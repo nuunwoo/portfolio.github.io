@@ -25,14 +25,17 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: "yarn"
+          cache: yarn
 
       - name: Install deps
-        run: yarn --frozen-lockfile
+        run: yarn install # lockfile 최신화해서 push했다면 --frozen-lockfile 사용 OK
 
       - name: Build
+        env:
+          VITE_API_URL: ${{ secrets.VITE_API_URL }}
+          VITE_GA_ID: ${{ secrets.VITE_GA_ID }}
+          VITE_SENTRY_DSN: ${{ secrets.VITE_SENTRY_DSN }}
         run: yarn build
-        # User Pages(nuunwoo.github.io)는 기본 base("/")라 vite 설정 수정 불필요
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
