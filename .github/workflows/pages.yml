@@ -28,14 +28,20 @@ jobs:
           cache: yarn
 
       - name: Install deps
-        run: yarn install # lockfile 최신화해서 push했다면 --frozen-lockfile 사용 OK
+        run: yarn install
+        # lockfile 엄격 적용 원하면:
+        # run: yarn install --frozen-lockfile
+
+      # ✅ GitHub Secrets → .env 파일 생성
+      - name: Create .env file
+        run: |
+          echo "VITE_API_URL=${{ secrets.VITE_API_URL }}" >> .env
+          echo "VITE_GA_ID=${{ secrets.VITE_GA_ID }}" >> .env
+          echo "VITE_SENTRY_DSN=${{ secrets.VITE_SENTRY_DSN }}" >> .env
 
       - name: Build
-        env:
-          VITE_API_URL: ${{ secrets.VITE_API_URL }}
-          VITE_GA_ID: ${{ secrets.VITE_GA_ID }}
-          VITE_SENTRY_DSN: ${{ secrets.VITE_SENTRY_DSN }}
         run: yarn build --mode production
+        # Vite는 기본적으로 .env / .env.production 파일을 읽습니다.
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
