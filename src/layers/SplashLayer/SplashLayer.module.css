@@ -1,0 +1,53 @@
+/* SplashLayer.module.css
+   - 색/치수 토큰을 .root 스코프에 선언해 전역 테마 변수의 오버라이드를 방지
+   - 필요 시 :root 에 공용 토큰을 두되, 스플래시는 .root에서 최종값을 고정
+*/
+
+.root {
+  /* ✅ 스플래시 전용 토큰(여기서 고정) */
+  --splash-bg: #000;
+  --splash-logo-size: 72px;
+  --splash-progress-width-min: 180px;
+  --splash-progress-width-max: 420px;
+  --splash-progress-height: 6px;
+  --splash-track: rgba(255, 255, 255, 0.22);
+  --splash-fill: #fff; /* ← 진행바/로고 색을 로컬 스코프에서 강제 */
+
+  position: fixed;
+  inset: 0;
+  background: var(--splash-bg);
+  z-index: 1000;
+  display: grid;
+  place-items: center;
+}
+
+.container {
+  display: grid;
+  place-items: center;
+  gap: 16px;
+  transform: translateZ(0); /* GPU 합성 힌트 */
+}
+
+.logo {
+  width: var(--splash-logo-size);
+  height: var(--splash-logo-size);
+  border-radius: 50%;
+  opacity: 0.98;
+}
+
+.progress {
+  width: 32vw;
+  max-width: var(--splash-progress-width-max);
+  min-width: var(--splash-progress-width-min);
+  height: var(--splash-progress-height);
+  background: var(--splash-track);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.bar {
+  height: 100%;
+  width: 0%;
+  background: var(--splash-fill); /* ✅ 항상 흰색으로 보장 */
+  border-radius: 999px;
+}
