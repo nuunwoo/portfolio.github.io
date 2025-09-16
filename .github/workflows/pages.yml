@@ -29,24 +29,24 @@ jobs:
 
       - name: Install deps
         run: yarn install
-        # lockfile 일관성 엄격 적용 원하면:
+        # lockfile 엄격 모드 쓰려면:
         # run: yarn install --frozen-lockfile
 
-      # ✅ 배포용 환경파일(.env.production) 생성 — Secrets에서 주입
+      # ✅ 배포용 env 파일 생성 (빌드 '직전'에 실행)
       - name: Create .env.production
         run: |
           echo "VITE_API_URL=${{ secrets.VITE_API_URL }}" >> .env.production
           echo "VITE_GA_ID=${{ secrets.VITE_GA_ID }}" >> .env.production
           echo "VITE_SENTRY_DSN=${{ secrets.VITE_SENTRY_DSN }}" >> .env.production
 
-      # (선택) env 파일 존재만 확인 — 값은 출력하지 않음
-      - name: List env files
+      # (선택) 파일 존재만 검사 — 값은 노출 금지
+      - name: Show env files
         run: ls -la . | grep env || true
 
       - name: Build
         run: yarn build --mode production
-        # Vite는 production 모드에서 .env, .env.production, .env.local(있다면)를 읽습니다.
-        # CI에는 .env.local이 없으므로 방금 만든 .env.production이 적용됩니다.
+        # production 모드: .env, .env.production, (있다면) .env.local 순으로 머지
+        # CI에는 .env.local이 없으므로 방금 만든 .env.production이 적용됨
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
