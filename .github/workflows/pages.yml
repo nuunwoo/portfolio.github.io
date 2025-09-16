@@ -29,19 +29,24 @@ jobs:
 
       - name: Install deps
         run: yarn install
-        # lockfile 엄격 적용 원하면:
+        # lockfile 일관성 엄격 적용 원하면:
         # run: yarn install --frozen-lockfile
 
-      # ✅ GitHub Secrets → .env 파일 생성
-      - name: Create .env file
+      # ✅ 배포용 환경파일(.env.production) 생성 — Secrets에서 주입
+      - name: Create .env.production
         run: |
-          echo "VITE_API_URL=${{ secrets.VITE_API_URL }}" >> .env
-          echo "VITE_GA_ID=${{ secrets.VITE_GA_ID }}" >> .env
-          echo "VITE_SENTRY_DSN=${{ secrets.VITE_SENTRY_DSN }}" >> .env
+          echo "VITE_API_URL=${{ secrets.VITE_API_URL }}" >> .env.production
+          echo "VITE_GA_ID=${{ secrets.VITE_GA_ID }}" >> .env.production
+          echo "VITE_SENTRY_DSN=${{ secrets.VITE_SENTRY_DSN }}" >> .env.production
+
+      # (선택) env 파일 존재만 확인 — 값은 출력하지 않음
+      - name: List env files
+        run: ls -la . | grep env || true
 
       - name: Build
         run: yarn build --mode production
-        # Vite는 기본적으로 .env / .env.production 파일을 읽습니다.
+        # Vite는 production 모드에서 .env, .env.production, .env.local(있다면)를 읽습니다.
+        # CI에는 .env.local이 없으므로 방금 만든 .env.production이 적용됩니다.
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
