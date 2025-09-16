@@ -9,7 +9,7 @@ function App() {
   const apiUrl = import.meta.env.VITE_API_URL;
 
   console.log(apiUrl);
-  console.log(2);
+  console.log(3);
 
   return (
     <>
