@@ -11,18 +11,18 @@ function App() {
 
   console.log(import.meta.env);
   console.log(apiUrl);
-  console.log(4);
 
   return (
     <>
       <SplashLayer
-        // 첫 화면에 실제로 보이는 이미지만 선택적으로 대기(로고, Dock 아이콘 등)
         aboveFoldImageSelectors={["img[alt='logo']", ".dock img"]}
         timeoutMs={3000}
         onDone={() => {
           // 여기서 로그인/데스크탑 상태 전환 시작(예: setPhase('login' | 'desktop'))
         }}
       />
+      <img src="/wallpapers/wallpapers_1.webp" alt="background" className="background" />
+
       {/* <div>
         <a href="https://vite.dev" target="_blank">
           <img src={viteLogo} className="logo" alt="Vite logo" />
