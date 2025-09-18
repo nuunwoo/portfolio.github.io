@@ -1,7 +1,12 @@
 {
-  "name": "portfolio-project",
+  "name": "portfolio.github.io",
   "private": true,
   "version": "0.0.0",
+  "description": "nuunwoo portfolio website",
+  "packageManager": "yarn@4.9.4",
+  "engines": {
+    "node": ">=20.19.0"
+  },
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -11,10 +16,12 @@
   },
   "dependencies": {
     "react": "^19.1.1",
-    "react-dom": "^19.1.1"
+    "react-dom": "^19.1.1",
+    "zustand": "^5.0.8"
   },
   "devDependencies": {
     "@eslint/js": "^9.33.0",
+    "@types/node": "^25.6.0",
     "@types/react": "^19.1.10",
     "@types/react-dom": "^19.1.7",
     "@vitejs/plugin-react-swc": "^4.0.0",
