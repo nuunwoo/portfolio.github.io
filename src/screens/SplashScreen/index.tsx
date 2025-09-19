@@ -1,20 +1,24 @@
 import {useEffect, useMemo, useRef, useState} from 'react';
 import {preloadImages, ready} from '../../core/preload';
-import {DESKTOP_REQUIRED_KEYS, FIRST_BOOT_ASSETS, LOCK_REQUIRED_KEYS} from '../../app/assetsManifest';
+import {DESKTOP_REQUIRED_KEYS, getBootAssetsForDate, LOCK_REQUIRED_KEYS} from '../../app/assetsManifest';
 import styles from './SplashScreen.module.css';
 
 type SplashScreenProps = {
+  bootDate: Date;
   onComplete?: () => void;
 };
 
-const SplashScreen = ({onComplete}: SplashScreenProps) => {
+const SplashScreen = ({bootDate, onComplete}: SplashScreenProps) => {
   const [displayProgress, setDisplayProgress] = useState(0);
   const [isFadingOut, setIsFadingOut] = useState(false);
   const targetProgressRef = useRef(0);
   const displayProgressRef = useRef(0);
   const hasCompletedRef = useRef(false);
 
-  const bootAssets = useMemo(() => FIRST_BOOT_ASSETS, []);
+  const bootAssets = useMemo(() => {
+    const assets = getBootAssetsForDate(bootDate);
+    return [assets.lockBg, assets.desktopBg];
+  }, [bootDate]);
   const readyAssetKeys = useMemo(() => [...new Set([...LOCK_REQUIRED_KEYS, ...DESKTOP_REQUIRED_KEYS])], []);
 
   useEffect(() => {

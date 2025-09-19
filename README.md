@@ -1,6 +1,6 @@
-# portfolio.github.io
+# nuunwoo.github.io
 
-nuunwoo의 포트폴리오 웹사이트 프로젝트입니다. GitHub Pages 사용자 사이트 저장소인 `portfolio.github.io`와 동일한 이름으로 관리합니다.
+nuunwoo의 포트폴리오 웹사이트 프로젝트입니다. GitHub Pages 사용자 사이트 저장소인 `nuunwoo.github.io`와 동일한 이름으로 관리합니다.
 
 ## Tech Stack
 

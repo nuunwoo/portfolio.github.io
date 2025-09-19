@@ -1,36 +1,70 @@
-import { useMemo } from "react";
+import { useEffect, useState } from "react";
 
 const formatTime = (date: Date) =>
-  new Intl.DateTimeFormat("en-US", {
-    hour: "numeric",
+  new Intl.DateTimeFormat("ko-KR", {
+    hour: "2-digit",
     minute: "2-digit",
+    hour12: false,
   }).format(date);
 
 const formatDate = (date: Date) =>
-  new Intl.DateTimeFormat("en-US", {
-    weekday: "long",
+  new Intl.DateTimeFormat("ko-KR", {
     month: "long",
     day: "numeric",
+    weekday: "long",
   }).format(date);
 
 type LockScreenProps = {
+  currentDate: Date;
+  isUnlocking?: boolean;
   onUnlock?: () => void;
+  wallpaperSrc: string;
 };
 
-function LockScreen({ onUnlock }: LockScreenProps) {
-  const now = useMemo(() => new Date(), []);
+function LockScreen({ currentDate, isUnlocking = false, onUnlock, wallpaperSrc }: LockScreenProps) {
+  const [now, setNow] = useState(currentDate);
+
+  useEffect(() => {
+    setNow(currentDate);
+  }, [currentDate]);
+
+  useEffect(() => {
+    if (isUnlocking) return;
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Enter") {
+        onUnlock?.();
+      }
+    };
+
+    window.addEventListener("keydown", onKeyDown);
+    return () => {
+      window.removeEventListener("keydown", onKeyDown);
+    };
+  }, [isUnlocking, onUnlock]);
 
   return (
     <section
+      aria-label="Lock screen"
+      onClick={() => {
+        if (!isUnlocking) onUnlock?.();
+      }}
       style={{
-        position: "relative",
+        position: "absolute",
+        inset: 0,
         width: "100%",
         height: "100%",
         overflow: "hidden",
+        cursor: isUnlocking ? "default" : "pointer",
+        transition: "opacity 360ms ease, transform 360ms ease, filter 360ms ease",
+        opacity: isUnlocking ? 0 : 1,
+        transform: isUnlocking ? "scale(1.015)" : "scale(1)",
+        filter: isUnlocking ? "blur(10px)" : "blur(0px)",
+        pointerEvents: isUnlocking ? "none" : "auto",
       }}
     >
       <img
-        src="/wallpapers/wallpapers_14.webp"
+        src={wallpaperSrc}
         alt="Lock screen wallpaper"
         className="wallpaper"
       />
@@ -39,46 +73,105 @@ function LockScreen({ onUnlock }: LockScreenProps) {
           position: "absolute",
           inset: 0,
           background:
-            "linear-gradient(180deg, rgba(6, 9, 16, 0.2) 0%, rgba(3, 3, 6, 0.56) 100%)",
+            "linear-gradient(180deg, rgba(9, 14, 18, 0.12) 0%, rgba(7, 11, 15, 0.22) 40%, rgba(4, 7, 10, 0.28) 100%)",
           color: "#fff",
           display: "grid",
-          placeItems: "center",
+          gridTemplateRows: "1fr auto",
           textAlign: "center",
-          padding: "24px",
+          padding: "36px 24px 56px",
+          backdropFilter: "blur(10px) saturate(1.04)",
         }}
       >
-        <div>
-          <p style={{ fontSize: "18px", opacity: 0.72, marginBottom: "12px" }}>{formatDate(now)}</p>
+        <div
+          style={{
+            width: "100%",
+            display: "grid",
+            placeItems: "center",
+            alignSelf: "start",
+            paddingTop: "18px",
+          }}
+        >
+          <div
+            style={{
+              width: "100%",
+              display: "flex",
+              justifyContent: "flex-end",
+              gap: "10px",
+              paddingRight: "2px",
+              fontSize: "12px",
+              fontWeight: 600,
+              opacity: 0.92,
+              letterSpacing: "0.02em",
+            }}
+          >
+            <span>ABC</span>
+            <span>􀙇</span>
+            <span>􀛨</span>
+            <span>􀋦</span>
+          </div>
+        </div>
+
+        <div
+          style={{
+            width: "100%",
+            display: "grid",
+            placeItems: "center",
+            alignSelf: "center",
+          }}
+        >
+          <p
+            style={{
+              fontSize: "clamp(20px, 2.2vw, 34px)",
+              fontWeight: 700,
+              opacity: 0.84,
+              marginBottom: "14px",
+              textShadow: "0 12px 30px rgba(0,0,0,0.18)",
+            }}
+          >
+            {formatDate(now)}
+          </p>
           <h1
             style={{
-              fontSize: "clamp(68px, 14vw, 124px)",
+              fontSize: "clamp(88px, 12vw, 136px)",
               lineHeight: 1,
-              fontWeight: 500,
-              letterSpacing: "-0.06em",
+              fontWeight: 700,
+              letterSpacing: "-0.07em",
+              textShadow: "0 18px 40px rgba(0,0,0,0.24)",
             }}
           >
             {formatTime(now)}
           </h1>
-          <p style={{ marginTop: "20px", fontSize: "17px", opacity: 0.84 }}>
-            Hyunwoo Lee
-          </p>
-          <button
-            type="button"
-            onClick={() => onUnlock?.()}
+          <div
             style={{
-              marginTop: "28px",
-              border: "1px solid rgba(255,255,255,0.18)",
-              borderRadius: "999px",
-              background: "rgba(255,255,255,0.12)",
-              color: "#fff",
-              padding: "12px 22px",
-              fontSize: "14px",
-              cursor: "pointer",
-              backdropFilter: "blur(14px)",
+              marginTop: "clamp(180px, 24vh, 280px)",
+              display: "grid",
+              gap: "12px",
+              justifyItems: "center",
             }}
           >
-            Click to unlock
-          </button>
+            <div
+              style={{
+                width: "56px",
+                height: "56px",
+                borderRadius: "999px",
+                background: "linear-gradient(180deg, rgba(255,255,255,0.16), rgba(255,255,255,0.08))",
+                border: "1px solid rgba(255,255,255,0.18)",
+                boxShadow: "0 10px 30px rgba(0,0,0,0.25)",
+                backdropFilter: "blur(14px)",
+                display: "grid",
+                placeItems: "center",
+                fontSize: "24px",
+              }}
+            >
+              <span>👤</span>
+            </div>
+            <p style={{ fontSize: "18px", fontWeight: 600, opacity: 0.9 }}>
+              이현우
+            </p>
+            <p style={{ fontSize: "13px", opacity: 0.78, letterSpacing: "0.02em" }}>
+              클릭하거나 Enter 키를 눌러 잠금 해제
+            </p>
+          </div>
         </div>
       </div>
     </section>

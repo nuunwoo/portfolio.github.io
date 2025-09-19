@@ -1973,6 +1973,28 @@ __metadata:
   languageName: node
   linkType: hard
 
+"nuunwoo.github.io@workspace:.":
+  version: 0.0.0-use.local
+  resolution: "nuunwoo.github.io@workspace:."
+  dependencies:
+    "@eslint/js": "npm:^9.33.0"
+    "@types/node": "npm:^25.6.0"
+    "@types/react": "npm:^19.1.10"
+    "@types/react-dom": "npm:^19.1.7"
+    "@vitejs/plugin-react-swc": "npm:^4.0.0"
+    eslint: "npm:^9.33.0"
+    eslint-plugin-react-hooks: "npm:^5.2.0"
+    eslint-plugin-react-refresh: "npm:^0.4.20"
+    globals: "npm:^16.3.0"
+    react: "npm:^19.1.1"
+    react-dom: "npm:^19.1.1"
+    typescript: "npm:~5.8.3"
+    typescript-eslint: "npm:^8.39.1"
+    vite: "npm:^7.1.2"
+    zustand: "npm:^5.0.8"
+  languageName: unknown
+  linkType: soft
+
 "optionator@npm:^0.9.3":
   version: 0.9.4
   resolution: "optionator@npm:0.9.4"
@@ -2072,28 +2094,6 @@ __metadata:
   checksum: 10c0/9582c951e95eebee5434f59e426cddd228a7b97a0161a375aed4be244bd3fe8e3a31b846808ea14ef2c8a2527a6eeab7b3946a67d5979e81694654f939473ae2
   languageName: node
   linkType: hard
-
-"portfolio.github.io@workspace:.":
-  version: 0.0.0-use.local
-  resolution: "portfolio.github.io@workspace:."
-  dependencies:
-    "@eslint/js": "npm:^9.33.0"
-    "@types/node": "npm:^25.6.0"
-    "@types/react": "npm:^19.1.10"
-    "@types/react-dom": "npm:^19.1.7"
-    "@vitejs/plugin-react-swc": "npm:^4.0.0"
-    eslint: "npm:^9.33.0"
-    eslint-plugin-react-hooks: "npm:^5.2.0"
-    eslint-plugin-react-refresh: "npm:^0.4.20"
-    globals: "npm:^16.3.0"
-    react: "npm:^19.1.1"
-    react-dom: "npm:^19.1.1"
-    typescript: "npm:~5.8.3"
-    typescript-eslint: "npm:^8.39.1"
-    vite: "npm:^7.1.2"
-    zustand: "npm:^5.0.8"
-  languageName: unknown
-  linkType: soft
 
 "postcss@npm:^8.5.6":
   version: 8.5.6

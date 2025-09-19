@@ -1,4 +1,8 @@
-function DesktopScreen() {
+type DesktopScreenProps = {
+  wallpaperSrc: string;
+};
+
+function DesktopScreen({ wallpaperSrc }: DesktopScreenProps) {
   return (
     <section
       style={{
@@ -8,7 +12,7 @@ function DesktopScreen() {
         overflow: "hidden",
       }}
     >
-      <img src="/wallpapers/wallpapers_1.webp" alt="Desktop wallpaper" className="wallpaper" />
+      <img src={wallpaperSrc} alt="Desktop wallpaper" className="wallpaper" />
       <div
         style={{
           position: "absolute",
@@ -24,7 +28,7 @@ function DesktopScreen() {
             justifyContent: "space-between",
             padding: "0 16px",
             color: "#fff",
-            background: "rgba(10, 12, 20, 0.28)",
+            background: "rgba(10, 12, 20, 0.24)",
             backdropFilter: "blur(18px)",
           }}
         >
@@ -44,7 +48,7 @@ function DesktopScreen() {
               borderRadius: "28px",
               padding: "28px",
               color: "#f5f7fb",
-              background: "rgba(11, 14, 22, 0.28)",
+              background: "rgba(11, 14, 22, 0.24)",
               backdropFilter: "blur(20px)",
               border: "1px solid rgba(255,255,255,0.16)",
               boxShadow: "0 20px 80px rgba(0,0,0,0.32)",
