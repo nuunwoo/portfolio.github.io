@@ -1,4 +1,4 @@
-// src/utils/TimeKeeper.ts
+// src/utils/timeKeeper.ts
 // 전역에서 공유 가능한 시간 관리 유틸 클래스
 // - 분 단위 정렬(정확히 00초에 맞춰 동작)
 // - 타임존 동적 변경 (예: Asia/Seoul → UTC → America/Los_Angeles)

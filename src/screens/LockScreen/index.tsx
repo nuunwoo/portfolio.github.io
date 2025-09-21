@@ -1,18 +1,5 @@
-import { useEffect, useState } from "react";
-
-const formatTime = (date: Date) =>
-  new Intl.DateTimeFormat("ko-KR", {
-    hour: "2-digit",
-    minute: "2-digit",
-    hour12: false,
-  }).format(date);
-
-const formatDate = (date: Date) =>
-  new Intl.DateTimeFormat("ko-KR", {
-    month: "long",
-    day: "numeric",
-    weekday: "long",
-  }).format(date);
+import { useEffect } from "react";
+import { formatLockScreenDate, formatLockScreenTime } from "../../utils/dateTime";
 
 type LockScreenProps = {
   currentDate: Date;
@@ -21,13 +8,12 @@ type LockScreenProps = {
   wallpaperSrc: string;
 };
 
-function LockScreen({ currentDate, isUnlocking = false, onUnlock, wallpaperSrc }: LockScreenProps) {
-  const [now, setNow] = useState(currentDate);
-
-  useEffect(() => {
-    setNow(currentDate);
-  }, [currentDate]);
-
+function LockScreen({
+  currentDate,
+  isUnlocking = false,
+  onUnlock,
+  wallpaperSrc,
+}: LockScreenProps) {
   useEffect(() => {
     if (isUnlocking) return;
 
@@ -128,7 +114,7 @@ function LockScreen({ currentDate, isUnlocking = false, onUnlock, wallpaperSrc }
               textShadow: "0 12px 30px rgba(0,0,0,0.18)",
             }}
           >
-            {formatDate(now)}
+            {formatLockScreenDate(currentDate)}
           </p>
           <h1
             style={{
@@ -139,7 +125,7 @@ function LockScreen({ currentDate, isUnlocking = false, onUnlock, wallpaperSrc }
               textShadow: "0 18px 40px rgba(0,0,0,0.24)",
             }}
           >
-            {formatTime(now)}
+            {formatLockScreenTime(currentDate)}
           </h1>
           <div
             style={{

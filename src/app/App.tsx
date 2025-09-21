@@ -1,6 +1,7 @@
 import "../App.css";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { getWallpaperSrcForDate } from "./assetsManifest";
+import { useCurrentDateTime } from "../hooks/useCurrentDateTime";
 import SplashScreen from "../screens/SplashScreen";
 import LockScreen from "../screens/LockScreen";
 import DesktopScreen from "../screens/DesktopScreen";
@@ -10,19 +11,9 @@ type ScreenName = "splash" | "lock" | "desktop";
 function App() {
   const [currentScreen, setCurrentScreen] = useState<ScreenName>("splash");
   const [isUnlocking, setIsUnlocking] = useState(false);
-  const [currentDate, setCurrentDate] = useState(() => new Date());
+  const currentDateTime = useCurrentDateTime();
 
-  useEffect(() => {
-    const timerId = window.setInterval(() => {
-      setCurrentDate(new Date());
-    }, 1000);
-
-    return () => {
-      window.clearInterval(timerId);
-    };
-  }, []);
-
-  const currentWallpaperSrc = useMemo(() => getWallpaperSrcForDate(currentDate), [currentDate]);
+  const currentWallpaperSrc = useMemo(() => getWallpaperSrcForDate(currentDateTime), [currentDateTime]);
 
   const handleUnlock = () => {
     setIsUnlocking(true);
@@ -43,10 +34,20 @@ function App() {
           currentScreen === "lock" || isUnlocking ? "app-layer-visible" : "app-layer-hidden"
         }`}
       >
-        <LockScreen currentDate={currentDate} isUnlocking={isUnlocking} onUnlock={handleUnlock} wallpaperSrc={currentWallpaperSrc} />
+        <LockScreen
+          currentDate={currentDateTime}
+          isUnlocking={isUnlocking}
+          onUnlock={handleUnlock}
+          wallpaperSrc={currentWallpaperSrc}
+        />
       </div>
 
-      {currentScreen === "splash" ? <SplashScreen bootDate={currentDate} onComplete={() => setCurrentScreen("lock")} /> : null}
+      {currentScreen === "splash" ? (
+        <SplashScreen
+          bootDate={currentDateTime}
+          onComplete={() => setCurrentScreen("lock")}
+        />
+      ) : null}
     </main>
   );
 }
