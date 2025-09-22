@@ -20,7 +20,8 @@ const decode = (src: string) =>
 
 export const preloadImages = async (
   entries: Array<{ key: Key; src: string }>,
-  onProgress?: (loaded: number, total: number) => void
+  onProgress?: (loaded: number, total: number) => void,
+  onAssetLoaded?: (entry: { key: Key; src: string }) => void
 ) => {
   const targets = entries.filter((e) => !cache.has(e.key));
   const total = entries.length;
@@ -38,19 +39,10 @@ export const preloadImages = async (
       const img = await decode(src);
       cache.set(key, img);
       loaded += 1;
+      onAssetLoaded?.({ key, src });
       onProgress?.(loaded, total);
     })
   );
-};
-
-export const ready = async (keys: Key[]) => {
-  // 모두 캐시에 있으면 즉시 resolve
-  const missing: Key[] = [];
-  keys.forEach((k) => {
-    if (!cache.has(k)) missing.push(k);
-  });
-  if (missing.length === 0) return;
-  throw new Error(`ready() called before preload: ${missing.join(", ")}`);
 };
 
 export const getImage = (key: Key) => cache.get(key);

@@ -1,31 +1,47 @@
-import {useEffect, useMemo, useRef, useState} from 'react';
-import {preloadImages, ready} from '../../core/preload';
-import {DESKTOP_REQUIRED_KEYS, getBootAssetsForDate, LOCK_REQUIRED_KEYS} from '../../app/assetsManifest';
-import styles from './SplashScreen.module.css';
+import { useEffect, useMemo, useRef, useState } from "react";
+import { DESKTOP_REQUIRED_KEYS, getBootAssetsForDate, LOCK_REQUIRED_KEYS } from "../../app/assetsManifest";
+import { bootReadiness } from "../../core/bootReadiness";
+import { hasImage, preloadImages } from "../../core/preload";
+import { useBootReadiness } from "../../hooks/useBootReadiness";
+import styles from "./SplashScreen.module.css";
 
 type SplashScreenProps = {
   bootDate: Date;
   onComplete?: () => void;
 };
 
-const SplashScreen = ({bootDate, onComplete}: SplashScreenProps) => {
+const SplashScreen = ({ bootDate, onComplete }: SplashScreenProps) => {
   const [displayProgress, setDisplayProgress] = useState(0);
   const [isFadingOut, setIsFadingOut] = useState(false);
   const targetProgressRef = useRef(0);
   const displayProgressRef = useRef(0);
   const hasCompletedRef = useRef(false);
+  const { hasError, isReady, progress } = useBootReadiness();
 
   const bootAssets = useMemo(() => {
     const assets = getBootAssetsForDate(bootDate);
     return [assets.lockBg, assets.desktopBg];
   }, [bootDate]);
   const readyAssetKeys = useMemo(() => [...new Set([...LOCK_REQUIRED_KEYS, ...DESKTOP_REQUIRED_KEYS])], []);
+  const completeSplashScreen = () => {
+    if (hasCompletedRef.current) return;
+
+    hasCompletedRef.current = true;
+    setIsFadingOut(true);
+    window.setTimeout(() => {
+      onComplete?.();
+    }, 260);
+  };
+
+  useEffect(() => {
+    targetProgressRef.current = hasError ? 100 : progress;
+  }, [hasError, progress]);
 
   useEffect(() => {
     let frameId = 0;
 
     const tick = () => {
-      setDisplayProgress(previousProgress => {
+      setDisplayProgress((previousProgress) => {
         const target = targetProgressRef.current;
         const diff = target - previousProgress;
 
@@ -53,33 +69,39 @@ const SplashScreen = ({bootDate, onComplete}: SplashScreenProps) => {
   useEffect(() => {
     let alive = true;
 
-    const completeSplashScreen = () => {
-      if (!alive || hasCompletedRef.current) return;
-      hasCompletedRef.current = true;
-      setIsFadingOut(true);
-      window.setTimeout(() => {
-        if (alive) onComplete?.();
-      }, 260);
-    };
-
     const bootSystem = async () => {
       try {
-        await preloadImages(bootAssets, (loaded, total) => {
-          if (!alive) return;
-          targetProgressRef.current = Math.round((loaded / total) * 100);
+        bootReadiness.configure(readyAssetKeys.map((key) => ({ key })));
+
+        readyAssetKeys.forEach((key) => {
+          if (hasImage(key)) {
+            bootReadiness.markStepReady(key);
+            return;
+          }
+
+          bootReadiness.markStepLoading(key);
         });
 
-        await ready(readyAssetKeys);
-        targetProgressRef.current = 100;
+        await preloadImages(
+          bootAssets,
+          undefined,
+          ({ key }) => {
+            if (!alive) return;
+            bootReadiness.markStepReady(key);
+          }
+        );
 
-        while (alive && displayProgressRef.current < 99.6) {
-          await new Promise(resolve => setTimeout(resolve, 16));
+        const snapshot = await bootReadiness.waitForReady();
+        if (snapshot.hasError) {
+          return;
         }
-
-        completeSplashScreen();
       } catch (e) {
-        console.error('Splash preload error:', e);
-        completeSplashScreen();
+        console.error("Splash preload error:", e);
+        readyAssetKeys.forEach((key) => {
+          if (!hasImage(key)) {
+            bootReadiness.markStepError(key);
+          }
+        });
       }
     };
 
@@ -90,8 +112,29 @@ const SplashScreen = ({bootDate, onComplete}: SplashScreenProps) => {
     };
   }, [bootAssets, onComplete, readyAssetKeys]);
 
+  useEffect(() => {
+    if (!isReady && !hasError) return;
+    let cancelled = false;
+
+    const waitForDisplayProgress = async () => {
+      while (!cancelled && displayProgressRef.current < 99.6) {
+        await new Promise((resolve) => setTimeout(resolve, 16));
+      }
+
+      if (!cancelled) {
+        completeSplashScreen();
+      }
+    };
+
+    void waitForDisplayProgress();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [hasError, isReady, onComplete]);
+
   return (
-    <section className={`${styles.root} ${isFadingOut ? styles.exiting : ''}`} aria-label="MacBook boot splash screen">
+    <section className={`${styles.root} ${isFadingOut ? styles.exiting : ""}`} aria-label="MacBook boot splash screen">
       <div className={styles.glow} />
       <div className={styles.container}>
         <img src="/icons/apple_black.svg" alt="Apple inspired boot logo" className={styles.logo} draggable={false} />
@@ -101,7 +144,7 @@ const SplashScreen = ({bootDate, onComplete}: SplashScreenProps) => {
             <span className={styles.percent}>{Math.round(displayProgress)}%</span>
           </div>
           <div className={styles.progress}>
-            <div className={styles.bar} style={{width: `${displayProgress}%`}} />
+            <div className={styles.bar} style={{ width: `${displayProgress}%` }} />
           </div>
         </div>
       </div>

@@ -1,24 +1,32 @@
 import { useEffect } from "react";
 import { formatLockScreenDate, formatLockScreenTime } from "../../utils/dateTime";
+import type { WindowKey } from "../../utils/windowKeys";
 
 type LockScreenProps = {
   currentDate: Date;
+  isFocused?: boolean;
   isUnlocking?: boolean;
+  onFocusWindow?: (windowKey: WindowKey) => void;
   onUnlock?: () => void;
   wallpaperSrc: string;
+  windowKey: WindowKey;
 };
 
 function LockScreen({
   currentDate,
+  isFocused = false,
   isUnlocking = false,
+  onFocusWindow,
   onUnlock,
   wallpaperSrc,
+  windowKey,
 }: LockScreenProps) {
   useEffect(() => {
     if (isUnlocking) return;
 
     const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Enter") {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
         onUnlock?.();
       }
     };
@@ -33,8 +41,11 @@ function LockScreen({
     <section
       aria-label="Lock screen"
       onClick={() => {
+        onFocusWindow?.(windowKey);
         if (!isUnlocking) onUnlock?.();
       }}
+      onPointerDown={() => onFocusWindow?.(windowKey)}
+      data-window-key={windowKey}
       style={{
         position: "absolute",
         inset: 0,
@@ -47,6 +58,8 @@ function LockScreen({
         transform: isUnlocking ? "scale(1.015)" : "scale(1)",
         filter: isUnlocking ? "blur(10px)" : "blur(0px)",
         pointerEvents: isUnlocking ? "none" : "auto",
+        outline: isFocused ? "1px solid rgba(255,255,255,0.16)" : "none",
+        outlineOffset: "-1px",
       }}
     >
       <img

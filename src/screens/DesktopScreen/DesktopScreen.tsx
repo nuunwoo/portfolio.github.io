@@ -1,15 +1,29 @@
+import type { WindowKey } from "../../utils/windowKeys";
+
 type DesktopScreenProps = {
+  isFocused?: boolean;
+  onFocusWindow?: (windowKey: WindowKey) => void;
   wallpaperSrc: string;
+  windowKey: WindowKey;
 };
 
-function DesktopScreen({ wallpaperSrc }: DesktopScreenProps) {
+function DesktopScreen({
+  isFocused = false,
+  onFocusWindow,
+  wallpaperSrc,
+  windowKey,
+}: DesktopScreenProps) {
   return (
     <section
+      data-window-key={windowKey}
+      onPointerDown={() => onFocusWindow?.(windowKey)}
       style={{
         position: "relative",
         width: "100%",
         height: "100%",
         overflow: "hidden",
+        outline: isFocused ? "1px solid rgba(255,255,255,0.12)" : "none",
+        outlineOffset: "-1px",
       }}
     >
       <img src={wallpaperSrc} alt="Desktop wallpaper" className="wallpaper" />
