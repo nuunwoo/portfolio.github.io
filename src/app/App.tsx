@@ -2,6 +2,7 @@ import "../App.css";
 import { useEffect, useMemo, useState } from "react";
 import { getWallpaperSrcForDate } from "./assetsManifest";
 import { useCurrentDateTime } from "../hooks/useCurrentDateTime";
+import { useSystemAppearance } from "../hooks/useSystemAppearance";
 import { useWindowKeyboardShortcuts } from "../hooks/useWindowKeyboardShortcuts";
 import { WINDOW_KEYS, type WindowKey } from "../utils/windowKeys";
 import SplashScreen from "../screens/SplashScreen";
@@ -15,6 +16,7 @@ function App() {
   const [isUnlocking, setIsUnlocking] = useState(false);
   const [focusedWindowKey, setFocusedWindowKey] = useState<WindowKey | null>(WINDOW_KEYS.splashScreen);
   const currentDateTime = useCurrentDateTime();
+  const systemAppearance = useSystemAppearance();
 
   const currentWallpaperSrc = useMemo(() => getWallpaperSrcForDate(currentDateTime), [currentDateTime]);
 
@@ -78,7 +80,7 @@ function App() {
   });
 
   return (
-    <main className="app-shell">
+    <main className="app-shell" data-appearance={systemAppearance}>
       <div className={`app-layer ${currentScreen === "splash" ? "app-layer-hidden" : "app-layer-visible"}`}>
         <DesktopScreen
           isFocused={focusedWindowKey === WINDOW_KEYS.desktopScreen}
