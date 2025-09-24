@@ -1,0 +1,41 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -webkit-user-drag: none;
+}
+
+body {
+  font-family: var(--font-family-system);
+}
+
+img,
+a {
+  -webkit-user-drag: none;
+}
+
+.allow-select,
+.allow-select * {
+  user-select: text;
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+}
+
+.allow-drag,
+.allow-drag * {
+  -webkit-user-drag: auto;
+}
+
+.allow-select.allow-drag,
+.allow-select.allow-drag * {
+  user-select: text;
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+  -webkit-user-drag: auto;
+}

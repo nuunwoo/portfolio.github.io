@@ -1,64 +1,39 @@
 import "../App.css";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo } from "react";
 import { getWallpaperSrcForDate } from "./assetsManifest";
+import BootSplash from "../features/boot/ui/BootSplash";
+import DesktopScreen from "../features/desktop/ui/DesktopScreen";
+import LockScreen from "../features/lock-screen/ui/LockScreen";
 import { useCurrentDateTime } from "../hooks/useCurrentDateTime";
 import { useSystemAppearance } from "../hooks/useSystemAppearance";
 import { useWindowKeyboardShortcuts } from "../hooks/useWindowKeyboardShortcuts";
-import { WINDOW_KEYS, type WindowKey } from "../utils/windowKeys";
-import SplashScreen from "../screens/SplashScreen";
-import LockScreen from "../screens/LockScreen";
-import DesktopScreen from "../screens/DesktopScreen";
-
-type ScreenName = "splash" | "lock" | "desktop";
+import { useAppStore } from "../shared/store/app-store";
+import { WINDOW_KEYS } from "../utils/windowKeys";
 
 function App() {
-  const [currentScreen, setCurrentScreen] = useState<ScreenName>("splash");
-  const [isUnlocking, setIsUnlocking] = useState(false);
-  const [focusedWindowKey, setFocusedWindowKey] = useState<WindowKey | null>(WINDOW_KEYS.splashScreen);
+  const completeSplash = useAppStore((state) => state.completeSplash);
+  const currentScreen = useAppStore((state) => state.currentScreen);
+  const focusedWindowKey = useAppStore((state) => state.focusedWindowKey);
+  const focusWindow = useAppStore((state) => state.focusWindow);
+  const isUnlocking = useAppStore((state) => state.isUnlocking);
+  const lockScreen = useAppStore((state) => state.lockScreen);
+  const syncFocusedWindow = useAppStore((state) => state.syncFocusedWindow);
+  const unlockScreen = useAppStore((state) => state.unlockScreen);
   const currentDateTime = useCurrentDateTime();
   const systemAppearance = useSystemAppearance();
 
   const currentWallpaperSrc = useMemo(() => getWallpaperSrcForDate(currentDateTime), [currentDateTime]);
 
-  const handleUnlock = () => {
-    if (isUnlocking) return;
-
-    setIsUnlocking(true);
-    window.setTimeout(() => {
-      setCurrentScreen("desktop");
-      setIsUnlocking(false);
-      setFocusedWindowKey(WINDOW_KEYS.desktopScreen);
-    }, 360);
-  };
-
-  const handleLock = () => {
-    setCurrentScreen("lock");
-    setIsUnlocking(false);
-    setFocusedWindowKey(WINDOW_KEYS.lockScreen);
-  };
-
   useEffect(() => {
-    if (currentScreen === "splash") {
-      setFocusedWindowKey(WINDOW_KEYS.splashScreen);
-      return;
-    }
-
-    if (currentScreen === "lock") {
-      setFocusedWindowKey(WINDOW_KEYS.lockScreen);
-      return;
-    }
-
-    if (currentScreen === "desktop" && !isUnlocking) {
-      setFocusedWindowKey(WINDOW_KEYS.desktopScreen);
-    }
-  }, [currentScreen, isUnlocking]);
+    syncFocusedWindow();
+  }, [currentScreen, isUnlocking, syncFocusedWindow]);
 
   const handlersByWindowKey = useMemo(
     () => ({
       [WINDOW_KEYS.lockScreen]: ({ event }: { event: KeyboardEvent }) => {
         if (event.key === "Enter" || event.key === " ") {
           event.preventDefault();
-          handleUnlock();
+          unlockScreen();
         }
       },
       [WINDOW_KEYS.desktopScreen]: ({ event }: { event: KeyboardEvent }) => {
@@ -67,11 +42,11 @@ function App() {
 
         if (event.key === "Escape" || isLockShortcut) {
           event.preventDefault();
-          handleLock();
+          lockScreen();
         }
       },
     }),
-    [handleUnlock, handleLock]
+    [lockScreen, unlockScreen]
   );
 
   useWindowKeyboardShortcuts({
@@ -83,34 +58,31 @@ function App() {
     <main className="app-shell" data-appearance={systemAppearance}>
       <div className={`app-layer ${currentScreen === "splash" ? "app-layer-hidden" : "app-layer-visible"}`}>
         <DesktopScreen
+          currentDate={currentDateTime}
           isFocused={focusedWindowKey === WINDOW_KEYS.desktopScreen}
-          onFocusWindow={() => setFocusedWindowKey(WINDOW_KEYS.desktopScreen)}
+          onFocusWindow={() => focusWindow(WINDOW_KEYS.desktopScreen)}
+          onRequestLock={lockScreen}
           wallpaperSrc={currentWallpaperSrc}
           windowKey={WINDOW_KEYS.desktopScreen}
         />
       </div>
 
       <div
-        className={`app-layer ${
-          currentScreen === "lock" || isUnlocking ? "app-layer-visible" : "app-layer-hidden"
-        }`}
+        className={`app-layer ${currentScreen === "lock" || isUnlocking ? "app-layer-visible" : "app-layer-hidden"}`}
       >
         <LockScreen
           currentDate={currentDateTime}
           isFocused={focusedWindowKey === WINDOW_KEYS.lockScreen}
           isUnlocking={isUnlocking}
-          onFocusWindow={() => setFocusedWindowKey(WINDOW_KEYS.lockScreen)}
-          onUnlock={handleUnlock}
+          onFocusWindow={() => focusWindow(WINDOW_KEYS.lockScreen)}
+          onUnlock={unlockScreen}
           wallpaperSrc={currentWallpaperSrc}
           windowKey={WINDOW_KEYS.lockScreen}
         />
       </div>
 
       {currentScreen === "splash" ? (
-        <SplashScreen
-          bootDate={currentDateTime}
-          onComplete={() => setCurrentScreen("lock")}
-        />
+        <BootSplash bootDate={currentDateTime} onComplete={completeSplash} />
       ) : null}
     </main>
   );

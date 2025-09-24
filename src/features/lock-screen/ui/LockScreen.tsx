@@ -1,6 +1,6 @@
 import { useEffect } from "react";
-import { formatLockScreenDate, formatLockScreenTime } from "../../utils/dateTime";
-import type { WindowKey } from "../../utils/windowKeys";
+import { formatLockScreenDate, formatLockScreenTime } from "../../../utils/dateTime";
+import type { WindowKey } from "../../../utils/windowKeys";
 
 type LockScreenProps = {
   currentDate: Date;
@@ -62,11 +62,7 @@ function LockScreen({
         outlineOffset: "-1px",
       }}
     >
-      <img
-        src={wallpaperSrc}
-        alt="Lock screen wallpaper"
-        className="wallpaper"
-      />
+      <img src={wallpaperSrc} alt="Lock screen wallpaper" className="wallpaper" />
       <div
         style={{
           position: "absolute",
@@ -153,7 +149,8 @@ function LockScreen({
                 width: "56px",
                 height: "56px",
                 borderRadius: "999px",
-                background: "linear-gradient(180deg, rgba(255,255,255,0.16), rgba(255,255,255,0.08))",
+                background:
+                  "linear-gradient(180deg, rgba(255,255,255,0.16), rgba(255,255,255,0.08))",
                 border: "1px solid rgba(255,255,255,0.18)",
                 boxShadow: "0 10px 30px rgba(0,0,0,0.25)",
                 backdropFilter: "blur(14px)",
@@ -164,9 +161,7 @@ function LockScreen({
             >
               <span>👤</span>
             </div>
-            <p style={{ fontSize: "18px", fontWeight: 600, opacity: 0.9 }}>
-              이현우
-            </p>
+            <p style={{ fontSize: "18px", fontWeight: 600, opacity: 0.9 }}>이현우</p>
             <p style={{ fontSize: "13px", opacity: 0.78, letterSpacing: "0.02em" }}>
               클릭하거나 Enter 키를 눌러 잠금 해제
             </p>

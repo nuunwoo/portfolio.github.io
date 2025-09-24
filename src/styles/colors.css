@@ -1,0 +1,285 @@
+:root {
+  --label-primary-light: rgba(0, 0, 0, 0.85);
+  --label-secondary-light: rgba(60, 60, 67, 0.6);
+  --label-tertiary-light: rgba(60, 60, 67, 0.3);
+
+  --label-primary-dark: rgba(255, 255, 255, 0.92);
+  --label-secondary-dark: rgba(235, 235, 245, 0.6);
+  --label-tertiary-dark: rgba(235, 235, 245, 0.3);
+
+  --accent-red-light: #ff3b30;
+  --accent-orange-light: #ff9500;
+  --accent-yellow-light: #ffcc00;
+  --accent-green-light: #34c759;
+  --accent-mint-light: #00c7be;
+  --accent-teal-light: #30b0c7;
+  --accent-cyan-light: #32ade6;
+  --accent-blue-light: #0a84ff;
+  --accent-indigo-light: #5856d6;
+  --accent-purple-light: #bf5af2;
+  --accent-pink-light: #ff2d55;
+  --accent-brown-light: #ac8e68;
+  --accent-gray-light: #8e8e93;
+
+  --accent-red-dark: #ff453a;
+  --accent-orange-dark: #ff9f0a;
+  --accent-yellow-dark: #ffd60a;
+  --accent-green-dark: #30d158;
+  --accent-mint-dark: #63e6e2;
+  --accent-teal-dark: #40c8e0;
+  --accent-cyan-dark: #64d2ff;
+  --accent-blue-dark: #0a84ff;
+  --accent-indigo-dark: #5e5ce6;
+  --accent-purple-dark: #bf5af2;
+  --accent-pink-dark: #ff375f;
+  --accent-brown-dark: #b58b61;
+  --accent-gray-dark: #98989d;
+
+  --accent-red-vibrant-light: rgba(255, 59, 48, 0.8);
+  --accent-orange-vibrant-light: rgba(255, 149, 0, 0.8);
+  --accent-yellow-vibrant-light: rgba(255, 204, 0, 0.8);
+  --accent-green-vibrant-light: rgba(52, 199, 89, 0.78);
+  --accent-mint-vibrant-light: rgba(0, 199, 190, 0.78);
+  --accent-teal-vibrant-light: rgba(48, 176, 199, 0.78);
+  --accent-cyan-vibrant-light: rgba(50, 173, 230, 0.78);
+  --accent-blue-vibrant-light: rgba(10, 132, 255, 0.82);
+  --accent-indigo-vibrant-light: rgba(88, 86, 214, 0.78);
+  --accent-purple-vibrant-light: rgba(191, 90, 242, 0.8);
+  --accent-pink-vibrant-light: rgba(255, 45, 85, 0.8);
+  --accent-brown-vibrant-light: rgba(172, 142, 104, 0.78);
+  --accent-gray-vibrant-light: rgba(142, 142, 147, 0.74);
+
+  --accent-red-vibrant-dark: rgba(255, 69, 58, 0.9);
+  --accent-orange-vibrant-dark: rgba(255, 159, 10, 0.88);
+  --accent-yellow-vibrant-dark: rgba(255, 214, 10, 0.88);
+  --accent-green-vibrant-dark: rgba(48, 209, 88, 0.84);
+  --accent-mint-vibrant-dark: rgba(99, 230, 226, 0.84);
+  --accent-teal-vibrant-dark: rgba(64, 200, 224, 0.84);
+  --accent-cyan-vibrant-dark: rgba(100, 210, 255, 0.86);
+  --accent-blue-vibrant-dark: rgba(10, 132, 255, 0.9);
+  --accent-indigo-vibrant-dark: rgba(94, 92, 230, 0.86);
+  --accent-purple-vibrant-dark: rgba(191, 90, 242, 0.88);
+  --accent-pink-vibrant-dark: rgba(255, 55, 95, 0.9);
+  --accent-brown-vibrant-dark: rgba(181, 139, 97, 0.82);
+  --accent-gray-vibrant-dark: rgba(152, 152, 157, 0.8);
+
+  --fill-primary-light: rgba(120, 120, 128, 0.2);
+  --fill-secondary-light: rgba(120, 120, 128, 0.16);
+  --fill-tertiary-light: rgba(118, 118, 128, 0.12);
+  --fill-quaternary-light: rgba(116, 116, 128, 0.08);
+  --fill-quinary-light: rgba(116, 116, 128, 0.04);
+
+  --fill-primary-dark: rgba(120, 120, 128, 0.36);
+  --fill-secondary-dark: rgba(120, 120, 128, 0.32);
+  --fill-tertiary-dark: rgba(118, 118, 128, 0.24);
+  --fill-quaternary-dark: rgba(118, 118, 128, 0.18);
+  --fill-quinary-dark: rgba(118, 118, 128, 0.12);
+
+  --fill-primary-vibrant-light: rgba(127, 127, 132, 0.24);
+  --fill-secondary-vibrant-light: rgba(127, 127, 132, 0.18);
+  --fill-tertiary-vibrant-light: rgba(127, 127, 132, 0.14);
+  --fill-quaternary-vibrant-light: rgba(127, 127, 132, 0.1);
+  --fill-quinary-vibrant-light: rgba(127, 127, 132, 0.06);
+
+  --fill-primary-vibrant-dark: rgba(127, 127, 132, 0.42);
+  --fill-secondary-vibrant-dark: rgba(127, 127, 132, 0.34);
+  --fill-tertiary-vibrant-dark: rgba(127, 127, 132, 0.26);
+  --fill-quaternary-vibrant-dark: rgba(127, 127, 132, 0.2);
+  --fill-quinary-vibrant-dark: rgba(127, 127, 132, 0.14);
+
+  --text-primary-light: rgba(0, 0, 0, 0.85);
+  --text-secondary-light: rgba(60, 60, 67, 0.72);
+  --text-tertiary-light: rgba(60, 60, 67, 0.48);
+  --text-quaternary-light: rgba(60, 60, 67, 0.3);
+  --text-quinary-light: rgba(60, 60, 67, 0.18);
+  --text-sextimal-light: rgba(60, 60, 67, 0.1);
+
+  --text-primary-dark: rgba(255, 255, 255, 0.92);
+  --text-secondary-dark: rgba(235, 235, 245, 0.72);
+  --text-tertiary-dark: rgba(235, 235, 245, 0.48);
+  --text-quaternary-dark: rgba(235, 235, 245, 0.3);
+  --text-quinary-dark: rgba(235, 235, 245, 0.18);
+  --text-sextimal-dark: rgba(235, 235, 245, 0.1);
+
+  --text-primary-vibrant-light: rgba(31, 31, 33, 0.84);
+  --text-secondary-vibrant-light: rgba(72, 72, 74, 0.68);
+  --text-tertiary-vibrant-light: rgba(72, 72, 74, 0.42);
+  --text-quaternary-vibrant-light: rgba(72, 72, 74, 0.24);
+  --text-quinary-vibrant-light: rgba(72, 72, 74, 0.14);
+  --text-sextimal-vibrant-light: rgba(72, 72, 74, 0.08);
+
+  --text-primary-vibrant-dark: rgba(255, 255, 255, 0.88);
+  --text-secondary-vibrant-dark: rgba(235, 235, 245, 0.66);
+  --text-tertiary-vibrant-dark: rgba(235, 235, 245, 0.42);
+  --text-quaternary-vibrant-dark: rgba(235, 235, 245, 0.24);
+  --text-quinary-vibrant-dark: rgba(235, 235, 245, 0.14);
+  --text-sextimal-vibrant-dark: rgba(235, 235, 245, 0.08);
+}
+
+.label-primary-light {
+  color: var(--label-primary-light);
+}
+
+.label-secondary-light {
+  color: var(--label-secondary-light);
+}
+
+.label-tertiary-light {
+  color: var(--label-tertiary-light);
+}
+
+.label-primary-dark {
+  color: var(--label-primary-dark);
+}
+
+.label-secondary-dark {
+  color: var(--label-secondary-dark);
+}
+
+.label-tertiary-dark {
+  color: var(--label-tertiary-dark);
+}
+
+.accent-red-light {
+  color: var(--accent-red-light);
+}
+
+.accent-orange-light {
+  color: var(--accent-orange-light);
+}
+
+.accent-yellow-light {
+  color: var(--accent-yellow-light);
+}
+
+.accent-green-light {
+  color: var(--accent-green-light);
+}
+
+.accent-blue-light {
+  color: var(--accent-blue-light);
+}
+
+.accent-purple-light {
+  color: var(--accent-purple-light);
+}
+
+.accent-pink-light {
+  color: var(--accent-pink-light);
+}
+
+.accent-gray-light {
+  color: var(--accent-gray-light);
+}
+
+.accent-red-dark {
+  color: var(--accent-red-dark);
+}
+
+.accent-orange-dark {
+  color: var(--accent-orange-dark);
+}
+
+.accent-yellow-dark {
+  color: var(--accent-yellow-dark);
+}
+
+.accent-green-dark {
+  color: var(--accent-green-dark);
+}
+
+.accent-blue-dark {
+  color: var(--accent-blue-dark);
+}
+
+.accent-purple-dark {
+  color: var(--accent-purple-dark);
+}
+
+.accent-pink-dark {
+  color: var(--accent-pink-dark);
+}
+
+.accent-gray-dark {
+  color: var(--accent-gray-dark);
+}
+
+.fill-primary-light {
+  background: var(--fill-primary-light);
+}
+
+.fill-secondary-light {
+  background: var(--fill-secondary-light);
+}
+
+.fill-tertiary-light {
+  background: var(--fill-tertiary-light);
+}
+
+.fill-primary-dark {
+  background: var(--fill-primary-dark);
+}
+
+.fill-secondary-dark {
+  background: var(--fill-secondary-dark);
+}
+
+.fill-tertiary-dark {
+  background: var(--fill-tertiary-dark);
+}
+
+.fill-primary-vibrant-light {
+  background: var(--fill-primary-vibrant-light);
+}
+
+.fill-secondary-vibrant-light {
+  background: var(--fill-secondary-vibrant-light);
+}
+
+.fill-primary-vibrant-dark {
+  background: var(--fill-primary-vibrant-dark);
+}
+
+.fill-secondary-vibrant-dark {
+  background: var(--fill-secondary-vibrant-dark);
+}
+
+.text-primary-light {
+  color: var(--text-primary-light);
+}
+
+.text-secondary-light {
+  color: var(--text-secondary-light);
+}
+
+.text-tertiary-light {
+  color: var(--text-tertiary-light);
+}
+
+.text-primary-dark {
+  color: var(--text-primary-dark);
+}
+
+.text-secondary-dark {
+  color: var(--text-secondary-dark);
+}
+
+.text-tertiary-dark {
+  color: var(--text-tertiary-dark);
+}
+
+.text-primary-vibrant-light {
+  color: var(--text-primary-vibrant-light);
+}
+
+.text-secondary-vibrant-light {
+  color: var(--text-secondary-vibrant-light);
+}
+
+.text-primary-vibrant-dark {
+  color: var(--text-primary-vibrant-dark);
+}
+
+.text-secondary-vibrant-dark {
+  color: var(--text-secondary-vibrant-dark);
+}

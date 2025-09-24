@@ -1,0 +1,153 @@
+:root {
+  --font-family-system:
+    -apple-system,
+    BlinkMacSystemFont,
+    "SF Pro Text",
+    "SF Pro Display",
+    "Helvetica Neue",
+    sans-serif;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  --text-large-title-size: 34px;
+  --text-large-title-line-height: 41px;
+  --text-large-title-tracking: 0.012em;
+
+  --text-title-1-size: 28px;
+  --text-title-1-line-height: 34px;
+  --text-title-1-tracking: 0.01em;
+
+  --text-title-2-size: 22px;
+  --text-title-2-line-height: 28px;
+  --text-title-2-tracking: 0.008em;
+
+  --text-title-3-size: 20px;
+  --text-title-3-line-height: 25px;
+  --text-title-3-tracking: 0.006em;
+
+  --text-headline-size: 17px;
+  --text-headline-line-height: 22px;
+  --text-headline-tracking: -0.024em;
+
+  --text-body-size: 17px;
+  --text-body-line-height: 22px;
+  --text-body-tracking: -0.024em;
+
+  --text-callout-size: 16px;
+  --text-callout-line-height: 21px;
+  --text-callout-tracking: -0.02em;
+
+  --text-subheadline-size: 15px;
+  --text-subheadline-line-height: 20px;
+  --text-subheadline-tracking: -0.016em;
+
+  --text-footnote-size: 13px;
+  --text-footnote-line-height: 18px;
+  --text-footnote-tracking: -0.01em;
+
+  --text-caption-1-size: 12px;
+  --text-caption-1-line-height: 16px;
+  --text-caption-1-tracking: 0;
+
+  --text-caption-2-size: 11px;
+  --text-caption-2-line-height: 13px;
+  --text-caption-2-tracking: 0.006em;
+}
+
+.text-large-title,
+.text-title-1,
+.text-title-2,
+.text-title-3,
+.text-headline,
+.text-body,
+.text-callout,
+.text-subheadline,
+.text-footnote,
+.text-caption-1,
+.text-caption-2 {
+  font-family: var(--font-family-system);
+}
+
+.text-large-title {
+  font-size: var(--text-large-title-size);
+  line-height: var(--text-large-title-line-height);
+  letter-spacing: var(--text-large-title-tracking);
+}
+
+.text-title-1 {
+  font-size: var(--text-title-1-size);
+  line-height: var(--text-title-1-line-height);
+  letter-spacing: var(--text-title-1-tracking);
+}
+
+.text-title-2 {
+  font-size: var(--text-title-2-size);
+  line-height: var(--text-title-2-line-height);
+  letter-spacing: var(--text-title-2-tracking);
+}
+
+.text-title-3 {
+  font-size: var(--text-title-3-size);
+  line-height: var(--text-title-3-line-height);
+  letter-spacing: var(--text-title-3-tracking);
+}
+
+.text-headline {
+  font-size: var(--text-headline-size);
+  line-height: var(--text-headline-line-height);
+  letter-spacing: var(--text-headline-tracking);
+}
+
+.text-body {
+  font-size: var(--text-body-size);
+  line-height: var(--text-body-line-height);
+  letter-spacing: var(--text-body-tracking);
+}
+
+.text-callout {
+  font-size: var(--text-callout-size);
+  line-height: var(--text-callout-line-height);
+  letter-spacing: var(--text-callout-tracking);
+}
+
+.text-subheadline {
+  font-size: var(--text-subheadline-size);
+  line-height: var(--text-subheadline-line-height);
+  letter-spacing: var(--text-subheadline-tracking);
+}
+
+.text-footnote {
+  font-size: var(--text-footnote-size);
+  line-height: var(--text-footnote-line-height);
+  letter-spacing: var(--text-footnote-tracking);
+}
+
+.text-caption-1 {
+  font-size: var(--text-caption-1-size);
+  line-height: var(--text-caption-1-line-height);
+  letter-spacing: var(--text-caption-1-tracking);
+}
+
+.text-caption-2 {
+  font-size: var(--text-caption-2-size);
+  line-height: var(--text-caption-2-line-height);
+  letter-spacing: var(--text-caption-2-tracking);
+}
+
+.font-regular {
+  font-weight: var(--font-weight-regular);
+}
+
+.font-medium {
+  font-weight: var(--font-weight-medium);
+}
+
+.font-semibold {
+  font-weight: var(--font-weight-semibold);
+}
+
+.font-bold {
+  font-weight: var(--font-weight-bold);
+}

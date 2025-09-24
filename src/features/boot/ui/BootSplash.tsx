@@ -1,16 +1,20 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import { DESKTOP_REQUIRED_KEYS, getBootAssetsForDate, LOCK_REQUIRED_KEYS } from "../../app/assetsManifest";
-import { bootReadiness } from "../../core/bootReadiness";
-import { hasImage, preloadImages } from "../../core/preload";
-import { useBootReadiness } from "../../hooks/useBootReadiness";
-import styles from "./SplashScreen.module.css";
+import {
+  DESKTOP_REQUIRED_KEYS,
+  getBootAssetsForDate,
+  LOCK_REQUIRED_KEYS,
+} from "../../../app/assetsManifest";
+import { bootReadiness } from "../../../core/bootReadiness";
+import { hasImage, preloadImages } from "../../../core/preload";
+import { useBootReadiness } from "../../../hooks/useBootReadiness";
+import styles from "./BootSplash.module.css";
 
-type SplashScreenProps = {
+type BootSplashProps = {
   bootDate: Date;
   onComplete?: () => void;
 };
 
-const SplashScreen = ({ bootDate, onComplete }: SplashScreenProps) => {
+function BootSplash({ bootDate, onComplete }: BootSplashProps) {
   const [displayProgress, setDisplayProgress] = useState(0);
   const [isFadingOut, setIsFadingOut] = useState(false);
   const targetProgressRef = useRef(0);
@@ -22,8 +26,13 @@ const SplashScreen = ({ bootDate, onComplete }: SplashScreenProps) => {
     const assets = getBootAssetsForDate(bootDate);
     return [assets.lockBg, assets.desktopBg];
   }, [bootDate]);
-  const readyAssetKeys = useMemo(() => [...new Set([...LOCK_REQUIRED_KEYS, ...DESKTOP_REQUIRED_KEYS])], []);
-  const completeSplashScreen = () => {
+
+  const readyAssetKeys = useMemo(
+    () => [...new Set([...LOCK_REQUIRED_KEYS, ...DESKTOP_REQUIRED_KEYS])],
+    []
+  );
+
+  const completeBootSplash = () => {
     if (hasCompletedRef.current) return;
 
     hasCompletedRef.current = true;
@@ -82,21 +91,14 @@ const SplashScreen = ({ bootDate, onComplete }: SplashScreenProps) => {
           bootReadiness.markStepLoading(key);
         });
 
-        await preloadImages(
-          bootAssets,
-          undefined,
-          ({ key }) => {
-            if (!alive) return;
-            bootReadiness.markStepReady(key);
-          }
-        );
+        await preloadImages(bootAssets, undefined, ({ key }) => {
+          if (!alive) return;
+          bootReadiness.markStepReady(key);
+        });
 
-        const snapshot = await bootReadiness.waitForReady();
-        if (snapshot.hasError) {
-          return;
-        }
-      } catch (e) {
-        console.error("Splash preload error:", e);
+        await bootReadiness.waitForReady();
+      } catch (error) {
+        console.error("Splash preload error:", error);
         readyAssetKeys.forEach((key) => {
           if (!hasImage(key)) {
             bootReadiness.markStepError(key);
@@ -105,12 +107,12 @@ const SplashScreen = ({ bootDate, onComplete }: SplashScreenProps) => {
       }
     };
 
-    bootSystem();
+    void bootSystem();
 
     return () => {
       alive = false;
     };
-  }, [bootAssets, onComplete, readyAssetKeys]);
+  }, [bootAssets, readyAssetKeys]);
 
   useEffect(() => {
     if (!isReady && !hasError) return;
@@ -122,7 +124,7 @@ const SplashScreen = ({ bootDate, onComplete }: SplashScreenProps) => {
       }
 
       if (!cancelled) {
-        completeSplashScreen();
+        completeBootSplash();
       }
     };
 
@@ -131,13 +133,21 @@ const SplashScreen = ({ bootDate, onComplete }: SplashScreenProps) => {
     return () => {
       cancelled = true;
     };
-  }, [hasError, isReady, onComplete]);
+  }, [hasError, isReady]);
 
   return (
-    <section className={`${styles.root} ${isFadingOut ? styles.exiting : ""}`} aria-label="MacBook boot splash screen">
+    <section
+      className={`${styles.root} ${isFadingOut ? styles.exiting : ""}`}
+      aria-label="MacBook boot splash screen"
+    >
       <div className={styles.glow} />
       <div className={styles.container}>
-        <img src="/icons/apple_black.svg" alt="Apple inspired boot logo" className={styles.logo} draggable={false} />
+        <img
+          src="/icons/apple_black.svg"
+          alt="Apple inspired boot logo"
+          className={styles.logo}
+          draggable={false}
+        />
         <div className={styles.progressWrap}>
           <div className={styles.progressMeta}>
             <span className={styles.status}>Starting portfolio OS</span>
@@ -150,6 +160,6 @@ const SplashScreen = ({ bootDate, onComplete }: SplashScreenProps) => {
       </div>
     </section>
   );
-};
+}
 
-export default SplashScreen;
+export default BootSplash;

@@ -11,3 +11,10 @@ export const formatLockScreenDate = (date: Date) =>
     day: "numeric",
     weekday: "long",
   }).format(date);
+
+export const formatMenuBarTime = (date: Date) =>
+  new Intl.DateTimeFormat("ko-KR", {
+    weekday: "short",
+    hour: "numeric",
+    minute: "2-digit",
+  }).format(date);
