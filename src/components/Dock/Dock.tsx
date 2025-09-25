@@ -1,3 +1,5 @@
+import styles from "./Dock.module.css";
+
 type DockItem = {
   key: string;
   label: string;
@@ -15,18 +17,10 @@ const dockItems: DockItem[] = [
   { key: "settings", label: "Settings", accentClass: "accent-gray-light", glyph: "⚙" },
 ];
 
-function Dock() {
+const Dock = () => {
   return (
     <div
-      className="material-surface material-light material-medium material-dynamic-on-light shape-squircle-lg"
-      style={{
-        display: "flex",
-        alignItems: "flex-end",
-        justifyContent: "center",
-        gap: "10px",
-        padding: "10px 14px 12px",
-        minHeight: "74px",
-      }}
+      className={`material-surface material-light material-medium material-dynamic-on-light shape-squircle-lg ${styles.root}`}
     >
       {dockItems.map((item) => (
         <button
@@ -34,73 +28,32 @@ function Dock() {
           type="button"
           title={item.label}
           aria-label={item.label}
-          style={{
-            display: "grid",
-            placeItems: "center",
-            width: "48px",
-            height: "48px",
-            border: "none",
-            background: "transparent",
-            cursor: "pointer",
-            padding: 0,
-          }}
+          className={styles.dockButton}
         >
           <span
-            className={`material-surface material-light material-thin shape-squircle-md ${item.accentClass}`}
-            style={{
-              width: "48px",
-              height: "48px",
-              display: "grid",
-              placeItems: "center",
-              fontSize: "22px",
-              fontWeight: 700,
-              textShadow: "0 1px 0 rgba(255,255,255,0.4)",
-            }}
+            className={`material-surface material-light material-thin shape-squircle-md ${item.accentClass} ${styles.dockIcon}`}
           >
             {item.glyph}
           </span>
         </button>
       ))}
 
-      <div
-        style={{
-          width: "1px",
-          alignSelf: "stretch",
-          background: "rgba(60, 60, 67, 0.18)",
-          margin: "0 2px 0 4px",
-        }}
-      />
+      <div className={styles.separator} />
 
       <button
         type="button"
         title="Trash"
         aria-label="Trash"
-        style={{
-          display: "grid",
-          placeItems: "center",
-          width: "48px",
-          height: "48px",
-          border: "none",
-          background: "transparent",
-          cursor: "pointer",
-          padding: 0,
-        }}
+        className={styles.dockButton}
       >
         <span
-          className="material-surface material-light material-thin shape-squircle-md text-secondary-light"
-          style={{
-            width: "48px",
-            height: "48px",
-            display: "grid",
-            placeItems: "center",
-            fontSize: "22px",
-          }}
+          className={`material-surface material-light material-thin shape-squircle-md text-secondary-light ${styles.trashIcon}`}
         >
           🗑
         </span>
       </button>
     </div>
   );
-}
+};
 
 export default Dock;

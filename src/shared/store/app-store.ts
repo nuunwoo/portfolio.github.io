@@ -4,6 +4,8 @@ import { WINDOW_KEYS, type WindowKey } from "../../utils/windowKeys";
 export type ScreenName = "splash" | "lock" | "desktop";
 
 type AppStoreState = {
+  isBooting: boolean;
+  hasUnlockedOnce: boolean;
   currentScreen: ScreenName;
   focusedWindowKey: WindowKey | null;
   isUnlocking: boolean;
@@ -15,23 +17,41 @@ type AppStoreState = {
 };
 
 export const useAppStore = create<AppStoreState>((set, get) => ({
+  isBooting: true,
+  hasUnlockedOnce: false,
   currentScreen: "splash",
   focusedWindowKey: WINDOW_KEYS.splashScreen,
   isUnlocking: false,
   completeSplash: () =>
     set({
+      isBooting: false,
       currentScreen: "lock",
       focusedWindowKey: WINDOW_KEYS.lockScreen,
     }),
   focusWindow: (windowKey) => set({ focusedWindowKey: windowKey }),
   lockScreen: () =>
-    set({
-      currentScreen: "lock",
-      focusedWindowKey: WINDOW_KEYS.lockScreen,
-      isUnlocking: false,
+    set((state) => {
+      if (state.isUnlocking) {
+        return {
+          currentScreen: "lock",
+          focusedWindowKey: WINDOW_KEYS.lockScreen,
+          isUnlocking: false,
+        };
+      }
+
+      return {
+        currentScreen: "lock",
+        focusedWindowKey: WINDOW_KEYS.lockScreen,
+        isUnlocking: false,
+      };
     }),
   syncFocusedWindow: () => {
-    const { currentScreen, isUnlocking } = get();
+    const { currentScreen, isBooting, isUnlocking } = get();
+
+    if (isBooting) {
+      set({ focusedWindowKey: WINDOW_KEYS.splashScreen });
+      return;
+    }
 
     if (currentScreen === "splash") {
       set({ focusedWindowKey: WINDOW_KEYS.splashScreen });
@@ -48,8 +68,8 @@ export const useAppStore = create<AppStoreState>((set, get) => ({
     }
   },
   unlockScreen: () => {
-    const { isUnlocking } = get();
-    if (isUnlocking) return;
+    const { currentScreen, isBooting, isUnlocking } = get();
+    if (isBooting || currentScreen !== "lock" || isUnlocking) return;
 
     set({ isUnlocking: true });
 
@@ -57,8 +77,13 @@ export const useAppStore = create<AppStoreState>((set, get) => ({
       set({
         currentScreen: "desktop",
         focusedWindowKey: WINDOW_KEYS.desktopScreen,
-        isUnlocking: false,
+        hasUnlockedOnce: true,
       });
+
+      // Keep unlocking state briefly so the lock layer can finish its own fade-out.
+      window.setTimeout(() => {
+        set({ isUnlocking: false });
+      }, 220);
     }, 360);
   },
 }));

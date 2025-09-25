@@ -1,68 +1,31 @@
 import Dock from "../../../components/Dock/Dock";
 import MenuBar from "../../../components/MenuBar/MenuBar";
-import type { WindowKey } from "../../../utils/windowKeys";
+import { useCurrentWallpaper } from "../../../hooks/useCurrentWallpaper";
+import { useAppStore } from "../../../shared/store/app-store";
+import { WINDOW_KEYS } from "../../../utils/windowKeys";
+import styles from "./DesktopScreen.module.css";
 
-type DesktopScreenProps = {
-  currentDate: Date;
-  isFocused?: boolean;
-  onFocusWindow?: (windowKey: WindowKey) => void;
-  onRequestLock?: () => void;
-  wallpaperSrc: string;
-  windowKey: WindowKey;
-};
+const DesktopScreen = () => {
+  const wallpaperSrc = useCurrentWallpaper();
+  const isFocused = useAppStore(
+    (state) => state.focusedWindowKey === WINDOW_KEYS.desktopScreen
+  );
+  const focusWindow = useAppStore((state) => state.focusWindow);
 
-function DesktopScreen({
-  currentDate,
-  isFocused = false,
-  onFocusWindow,
-  onRequestLock,
-  wallpaperSrc,
-  windowKey,
-}: DesktopScreenProps) {
   return (
     <section
-      data-window-key={windowKey}
-      onPointerDown={() => onFocusWindow?.(windowKey)}
-      style={{
-        position: "relative",
-        width: "100%",
-        height: "100%",
-        overflow: "hidden",
-        outline: isFocused ? "1px solid rgba(255,255,255,0.12)" : "none",
-        outlineOffset: "-1px",
-      }}
+      data-window-key={WINDOW_KEYS.desktopScreen}
+      onPointerDown={() => focusWindow(WINDOW_KEYS.desktopScreen)}
+      className={`${styles.root} ${isFocused ? styles.focused : ""}`}
     >
       <img src={wallpaperSrc} alt="Desktop wallpaper" className="wallpaper" />
-      <div style={{ position: "absolute", inset: 0 }}>
-        <div
-          style={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            right: 0,
-            zIndex: 20,
-          }}
-        >
-          <MenuBar currentDate={currentDate} onRequestLock={onRequestLock} />
+      <div className={styles.contentLayer}>
+        <div className={styles.menuBarArea}>
+          <MenuBar />
         </div>
 
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "140px 1fr",
-            alignItems: "start",
-            padding: "54px 28px 110px",
-            gap: "24px",
-            height: "100%",
-          }}
-        >
-          <div
-            style={{
-              display: "grid",
-              gap: "18px",
-              justifyItems: "center",
-            }}
-          >
+        <div className={styles.desktopGrid}>
+          <div className={styles.shortcutColumn}>
             {[
               { label: "About Me", glyph: "👤" },
               { label: "Projects", glyph: "🗂" },
@@ -71,36 +34,15 @@ function DesktopScreen({
               <button
                 key={item.label}
                 type="button"
-                style={{
-                  border: "none",
-                  background: "transparent",
-                  display: "grid",
-                  gap: "8px",
-                  justifyItems: "center",
-                  color: "white",
-                  cursor: "pointer",
-                }}
+                className={styles.shortcutButton}
               >
                 <span
-                  className="material-surface material-light material-medium material-dynamic-on-light shape-squircle-lg"
-                  style={{
-                    width: "72px",
-                    height: "72px",
-                    display: "grid",
-                    placeItems: "center",
-                    fontSize: "30px",
-                  }}
+                  className={`material-surface material-light material-medium material-dynamic-on-light shape-squircle-lg ${styles.shortcutIcon}`}
                 >
                   {item.glyph}
                 </span>
                 <span
-                  className="text-footnote font-medium text-primary-dark"
-                  style={{
-                    padding: "2px 8px",
-                    borderRadius: "10px",
-                    background: "rgba(8, 10, 14, 0.18)",
-                    backdropFilter: "blur(12px)",
-                  }}
+                  className={`text-footnote font-medium text-primary-dark ${styles.shortcutLabel}`}
                 >
                   {item.label}
                 </span>
@@ -108,36 +50,22 @@ function DesktopScreen({
             ))}
           </div>
 
-          <div
-            style={{
-              display: "grid",
-              placeItems: "center",
-              paddingTop: "48px",
-            }}
-          >
+          <div className={styles.previewArea}>
             <div
-              className="material-surface material-dark material-thick material-dynamic-on-dark shape-squircle-lg"
-              style={{
-                width: "min(560px, 100%)",
-                padding: "28px",
-                color: "#f5f7fb",
-              }}
+              className={`material-surface material-dark material-thick material-dynamic-on-dark shape-squircle-lg ${styles.previewCard}`}
             >
               <p
-                className="text-caption-1 font-semibold text-secondary-dark"
-                style={{ textTransform: "uppercase", letterSpacing: "0.12em" }}
+                className={`text-caption-1 font-semibold text-secondary-dark ${styles.previewCaption}`}
               >
                 Desktop Preview
               </p>
               <h2
-                className="text-large-title font-semibold text-primary-dark"
-                style={{ marginTop: "10px" }}
+                className={`text-large-title font-semibold text-primary-dark ${styles.previewTitle}`}
               >
                 macOS-inspired portfolio workspace
               </h2>
               <p
-                className="text-body font-regular text-secondary-dark"
-                style={{ marginTop: "14px", maxWidth: "44ch" }}
+                className={`text-body font-regular text-secondary-dark ${styles.previewBody}`}
               >
                 Menu bar and dock are now separated into reusable components so we can
                 evolve the desktop into a real portfolio launcher next.
@@ -146,20 +74,12 @@ function DesktopScreen({
           </div>
         </div>
 
-        <div
-          style={{
-            position: "absolute",
-            left: "50%",
-            bottom: "16px",
-            transform: "translateX(-50%)",
-            zIndex: 20,
-          }}
-        >
+        <div className={styles.dockArea}>
           <Dock />
         </div>
       </div>
     </section>
   );
-}
+};
 
 export default DesktopScreen;

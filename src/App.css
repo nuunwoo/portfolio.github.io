@@ -19,6 +19,22 @@
     visibility 220ms ease;
 }
 
+.app-layer-no-transition {
+  transition: none;
+}
+
+.app-layer-desktop {
+  z-index: 10;
+}
+
+.app-layer-lock {
+  z-index: 20;
+}
+
+.app-layer-splash {
+  z-index: 30;
+}
+
 .app-layer-visible {
   opacity: 1;
   visibility: visible;

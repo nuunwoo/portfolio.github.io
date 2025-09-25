@@ -1,60 +1,38 @@
 import { formatMenuBarTime } from "../../utils/dateTime";
-
-type MenuBarProps = {
-  currentDate: Date;
-  onRequestLock?: () => void;
-};
+import { useCurrentDateTime } from "../../hooks/useCurrentDateTime";
+import { useAppStore } from "../../shared/store/app-store";
+import styles from "./MenuBar.module.css";
 
 const leftItems = ["Finder", "File", "Edit", "View", "Go", "Window", "Help"];
 
-function MenuBar({ currentDate, onRequestLock }: MenuBarProps) {
+const MenuBar = () => {
+  const currentDate = useCurrentDateTime({ align: "minute" });
+  const lockScreen = useAppStore((state) => state.lockScreen);
+
   return (
     <header
-      className="material-surface material-dark material-ultra-thin"
-      style={{
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "space-between",
-        gap: "16px",
-        minHeight: "30px",
-        padding: "0 14px",
-        borderRadius: "0",
-        borderLeft: "none",
-        borderRight: "none",
-        borderTop: "none",
-        background: "rgba(18, 20, 26, 0.28)",
-        boxShadow: "none",
-      }}
+      className={`material-surface material-dark material-ultra-thin ${styles.root}`}
     >
-      <div style={{ display: "flex", alignItems: "center", gap: "14px", minWidth: 0 }}>
+      <div className={styles.leftSection}>
         <button
           type="button"
-          className="text-footnote font-semibold text-primary-dark"
-          onClick={onRequestLock}
+          className={`text-footnote font-semibold text-primary-dark ${styles.appleButton}`}
+          onClick={lockScreen}
           aria-label="Open Apple menu and lock screen"
-          style={{
-            fontSize: "15px",
-            lineHeight: 1,
-            border: "none",
-            background: "transparent",
-            color: "inherit",
-            cursor: "pointer",
-          }}
         >
           
         </button>
         {leftItems.map((item, index) => (
           <span
             key={item}
-            className={index === 0 ? "text-footnote font-semibold text-primary-dark" : "text-footnote font-medium text-secondary-dark"}
-            style={{ whiteSpace: "nowrap" }}
+            className={`${index === 0 ? "text-footnote font-semibold text-primary-dark" : "text-footnote font-medium text-secondary-dark"} ${styles.menuLabel}`}
           >
             {item}
           </span>
         ))}
       </div>
 
-      <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+      <div className={styles.rightSection}>
         <span className="text-footnote font-medium text-secondary-dark">⌘</span>
         <span className="text-footnote font-medium text-secondary-dark">􀙇</span>
         <span className="text-footnote font-medium text-secondary-dark">􀛨</span>
@@ -65,6 +43,6 @@ function MenuBar({ currentDate, onRequestLock }: MenuBarProps) {
       </div>
     </header>
   );
-}
+};
 
 export default MenuBar;

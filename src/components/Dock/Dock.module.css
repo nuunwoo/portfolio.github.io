@@ -1,0 +1,44 @@
+.root {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 10px;
+  padding: 10px 14px 12px;
+  min-height: 74px;
+}
+
+.dockButton {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+}
+
+.dockIcon {
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  font-size: 22px;
+  font-weight: 700;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.4);
+}
+
+.separator {
+  width: 1px;
+  align-self: stretch;
+  background: rgba(60, 60, 67, 0.18);
+  margin: 0 2px 0 4px;
+}
+
+.trashIcon {
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  font-size: 22px;
+}
