@@ -18,10 +18,6 @@
   filter: blur(10px);
 }
 
-.focused {
-  outline: 1px solid rgba(255, 255, 255, 0.16);
-}
-
 .overlay {
   position: absolute;
   inset: 0;
@@ -37,26 +33,6 @@
   text-align: center;
   padding: 36px 24px 56px;
   backdrop-filter: blur(10px) saturate(1.04);
-}
-
-.topBarWrap {
-  width: 100%;
-  display: grid;
-  place-items: center;
-  align-self: start;
-  padding-top: 18px;
-}
-
-.statusBar {
-  width: 100%;
-  display: flex;
-  justify-content: flex-end;
-  gap: 10px;
-  padding-right: 2px;
-  font-size: 12px;
-  font-weight: 600;
-  opacity: 0.92;
-  letter-spacing: 0.02em;
 }
 
 .centerWrap {
