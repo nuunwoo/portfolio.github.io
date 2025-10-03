@@ -134,7 +134,7 @@ const run = async () => {
   await mkdir(componentsIconsDir, { recursive: true });
 
   execSync(
-    "yarn svgr --no-index --typescript --filename-case pascal --no-dimensions --no-svgo --template svgr.template.cjs --out-dir src/components/icons -- src/assets/icons",
+    "yarn svgr --no-index --typescript --filename-case pascal --no-dimensions --no-svgo --template scripts/svgr.template.cjs --out-dir src/components/icons -- src/assets/icons",
     {
       cwd: projectRoot,
       stdio: "inherit",
