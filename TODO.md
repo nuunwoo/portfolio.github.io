@@ -1,61 +1,38 @@
 # TODO
 
-맥북 전원 온보딩 흐름을 기준으로 포트폴리오 화면을 완성한다.
+맥북 전원 온보딩 흐름 기반 포트폴리오 UI를 완성한다.
 
-## Core Flow
+## Done So Far
 
-- [x] `App`에서 `splash -> lock -> desktop` 화면이 실제로 분기되도록 연결
-- [x] 스플래시가 끝나면 잠금화면으로 자연스럽게 전환되도록 애니메이션 정리
-- [x] 잠금화면 기본 UI 구성
-- [x] 잠금화면에서 현재 시간, 날짜, 배경, 사용자 정보 노출
-- [x] 잠금해제 액션 후 `desktop` 상태로 이동
-- [x] `Desktop` 기본 UI 연결
+- [x] `App` 레벨에서 `splash -> lock -> desktop` 화면 전환 연결
+- [x] Splash / Lock / Desktop 기본 화면 구현 및 전환 애니메이션 정리
+- [x] 공통 시간 소스(`timeKeeper`) 및 날짜 포맷 유틸 정리
+- [x] 메뉴바 기본 UI 구성 + Apple 로고 컴포넌트 연동
+- [x] Dock 기본 UI 구성
+- [x] Apple 로고 SVG 자산을 `src/assets/icons`로 이관
+- [x] `yarn icons` 기반 아이콘 생성 자동화 스크립트 구축
+- [x] light/dark 아이콘 쌍 자동 래퍼(`mode: light | dark | system`) 생성
+- [x] 아이콘 템플릿 파일을 `scripts/` 하위로 정리
+- [x] 로컬 기준 동기화(삭제 반영 포함) 작업 규칙 확정
 
-## Splash Screen
+## Current Sprint (Priority)
 
-- [x] 부팅 직후 느낌의 로딩 연출 보강
-- [x] 진행바/퍼센트 스타일 정리
-- [x] Apple 느낌의 로고 또는 브랜드 로딩 비주얼 결정
-- [x] 부팅 준비 상태를 공통 readiness 계층으로 분리
-- [ ] 프리로드 실패 시 fallback UX 정리
+- [ ] MenuBar hover 시 하단 메뉴(드롭다운/패널) 노출 인터랙션 구현
+- [ ] Window 공통 컴포넌트 제작 (`titlebar`, `traffic light`, `content`)
+- [ ] Window 최소화/최대화/복원 애니메이션 구현
+- [ ] Launchpad 화면/레이아웃/열기-닫기 모션 구현
+- [ ] Desktop 아이콘/윈도우 Drag & Drop 인터랙션 구현
 
-## Lock Screen
+## Next Backlog
 
-- [x] 잠금화면 레이아웃 시안 확정
-- [x] 시계/날짜 컴포넌트 분리
-- [x] 사용자 아바타 또는 프로필 영역 설계
-- [x] 엔터, 클릭, 슬라이드 등 잠금해제 인터랙션 결정
-- [x] 모바일/데스크톱 반응형 처리
+- [ ] 프리로드 실패 시 Splash fallback UX 정리
+- [ ] 포트폴리오 앱(소개/프로젝트/연락처) window 연결
+- [ ] 포트폴리오 컨텐츠(소개/기술스택/프로젝트/링크) 실데이터 반영
+- [ ] 창 포커스/active z-index 규칙 고도화
+- [ ] 접근성(키보드 탐색, aria, focus ring) 점검
 
-## Desktop
+## Tech / Quality
 
-- [x] 바탕화면 wallpaper 선택 방식 정리
-- [ ] 메뉴바 UI 연결
-- [ ] dock 또는 앱 아이콘 영역 설계
-- [ ] 포트폴리오 섹션으로 연결되는 아이콘/앱 구조 설계
-- [ ] 프로젝트, 소개, 연락처를 어떤 창 형태로 보여줄지 결정
-
-## Portfolio Content
-
-- [ ] 자기소개 문구 초안 작성
-- [ ] 기술 스택 정리
-- [ ] 대표 프로젝트 목록 정리
-- [ ] 프로젝트별 설명, 역할, 사용 기술, 링크 수집
-- [ ] 연락처/깃허브/이메일 연결
-
-## Technical Cleanup
-
-- [x] `src/app/App.tsx`에서 상태별 화면 렌더링 구조 정리
-- [x] 공통 시간 소스와 포맷 유틸 정리
-- [x] window key 기반 전역 키보드 이벤트 구조 정리
-- [x] 잠금화면 구현 및 파일 구조 정리
-- [x] 남아 있는 Vite 템플릿 흔적 재점검
-- [x] 전역 스타일과 레이어별 스타일 분리
-- [x] `.DS_Store`, build 산출물, generated 파일 정리 유지
-
-## Nice To Have
-
-- [ ] 부팅 사운드 또는 모션 옵션 고려
-- [x] 다크/라이트 또는 시간대 기반 배경 변화
-- [ ] 간단한 fake terminal / about window 추가
-- [ ] 프로젝트 창 드래그/포커스 인터랙션 추가
+- [ ] `yarn icons` 생성 결과에 대한 최소 스모크 테스트 규칙 추가
+- [ ] 인터랙션 많은 컴포넌트(Dock/Window/MenuBar) 단위 테스트 기반 추가
+- [ ] 스타일 토큰(간격/색상/radius/blur) 공통화

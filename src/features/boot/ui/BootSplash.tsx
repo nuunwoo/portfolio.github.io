@@ -133,7 +133,7 @@ const BootSplash = () => {
       <div className={styles.glow} />
       <div className={styles.container}>
         <AppleLogo
-          mode="light"
+          mode="dark"
           role="img"
           aria-label="Apple inspired boot logo"
           className={styles.logo}
