@@ -27,3 +27,4 @@ dist-ssr
 .env*
 .yarn/install-state.gz
 COMMIT_RULES.local.md
+/design\ system/

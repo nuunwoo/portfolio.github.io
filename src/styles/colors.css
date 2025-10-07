@@ -1,285 +1,319 @@
 :root {
-  --label-primary-light: rgba(0, 0, 0, 0.85);
-  --label-secondary-light: rgba(60, 60, 67, 0.6);
-  --label-tertiary-light: rgba(60, 60, 67, 0.3);
+  --colors-accents-red-light: #ff3b30;
+  --colors-accents-orange-light: #ff9500;
+  --colors-accents-yellow-light: #ffcc00;
+  --colors-accents-green-light: #34c759;
+  --colors-accents-mint-light: #00c7be;
+  --colors-accents-teal-light: #30b0c7;
+  --colors-accents-cyan-light: #32ade6;
+  --colors-accents-blue-light: #0a84ff;
+  --colors-accents-indigo-light: #5856d6;
+  --colors-accents-purple-light: #bf5af2;
+  --colors-accents-pink-light: #ff2d55;
+  --colors-accents-brown-light: #ac8e68;
+  --colors-accents-gray-light: #8e8e93;
 
-  --label-primary-dark: rgba(255, 255, 255, 0.92);
-  --label-secondary-dark: rgba(235, 235, 245, 0.6);
-  --label-tertiary-dark: rgba(235, 235, 245, 0.3);
+  --colors-accents-red-dark: #ff453a;
+  --colors-accents-orange-dark: #ff9f0a;
+  --colors-accents-yellow-dark: #ffd60a;
+  --colors-accents-green-dark: #30d158;
+  --colors-accents-mint-dark: #63e6e2;
+  --colors-accents-teal-dark: #40c8e0;
+  --colors-accents-cyan-dark: #64d2ff;
+  --colors-accents-blue-dark: #0a84ff;
+  --colors-accents-indigo-dark: #5e5ce6;
+  --colors-accents-purple-dark: #bf5af2;
+  --colors-accents-pink-dark: #ff375f;
+  --colors-accents-brown-dark: #b58b61;
+  --colors-accents-gray-dark: #98989d;
 
-  --accent-red-light: #ff3b30;
-  --accent-orange-light: #ff9500;
-  --accent-yellow-light: #ffcc00;
-  --accent-green-light: #34c759;
-  --accent-mint-light: #00c7be;
-  --accent-teal-light: #30b0c7;
-  --accent-cyan-light: #32ade6;
-  --accent-blue-light: #0a84ff;
-  --accent-indigo-light: #5856d6;
-  --accent-purple-light: #bf5af2;
-  --accent-pink-light: #ff2d55;
-  --accent-brown-light: #ac8e68;
-  --accent-gray-light: #8e8e93;
+  --colors-accents-vibrant-red-light: rgba(255, 59, 48, 0.8);
+  --colors-accents-vibrant-orange-light: rgba(255, 149, 0, 0.8);
+  --colors-accents-vibrant-yellow-light: rgba(255, 204, 0, 0.8);
+  --colors-accents-vibrant-green-light: rgba(52, 199, 89, 0.78);
+  --colors-accents-vibrant-mint-light: rgba(0, 199, 190, 0.78);
+  --colors-accents-vibrant-teal-light: rgba(48, 176, 199, 0.78);
+  --colors-accents-vibrant-cyan-light: rgba(50, 173, 230, 0.78);
+  --colors-accents-vibrant-blue-light: rgba(10, 132, 255, 0.82);
+  --colors-accents-vibrant-indigo-light: rgba(88, 86, 214, 0.78);
+  --colors-accents-vibrant-purple-light: rgba(191, 90, 242, 0.8);
+  --colors-accents-vibrant-pink-light: rgba(255, 45, 85, 0.8);
+  --colors-accents-vibrant-brown-light: rgba(172, 142, 104, 0.78);
 
-  --accent-red-dark: #ff453a;
-  --accent-orange-dark: #ff9f0a;
-  --accent-yellow-dark: #ffd60a;
-  --accent-green-dark: #30d158;
-  --accent-mint-dark: #63e6e2;
-  --accent-teal-dark: #40c8e0;
-  --accent-cyan-dark: #64d2ff;
-  --accent-blue-dark: #0a84ff;
-  --accent-indigo-dark: #5e5ce6;
-  --accent-purple-dark: #bf5af2;
-  --accent-pink-dark: #ff375f;
-  --accent-brown-dark: #b58b61;
-  --accent-gray-dark: #98989d;
+  --colors-accents-vibrant-red-dark: rgba(255, 69, 58, 0.9);
+  --colors-accents-vibrant-orange-dark: rgba(255, 159, 10, 0.88);
+  --colors-accents-vibrant-yellow-dark: rgba(255, 214, 10, 0.88);
+  --colors-accents-vibrant-green-dark: rgba(48, 209, 88, 0.84);
+  --colors-accents-vibrant-mint-dark: rgba(99, 230, 226, 0.84);
+  --colors-accents-vibrant-teal-dark: rgba(64, 200, 224, 0.84);
+  --colors-accents-vibrant-cyan-dark: rgba(100, 210, 255, 0.86);
+  --colors-accents-vibrant-blue-dark: rgba(10, 132, 255, 0.9);
+  --colors-accents-vibrant-indigo-dark: rgba(94, 92, 230, 0.86);
+  --colors-accents-vibrant-purple-dark: rgba(191, 90, 242, 0.88);
+  --colors-accents-vibrant-pink-dark: rgba(255, 55, 95, 0.9);
+  --colors-accents-vibrant-brown-dark: rgba(181, 139, 97, 0.82);
 
-  --accent-red-vibrant-light: rgba(255, 59, 48, 0.8);
-  --accent-orange-vibrant-light: rgba(255, 149, 0, 0.8);
-  --accent-yellow-vibrant-light: rgba(255, 204, 0, 0.8);
-  --accent-green-vibrant-light: rgba(52, 199, 89, 0.78);
-  --accent-mint-vibrant-light: rgba(0, 199, 190, 0.78);
-  --accent-teal-vibrant-light: rgba(48, 176, 199, 0.78);
-  --accent-cyan-vibrant-light: rgba(50, 173, 230, 0.78);
-  --accent-blue-vibrant-light: rgba(10, 132, 255, 0.82);
-  --accent-indigo-vibrant-light: rgba(88, 86, 214, 0.78);
-  --accent-purple-vibrant-light: rgba(191, 90, 242, 0.8);
-  --accent-pink-vibrant-light: rgba(255, 45, 85, 0.8);
-  --accent-brown-vibrant-light: rgba(172, 142, 104, 0.78);
-  --accent-gray-vibrant-light: rgba(142, 142, 147, 0.74);
+  --colors-fills-primary-light: rgba(120, 120, 128, 0.2);
+  --colors-fills-secondary-light: rgba(120, 120, 128, 0.16);
+  --colors-fills-tertiary-light: rgba(118, 118, 128, 0.12);
+  --colors-fills-quaternary-light: rgba(116, 116, 128, 0.08);
+  --colors-fills-quinary-light: rgba(116, 116, 128, 0.04);
 
-  --accent-red-vibrant-dark: rgba(255, 69, 58, 0.9);
-  --accent-orange-vibrant-dark: rgba(255, 159, 10, 0.88);
-  --accent-yellow-vibrant-dark: rgba(255, 214, 10, 0.88);
-  --accent-green-vibrant-dark: rgba(48, 209, 88, 0.84);
-  --accent-mint-vibrant-dark: rgba(99, 230, 226, 0.84);
-  --accent-teal-vibrant-dark: rgba(64, 200, 224, 0.84);
-  --accent-cyan-vibrant-dark: rgba(100, 210, 255, 0.86);
-  --accent-blue-vibrant-dark: rgba(10, 132, 255, 0.9);
-  --accent-indigo-vibrant-dark: rgba(94, 92, 230, 0.86);
-  --accent-purple-vibrant-dark: rgba(191, 90, 242, 0.88);
-  --accent-pink-vibrant-dark: rgba(255, 55, 95, 0.9);
-  --accent-brown-vibrant-dark: rgba(181, 139, 97, 0.82);
-  --accent-gray-vibrant-dark: rgba(152, 152, 157, 0.8);
+  --colors-fills-primary-dark: rgba(120, 120, 128, 0.36);
+  --colors-fills-secondary-dark: rgba(120, 120, 128, 0.32);
+  --colors-fills-tertiary-dark: rgba(118, 118, 128, 0.24);
+  --colors-fills-quaternary-dark: rgba(118, 118, 128, 0.18);
+  --colors-fills-quinary-dark: rgba(118, 118, 128, 0.12);
 
-  --fill-primary-light: rgba(120, 120, 128, 0.2);
-  --fill-secondary-light: rgba(120, 120, 128, 0.16);
-  --fill-tertiary-light: rgba(118, 118, 128, 0.12);
-  --fill-quaternary-light: rgba(116, 116, 128, 0.08);
-  --fill-quinary-light: rgba(116, 116, 128, 0.04);
+  --colors-fills-vibrant-primary-light: rgba(127, 127, 132, 0.24);
+  --colors-fills-vibrant-secondary-light: rgba(127, 127, 132, 0.18);
+  --colors-fills-vibrant-tertiary-light: rgba(127, 127, 132, 0.14);
+  --colors-fills-vibrant-quaternary-light: rgba(127, 127, 132, 0.1);
+  --colors-fills-vibrant-quinary-light: rgba(127, 127, 132, 0.06);
 
-  --fill-primary-dark: rgba(120, 120, 128, 0.36);
-  --fill-secondary-dark: rgba(120, 120, 128, 0.32);
-  --fill-tertiary-dark: rgba(118, 118, 128, 0.24);
-  --fill-quaternary-dark: rgba(118, 118, 128, 0.18);
-  --fill-quinary-dark: rgba(118, 118, 128, 0.12);
+  --colors-fills-vibrant-primary-dark: rgba(127, 127, 132, 0.42);
+  --colors-fills-vibrant-secondary-dark: rgba(127, 127, 132, 0.34);
+  --colors-fills-vibrant-tertiary-dark: rgba(127, 127, 132, 0.26);
+  --colors-fills-vibrant-quaternary-dark: rgba(127, 127, 132, 0.2);
+  --colors-fills-vibrant-quinary-dark: rgba(127, 127, 132, 0.14);
 
-  --fill-primary-vibrant-light: rgba(127, 127, 132, 0.24);
-  --fill-secondary-vibrant-light: rgba(127, 127, 132, 0.18);
-  --fill-tertiary-vibrant-light: rgba(127, 127, 132, 0.14);
-  --fill-quaternary-vibrant-light: rgba(127, 127, 132, 0.1);
-  --fill-quinary-vibrant-light: rgba(127, 127, 132, 0.06);
+  --colors-text-primary-light: rgba(0, 0, 0, 0.85);
+  --colors-text-secondary-light: rgba(60, 60, 67, 0.72);
+  --colors-text-tertiary-light: rgba(60, 60, 67, 0.48);
+  --colors-text-quaternary-light: rgba(60, 60, 67, 0.3);
+  --colors-text-quinary-light: rgba(60, 60, 67, 0.18);
+  --colors-text-seximal-light: rgba(60, 60, 67, 0.1);
 
-  --fill-primary-vibrant-dark: rgba(127, 127, 132, 0.42);
-  --fill-secondary-vibrant-dark: rgba(127, 127, 132, 0.34);
-  --fill-tertiary-vibrant-dark: rgba(127, 127, 132, 0.26);
-  --fill-quaternary-vibrant-dark: rgba(127, 127, 132, 0.2);
-  --fill-quinary-vibrant-dark: rgba(127, 127, 132, 0.14);
+  --colors-text-primary-dark: rgba(255, 255, 255, 0.92);
+  --colors-text-secondary-dark: rgba(235, 235, 245, 0.72);
+  --colors-text-tertiary-dark: rgba(235, 235, 245, 0.48);
+  --colors-text-quaternary-dark: rgba(235, 235, 245, 0.3);
+  --colors-text-quinary-dark: rgba(235, 235, 245, 0.18);
+  --colors-text-seximal-dark: rgba(235, 235, 245, 0.1);
 
-  --text-primary-light: rgba(0, 0, 0, 0.85);
-  --text-secondary-light: rgba(60, 60, 67, 0.72);
-  --text-tertiary-light: rgba(60, 60, 67, 0.48);
-  --text-quaternary-light: rgba(60, 60, 67, 0.3);
-  --text-quinary-light: rgba(60, 60, 67, 0.18);
-  --text-sextimal-light: rgba(60, 60, 67, 0.1);
+  --colors-text-vibrant-primary-light: rgba(31, 31, 33, 0.84);
+  --colors-text-vibrant-secondary-light: rgba(72, 72, 74, 0.68);
+  --colors-text-vibrant-tertiary-light: rgba(72, 72, 74, 0.42);
+  --colors-text-vibrant-quaternary-light: rgba(72, 72, 74, 0.24);
+  --colors-text-vibrant-quinary-light: rgba(72, 72, 74, 0.14);
 
-  --text-primary-dark: rgba(255, 255, 255, 0.92);
-  --text-secondary-dark: rgba(235, 235, 245, 0.72);
-  --text-tertiary-dark: rgba(235, 235, 245, 0.48);
-  --text-quaternary-dark: rgba(235, 235, 245, 0.3);
-  --text-quinary-dark: rgba(235, 235, 245, 0.18);
-  --text-sextimal-dark: rgba(235, 235, 245, 0.1);
-
-  --text-primary-vibrant-light: rgba(31, 31, 33, 0.84);
-  --text-secondary-vibrant-light: rgba(72, 72, 74, 0.68);
-  --text-tertiary-vibrant-light: rgba(72, 72, 74, 0.42);
-  --text-quaternary-vibrant-light: rgba(72, 72, 74, 0.24);
-  --text-quinary-vibrant-light: rgba(72, 72, 74, 0.14);
-  --text-sextimal-vibrant-light: rgba(72, 72, 74, 0.08);
-
-  --text-primary-vibrant-dark: rgba(255, 255, 255, 0.88);
-  --text-secondary-vibrant-dark: rgba(235, 235, 245, 0.66);
-  --text-tertiary-vibrant-dark: rgba(235, 235, 245, 0.42);
-  --text-quaternary-vibrant-dark: rgba(235, 235, 245, 0.24);
-  --text-quinary-vibrant-dark: rgba(235, 235, 245, 0.14);
-  --text-sextimal-vibrant-dark: rgba(235, 235, 245, 0.08);
-}
-
-.label-primary-light {
-  color: var(--label-primary-light);
-}
-
-.label-secondary-light {
-  color: var(--label-secondary-light);
-}
-
-.label-tertiary-light {
-  color: var(--label-tertiary-light);
-}
-
-.label-primary-dark {
-  color: var(--label-primary-dark);
-}
-
-.label-secondary-dark {
-  color: var(--label-secondary-dark);
-}
-
-.label-tertiary-dark {
-  color: var(--label-tertiary-dark);
-}
-
-.accent-red-light {
-  color: var(--accent-red-light);
-}
-
-.accent-orange-light {
-  color: var(--accent-orange-light);
-}
-
-.accent-yellow-light {
-  color: var(--accent-yellow-light);
-}
-
-.accent-green-light {
-  color: var(--accent-green-light);
-}
-
-.accent-blue-light {
-  color: var(--accent-blue-light);
-}
-
-.accent-purple-light {
-  color: var(--accent-purple-light);
-}
-
-.accent-pink-light {
-  color: var(--accent-pink-light);
-}
-
-.accent-gray-light {
-  color: var(--accent-gray-light);
-}
-
-.accent-red-dark {
-  color: var(--accent-red-dark);
-}
-
-.accent-orange-dark {
-  color: var(--accent-orange-dark);
-}
-
-.accent-yellow-dark {
-  color: var(--accent-yellow-dark);
-}
-
-.accent-green-dark {
-  color: var(--accent-green-dark);
-}
-
-.accent-blue-dark {
-  color: var(--accent-blue-dark);
-}
-
-.accent-purple-dark {
-  color: var(--accent-purple-dark);
-}
-
-.accent-pink-dark {
-  color: var(--accent-pink-dark);
-}
-
-.accent-gray-dark {
-  color: var(--accent-gray-dark);
-}
-
-.fill-primary-light {
-  background: var(--fill-primary-light);
-}
-
-.fill-secondary-light {
-  background: var(--fill-secondary-light);
-}
-
-.fill-tertiary-light {
-  background: var(--fill-tertiary-light);
-}
-
-.fill-primary-dark {
-  background: var(--fill-primary-dark);
-}
-
-.fill-secondary-dark {
-  background: var(--fill-secondary-dark);
-}
-
-.fill-tertiary-dark {
-  background: var(--fill-tertiary-dark);
-}
-
-.fill-primary-vibrant-light {
-  background: var(--fill-primary-vibrant-light);
-}
-
-.fill-secondary-vibrant-light {
-  background: var(--fill-secondary-vibrant-light);
-}
-
-.fill-primary-vibrant-dark {
-  background: var(--fill-primary-vibrant-dark);
-}
-
-.fill-secondary-vibrant-dark {
-  background: var(--fill-secondary-vibrant-dark);
+  --colors-text-vibrant-primary-dark: rgba(255, 255, 255, 0.88);
+  --colors-text-vibrant-secondary-dark: rgba(235, 235, 245, 0.66);
+  --colors-text-vibrant-tertiary-dark: rgba(235, 235, 245, 0.42);
+  --colors-text-vibrant-quaternary-dark: rgba(235, 235, 245, 0.24);
+  --colors-text-vibrant-quinary-dark: rgba(235, 235, 245, 0.14);
 }
 
 .text-primary-light {
-  color: var(--text-primary-light);
+  color: var(--colors-text-primary-light);
 }
-
 .text-secondary-light {
-  color: var(--text-secondary-light);
+  color: var(--colors-text-secondary-light);
 }
-
 .text-tertiary-light {
-  color: var(--text-tertiary-light);
+  color: var(--colors-text-tertiary-light);
+}
+.text-quaternary-light {
+  color: var(--colors-text-quaternary-light);
+}
+.text-quinary-light {
+  color: var(--colors-text-quinary-light);
+}
+.text-seximal-light {
+  color: var(--colors-text-seximal-light);
 }
 
 .text-primary-dark {
-  color: var(--text-primary-dark);
+  color: var(--colors-text-primary-dark);
 }
-
 .text-secondary-dark {
-  color: var(--text-secondary-dark);
+  color: var(--colors-text-secondary-dark);
 }
-
 .text-tertiary-dark {
-  color: var(--text-tertiary-dark);
+  color: var(--colors-text-tertiary-dark);
+}
+.text-quaternary-dark {
+  color: var(--colors-text-quaternary-dark);
+}
+.text-quinary-dark {
+  color: var(--colors-text-quinary-dark);
+}
+.text-seximal-dark {
+  color: var(--colors-text-seximal-dark);
 }
 
 .text-primary-vibrant-light {
-  color: var(--text-primary-vibrant-light);
+  color: var(--colors-text-vibrant-primary-light);
 }
-
 .text-secondary-vibrant-light {
-  color: var(--text-secondary-vibrant-light);
+  color: var(--colors-text-vibrant-secondary-light);
+}
+.text-tertiary-vibrant-light {
+  color: var(--colors-text-vibrant-tertiary-light);
+}
+.text-quaternary-vibrant-light {
+  color: var(--colors-text-vibrant-quaternary-light);
+}
+.text-quinary-vibrant-light {
+  color: var(--colors-text-vibrant-quinary-light);
 }
 
 .text-primary-vibrant-dark {
-  color: var(--text-primary-vibrant-dark);
+  color: var(--colors-text-vibrant-primary-dark);
+}
+.text-secondary-vibrant-dark {
+  color: var(--colors-text-vibrant-secondary-dark);
+}
+.text-tertiary-vibrant-dark {
+  color: var(--colors-text-vibrant-tertiary-dark);
+}
+.text-quaternary-vibrant-dark {
+  color: var(--colors-text-vibrant-quaternary-dark);
+}
+.text-quinary-vibrant-dark {
+  color: var(--colors-text-vibrant-quinary-dark);
 }
 
-.text-secondary-vibrant-dark {
-  color: var(--text-secondary-vibrant-dark);
+.fill-primary-light {
+  background: var(--colors-fills-primary-light);
+}
+.fill-secondary-light {
+  background: var(--colors-fills-secondary-light);
+}
+.fill-tertiary-light {
+  background: var(--colors-fills-tertiary-light);
+}
+.fill-quaternary-light {
+  background: var(--colors-fills-quaternary-light);
+}
+.fill-quinary-light {
+  background: var(--colors-fills-quinary-light);
+}
+
+.fill-primary-dark {
+  background: var(--colors-fills-primary-dark);
+}
+.fill-secondary-dark {
+  background: var(--colors-fills-secondary-dark);
+}
+.fill-tertiary-dark {
+  background: var(--colors-fills-tertiary-dark);
+}
+.fill-quaternary-dark {
+  background: var(--colors-fills-quaternary-dark);
+}
+.fill-quinary-dark {
+  background: var(--colors-fills-quinary-dark);
+}
+
+.fill-primary-vibrant-light {
+  background: var(--colors-fills-vibrant-primary-light);
+}
+.fill-secondary-vibrant-light {
+  background: var(--colors-fills-vibrant-secondary-light);
+}
+.fill-tertiary-vibrant-light {
+  background: var(--colors-fills-vibrant-tertiary-light);
+}
+.fill-quaternary-vibrant-light {
+  background: var(--colors-fills-vibrant-quaternary-light);
+}
+.fill-quinary-vibrant-light {
+  background: var(--colors-fills-vibrant-quinary-light);
+}
+
+.fill-primary-vibrant-dark {
+  background: var(--colors-fills-vibrant-primary-dark);
+}
+.fill-secondary-vibrant-dark {
+  background: var(--colors-fills-vibrant-secondary-dark);
+}
+.fill-tertiary-vibrant-dark {
+  background: var(--colors-fills-vibrant-tertiary-dark);
+}
+.fill-quaternary-vibrant-dark {
+  background: var(--colors-fills-vibrant-quaternary-dark);
+}
+.fill-quinary-vibrant-dark {
+  background: var(--colors-fills-vibrant-quinary-dark);
+}
+
+.accent-red-light {
+  color: var(--colors-accents-red-light);
+}
+.accent-orange-light {
+  color: var(--colors-accents-orange-light);
+}
+.accent-yellow-light {
+  color: var(--colors-accents-yellow-light);
+}
+.accent-green-light {
+  color: var(--colors-accents-green-light);
+}
+.accent-mint-light {
+  color: var(--colors-accents-mint-light);
+}
+.accent-teal-light {
+  color: var(--colors-accents-teal-light);
+}
+.accent-cyan-light {
+  color: var(--colors-accents-cyan-light);
+}
+.accent-blue-light {
+  color: var(--colors-accents-blue-light);
+}
+.accent-indigo-light {
+  color: var(--colors-accents-indigo-light);
+}
+.accent-purple-light {
+  color: var(--colors-accents-purple-light);
+}
+.accent-pink-light {
+  color: var(--colors-accents-pink-light);
+}
+.accent-brown-light {
+  color: var(--colors-accents-brown-light);
+}
+.accent-gray-light {
+  color: var(--colors-accents-gray-light);
+}
+
+.accent-red-dark {
+  color: var(--colors-accents-red-dark);
+}
+.accent-orange-dark {
+  color: var(--colors-accents-orange-dark);
+}
+.accent-yellow-dark {
+  color: var(--colors-accents-yellow-dark);
+}
+.accent-green-dark {
+  color: var(--colors-accents-green-dark);
+}
+.accent-mint-dark {
+  color: var(--colors-accents-mint-dark);
+}
+.accent-teal-dark {
+  color: var(--colors-accents-teal-dark);
+}
+.accent-cyan-dark {
+  color: var(--colors-accents-cyan-dark);
+}
+.accent-blue-dark {
+  color: var(--colors-accents-blue-dark);
+}
+.accent-indigo-dark {
+  color: var(--colors-accents-indigo-dark);
+}
+.accent-purple-dark {
+  color: var(--colors-accents-purple-dark);
+}
+.accent-pink-dark {
+  color: var(--colors-accents-pink-dark);
+}
+.accent-brown-dark {
+  color: var(--colors-accents-brown-dark);
+}
+.accent-gray-dark {
+  color: var(--colors-accents-gray-dark);
 }
