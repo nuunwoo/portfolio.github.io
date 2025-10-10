@@ -1,0 +1,92 @@
+.root {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 6px;
+  padding: 8px 12px 10px;
+  min-height: 82px;
+  border-radius: var(--ds-os-dock-radius);
+  background: var(--ds-os-dock-bg-light);
+  border: 1px solid var(--ds-os-dock-border-light);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.48),
+    var(--ds-os-dock-shadow);
+  backdrop-filter: blur(22px) saturate(1.2);
+  -webkit-backdrop-filter: blur(22px) saturate(1.2);
+  user-select: none;
+}
+
+.item {
+  display: grid;
+  place-items: start center;
+  width: 48px;
+  grid-template-rows: 48px 8px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+  position: relative;
+  transition: transform 180ms ease;
+}
+
+.icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  font-size: 21px;
+  font-weight: 700;
+  color: #11131a;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.65),
+    0 4px 12px rgba(13, 18, 30, 0.25);
+}
+
+.item:hover {
+  transform: translateY(-6px) scale(1.06);
+}
+
+.runningDot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: rgba(238, 244, 255, 0.95);
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.65);
+  justify-self: center;
+  align-self: center;
+}
+
+.separator {
+  width: 1px;
+  height: 46px;
+  align-self: center;
+  background: rgba(70, 76, 92, 0.35);
+  margin: 0 4px;
+}
+
+.badge {
+  position: absolute;
+  top: -3px;
+  right: -4px;
+  min-width: 18px;
+  height: 16px;
+  padding: 0 5px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  font-size: 10px;
+  font-weight: 700;
+  color: #fff;
+  background: linear-gradient(180deg, #ff665f 0%, #ff3b30 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.42),
+    0 2px 8px rgba(100, 10, 6, 0.4);
+  z-index: 2;
+}
+
+:global(.app-shell[data-appearance='dark']) .root {
+  background: var(--ds-os-dock-bg-dark);
+  border-color: var(--ds-os-dock-border-dark);
+}

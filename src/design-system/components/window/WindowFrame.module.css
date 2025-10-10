@@ -1,0 +1,53 @@
+.root {
+  width: min(760px, 100%);
+  border-radius: var(--ds-os-surface-radius-lg);
+  border: 1px solid var(--ds-os-window-border-light);
+  background: var(--ds-os-window-bg-light);
+  box-shadow: var(--ds-os-window-shadow);
+  overflow: hidden;
+}
+
+.titleBar {
+  height: var(--ds-os-titlebar-height);
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 12px;
+  padding: 0 10px;
+  background: var(--ds-os-titlebar-bg-light);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.title {
+  justify-self: center;
+  font-family: var(--font-family-system);
+  font-size: 12px;
+  font-weight: var(--font-weight-semibold);
+  color: var(--colors-text-vibrant-primary-light);
+}
+
+.tools {
+  width: 120px;
+  justify-self: end;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.body {
+  padding: 14px;
+}
+
+:global(.app-shell[data-appearance='dark']) .root {
+  border-color: var(--ds-os-window-border-dark);
+  background: var(--ds-os-window-bg-dark);
+}
+
+:global(.app-shell[data-appearance='dark']) .titleBar {
+  background: var(--ds-os-titlebar-bg-dark);
+  border-bottom-color: rgba(255, 255, 255, 0.1);
+}
+
+:global(.app-shell[data-appearance='dark']) .title {
+  color: var(--colors-text-vibrant-primary-dark);
+}

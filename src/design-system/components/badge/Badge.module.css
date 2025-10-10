@@ -1,0 +1,12 @@
+.root {
+  min-width: 18px;
+  height: 16px;
+  padding: 0 5px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font: 700 10px/1 var(--font-family-system);
+  color: #fff;
+  background: linear-gradient(180deg,#ff665f,#ff3b30);
+}

@@ -1,0 +1,4 @@
+.root { display: grid; }
+.row { height: 28px; display: flex; align-items: center; padding: 0 10px; font: 500 13px/16px var(--font-family-system); border-bottom: 1px solid rgba(0,0,0,0.06); }
+.row:hover { background: rgba(10,132,255,0.12); }
+.rowActive { background: #0a84ff; color: #fff; }

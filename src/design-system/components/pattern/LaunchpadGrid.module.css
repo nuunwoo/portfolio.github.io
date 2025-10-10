@@ -1,0 +1,4 @@
+.root { display: grid; grid-template-columns: repeat(6, 72px); gap: 18px; justify-content: center; }
+.item { display: grid; gap: 6px; justify-items: center; }
+.icon { width: 64px; height: 64px; border-radius: 16px; background: rgba(255,255,255,0.94); display: grid; place-items: center; }
+.label { font: 500 12px/15px var(--font-family-system); color: #fff; text-shadow: 0 1px 4px rgba(0,0,0,0.55); }

@@ -1,0 +1,11 @@
+.root {
+  width: min(420px, 100%);
+  border-radius: 14px;
+  border: 1px solid rgba(0,0,0,0.12);
+  background: #f6f6f8;
+  box-shadow: 0 20px 48px rgba(0,0,0,0.28);
+  padding: 16px;
+}
+.title { font: 700 15px/20px var(--font-family-system); }
+.body { margin-top: 8px; font: 400 13px/18px var(--font-family-system); }
+.footer { margin-top: 14px; display: flex; justify-content: flex-end; gap: 8px; }

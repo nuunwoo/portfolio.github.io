@@ -1,0 +1,222 @@
+.entryRow {
+  width: 100%;
+}
+
+.separatorRow {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: var(--ds-menu-separator-padding);
+  width: 100%;
+  height: var(--ds-menu-separator-height);
+}
+
+.separatorLine {
+  width: calc(100% - 18px);
+  height: 1px;
+  background: var(--ds-menu-separator-color);
+  mix-blend-mode: plus-darker;
+}
+
+.headerRow {
+  position: relative;
+  width: 100%;
+  min-width: var(--ds-menu-item-min-width);
+  height: var(--ds-menu-header-height);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  padding: var(--ds-menu-header-padding);
+  gap: 10px;
+  flex: none;
+}
+
+.headerLabel {
+  height: 12px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  font-family: var(--font-family-system);
+  font-size: var(--text-caption1-size);
+  line-height: 12px;
+  font-weight: var(--font-weight-bold);
+  color: #808080;
+  mix-blend-mode: plus-darker;
+}
+
+.item {
+  border: none;
+  background: transparent;
+  border-radius: 0;
+  min-width: var(--ds-menu-item-min-width);
+  width: 100%;
+  height: var(--ds-menu-item-height);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: var(--ds-menu-item-gap);
+  padding: 0;
+  text-align: left;
+  font-family: var(--font-family-system);
+  font-size: var(--text-body-size);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--text-body-line-height);
+  letter-spacing: var(--text-tracking);
+  color: var(--ds-menu-text-idle);
+  mix-blend-mode: plus-darker;
+  cursor: pointer;
+  position: relative;
+  isolation: isolate;
+  z-index: 0;
+}
+
+.item:hover {
+  color: var(--ds-menu-text-hover);
+  mix-blend-mode: normal;
+}
+
+.item:hover::before {
+  content: "";
+  position: absolute;
+  left: -7px;
+  right: -7px;
+  top: 0;
+  bottom: 0;
+  background: var(--ds-menu-item-hover-bg);
+  background-blend-mode: plus-darker, color-dodge, normal;
+  border-radius: 8px;
+  z-index: -1;
+}
+
+.itemDisabled,
+.itemDisabled:hover {
+  color: var(--ds-menu-text-disabled);
+  background: transparent;
+  cursor: default;
+  mix-blend-mode: plus-darker;
+}
+
+.itemDisabled:hover::before {
+  content: none;
+}
+
+.itemEmphasized .label {
+  font-weight: var(--font-weight-bold);
+}
+
+.itemSelected::before,
+.itemSubmenuOpen:not(:hover)::before {
+  content: "";
+  position: absolute;
+  left: -7px;
+  right: -7px;
+  top: 0;
+  bottom: 0;
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.12);
+  z-index: -1;
+}
+
+.symbol {
+  width: var(--ds-menu-symbol-width);
+  height: var(--ds-menu-item-height);
+  flex: none;
+  align-self: stretch;
+  mix-blend-mode: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: inherit;
+}
+
+.symbol span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--ds-menu-symbol-width);
+  height: var(--text-body-line-height);
+  font-family: var(--font-family-system);
+  font-size: var(--text-body-size);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--text-body-line-height);
+  color: inherit;
+}
+
+.label {
+  font-family: inherit;
+  font-size: var(--text-body-size);
+  line-height: var(--text-body-line-height);
+  letter-spacing: var(--text-tracking);
+  font-weight: inherit;
+  color: inherit;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  align-self: stretch;
+  mix-blend-mode: inherit;
+}
+
+.meta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 1px;
+  min-width: 25px;
+  height: var(--text-body-line-height);
+  flex: none;
+  mix-blend-mode: inherit;
+}
+
+.shortcut {
+  font-size: var(--text-body-size);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--text-body-line-height);
+  letter-spacing: var(--text-tracking);
+  color: var(--colors-menu-shortcut-idle);
+}
+
+.item:hover .shortcut,
+.item:hover .label {
+  color: var(--colors-menu-shortcut-hover);
+}
+
+.itemDisabled .label,
+.itemDisabled .shortcut,
+.itemDisabled .symbol,
+.itemDisabled .symbol span,
+.itemDisabled:hover .label,
+.itemDisabled:hover .shortcut,
+.itemDisabled:hover .symbol,
+.itemDisabled:hover .symbol span {
+  color: var(--colors-menu-shortcut-disabled);
+}
+
+.arrow {
+  width: var(--ds-menu-chevron-width);
+  height: var(--ds-menu-chevron-height);
+  display: block;
+  flex: none;
+  align-self: center;
+}
+
+:global(.app-shell[data-appearance='dark']) .headerLabel {
+  mix-blend-mode: plus-lighter;
+}
+
+:global(.app-shell[data-appearance='dark']) .item {
+  color: var(--colors-text-vibrant-secondary-dark);
+  mix-blend-mode: plus-lighter;
+}
+
+:global(.app-shell[data-appearance='dark']) .itemDisabled,
+:global(.app-shell[data-appearance='dark']) .itemDisabled:hover {
+  color: var(--ds-menu-text-disabled);
+  mix-blend-mode: plus-lighter;
+}
+
+:global(.app-shell[data-appearance='dark']) .itemSelected::before,
+:global(.app-shell[data-appearance='dark']) .itemSubmenuOpen:not(:hover)::before {
+  background: rgba(255, 255, 255, 0.22);
+}

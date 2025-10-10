@@ -1,0 +1,30 @@
+:root {
+  --ds-os-surface-radius-lg: 14px;
+  --ds-os-surface-radius-md: 10px;
+
+  --ds-os-window-bg-light: #ececef;
+  --ds-os-window-bg-dark: #2b2d31;
+  --ds-os-window-border-light: #c8c8ce;
+  --ds-os-window-border-dark: #4f525b;
+  --ds-os-window-shadow: 0 14px 40px rgba(10, 12, 18, 0.34);
+
+  --ds-os-titlebar-height: 30px;
+  --ds-os-titlebar-bg-light: #e5e5ea;
+  --ds-os-titlebar-bg-dark: #353840;
+
+  --ds-os-search-height: 24px;
+  --ds-os-search-radius: 8px;
+  --ds-os-search-bg-light: #f8f8fa;
+  --ds-os-search-bg-dark: #24262d;
+  --ds-os-search-border-light: #c6c6cc;
+  --ds-os-search-border-dark: #4a4e58;
+  --ds-os-search-placeholder-light: #7e7e86;
+  --ds-os-search-placeholder-dark: #9a9eab;
+
+  --ds-os-dock-radius: 18px;
+  --ds-os-dock-bg-light: rgba(244, 246, 252, 0.78);
+  --ds-os-dock-border-light: rgba(255, 255, 255, 0.56);
+  --ds-os-dock-bg-dark: rgba(39, 42, 49, 0.76);
+  --ds-os-dock-border-dark: rgba(115, 122, 139, 0.42);
+  --ds-os-dock-shadow: 0 14px 36px rgba(7, 12, 24, 0.35);
+}

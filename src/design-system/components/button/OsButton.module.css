@@ -1,0 +1,32 @@
+.root {
+  height: 28px;
+  border-radius: 8px;
+  border: 1px solid rgba(0,0,0,0.16);
+  background: linear-gradient(180deg,#ffffff,#ececf1);
+  padding: 0 12px;
+  font-family: var(--font-family-system);
+  font-size: 13px;
+  font-weight: var(--font-weight-medium);
+  color: var(--colors-text-vibrant-primary-light);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+.root:hover { background: linear-gradient(180deg,#ffffff,#e7e7ed); }
+.primary {
+  border-color: #0a84ff;
+  background: linear-gradient(180deg,#2392ff,#0a84ff);
+  color: #fff;
+}
+.primary:hover { background: linear-gradient(180deg,#45a3ff,#0a84ff); }
+:global(.app-shell[data-appearance='dark']) .root {
+  border-color: rgba(255,255,255,0.18);
+  background: linear-gradient(180deg,#3a3d45,#2d3037);
+  color: var(--colors-text-vibrant-primary-dark);
+}
+:global(.app-shell[data-appearance='dark']) .primary {
+  border-color: #0a84ff;
+  background: linear-gradient(180deg,#0a84ff,#006fdd);
+  color: #fff;
+}

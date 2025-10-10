@@ -1,0 +1,29 @@
+:root {
+  --ds-menu-panel-radius: 10px;
+  --ds-menu-panel-padding-y: 5px;
+  --ds-menu-panel-padding-x: 12px;
+
+  --ds-menu-item-min-width: 160px;
+  --ds-menu-item-height: 24px;
+  --ds-menu-item-gap: 6px;
+
+  --ds-menu-symbol-width: 12px;
+  --ds-menu-chevron-width: 6px;
+  --ds-menu-chevron-height: 10px;
+
+  --ds-menu-header-height: 21px;
+  --ds-menu-header-padding: 5px 0 4px 18px;
+
+  --ds-menu-separator-height: 11px;
+  --ds-menu-separator-padding: 5px 0 5px 18px;
+  --ds-menu-separator-color: #e6e6e6;
+
+  --ds-menu-text-idle: #4c4c4c;
+  --ds-menu-text-disabled: #c6c6c6;
+  --ds-menu-text-hover: #ffffff;
+
+  --ds-menu-item-hover-bg:
+    linear-gradient(0deg, #0088ff, #0088ff),
+    linear-gradient(0deg, rgba(255, 255, 255, 0.65), rgba(255, 255, 255, 0.65)),
+    rgba(0, 0, 0, 0.05);
+}

@@ -1,0 +1,2 @@
+.track { height: 6px; border-radius: 999px; background: rgba(120,120,128,0.24); overflow: hidden; }
+.value { height: 100%; background: linear-gradient(90deg,#0a84ff,#51a9ff); }

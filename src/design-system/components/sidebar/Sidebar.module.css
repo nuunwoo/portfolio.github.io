@@ -1,0 +1,27 @@
+.root {
+  width: 220px;
+  border-right: 1px solid rgba(0,0,0,0.1);
+  background: rgba(240,240,244,0.85);
+  padding: 8px;
+}
+.sectionTitle {
+  font: 600 11px/14px var(--font-family-system);
+  color: #7a7a82;
+  margin: 8px 6px;
+  text-transform: uppercase;
+}
+.item {
+  height: 28px;
+  padding: 0 10px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  font: 500 13px/16px var(--font-family-system);
+  color: var(--colors-text-vibrant-primary-light);
+}
+.itemActive { background: #0a84ff; color: #fff; }
+:global(.app-shell[data-appearance='dark']) .root {
+  border-right-color: rgba(255,255,255,0.12);
+  background: rgba(33,35,41,0.9);
+}
+:global(.app-shell[data-appearance='dark']) .item { color: var(--colors-text-vibrant-primary-dark); }

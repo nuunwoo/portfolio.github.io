@@ -1,0 +1,4 @@
+.root { display: inline-flex; align-items: center; gap: 6px; font: 500 12px/15px var(--font-family-system); }
+.item { color: var(--colors-text-vibrant-secondary-light); }
+.sep { color: #8b8b93; }
+:global(.app-shell[data-appearance='dark']) .item { color: var(--colors-text-vibrant-secondary-dark); }

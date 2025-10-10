@@ -1,0 +1,15 @@
+.root {
+  height: 34px;
+  border-radius: 10px;
+  border: 1px solid rgba(0,0,0,0.1);
+  background: rgba(245,245,248,0.9);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 10px;
+}
+.spacer { flex: 1; }
+:global(.app-shell[data-appearance='dark']) .root {
+  border-color: rgba(255,255,255,0.12);
+  background: rgba(42,44,52,0.88);
+}

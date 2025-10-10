@@ -1,0 +1,2 @@
+.root { width: 14px; height: 14px; border-radius: 50%; border: 1px solid rgba(0,0,0,0.24); background: #fff; display: inline-grid; place-items: center; }
+.dot { width: 6px; height: 6px; border-radius: 50%; background: #0a84ff; }

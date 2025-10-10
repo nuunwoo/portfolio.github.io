@@ -1,0 +1,4 @@
+.root { display: grid; grid-template-columns: var(--left-width, 240px) 1fr; min-height: 320px; border-radius: 14px; overflow: hidden; border: 1px solid rgba(0,0,0,0.12); }
+.left { min-width: 0; }
+.right { min-width: 0; background: rgba(255,255,255,0.62); }
+:global(.app-shell[data-appearance='dark']) .right { background: rgba(24,26,32,0.62); }
