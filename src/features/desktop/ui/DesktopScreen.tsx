@@ -1,11 +1,10 @@
-import MenuBar from '../../../components/MenuBar/MenuBar';
+import MenuBar from '../../shell/menu-bar/MenuBar';
 import {
   Breadcrumbs,
   Checkbox,
   ListView,
   NotificationCenter,
   OsButton,
-  OsDock,
   Radio,
   ProgressBar,
   SelectField,
@@ -21,29 +20,36 @@ import {
   Tabs,
   Toolbar,
   ToolbarSpacer,
-  type DockItem,
   WindowFrame,
 } from '../../../design-system/components';
+import {useMemo} from 'react';
+import {launchpadAppIcons} from '../../../components/icons/app-icons/catalog';
+import DesktopDock from '../../shell/dock/DesktopDock';
+import {LaunchpadIcon, useLaunchpadLayout} from '../../launchpad';
 import {useCurrentWallpaper} from '../../../hooks/useCurrentWallpaper';
 import {useAppStore} from '../../../shared/store/app-store';
 import {WINDOW_KEYS} from '../../../utils/windowKeys';
+import LaunchpadOverlayMotion from './animations/LaunchpadOverlayMotion';
 import styles from './DesktopScreen.module.css';
-
-const dockItems: DockItem[] = [
-  {key: 'finder', label: 'Finder', glyph: '🙂', tint: '#8fc6ff', running: true},
-  {key: 'launchpad', label: 'Launchpad', glyph: '◻', tint: '#f3f4f8', running: true},
-  {key: 'mail', label: 'Mail', glyph: '✉', tint: '#6ec7ff', badge: '109', running: true},
-  {key: 'calendar', label: 'Calendar', glyph: '14', tint: '#ffffff', running: true},
-  {key: 'notes', label: 'Notes', glyph: '📝', tint: '#ffe47f', running: true},
-  {key: 'terminal', label: 'Terminal', glyph: '>_', tint: '#1a1b20', running: true},
-  {key: 'figma', label: 'Figma', glyph: '◍', tint: '#25262c', running: true},
-  {key: 'trash', label: 'Trash', glyph: '🗑', tint: '#f0f2f8', running: true},
-];
 
 const DesktopScreen = () => {
   const wallpaperSrc = useCurrentWallpaper();
+  const closeLaunchpad = useAppStore(state => state.closeLaunchpad);
   const isFocused = useAppStore(state => state.focusedWindowKey === WINDOW_KEYS.desktopScreen);
+  const isLaunchpadOpen = useAppStore(state => state.isLaunchpadOpen);
   const focusWindow = useAppStore(state => state.focusWindow);
+  const toggleLaunchpad = useAppStore(state => state.toggleLaunchpad);
+
+  const launchpadSourceApps = useMemo(
+    () =>
+      launchpadAppIcons.map(item => ({
+        key: item.key,
+        icon: <LaunchpadIcon name={item.icon} label={item.label} />,
+        label: item.label,
+      })),
+    []
+  );
+  const {orderedApps: launchpadApps} = useLaunchpadLayout(launchpadSourceApps);
 
   return (
     <section
@@ -52,6 +58,8 @@ const DesktopScreen = () => {
       className={`${styles.root} ${isFocused ? styles.focused : ''}`}>
       <img src={wallpaperSrc} alt="Desktop wallpaper" className="wallpaper" />
       <div className={styles.contentLayer}>
+        <LaunchpadOverlayMotion isOpen={isLaunchpadOpen} apps={launchpadApps} onClose={closeLaunchpad} />
+
         <div className={styles.menuBarArea}>
           <MenuBar />
         </div>
@@ -150,7 +158,11 @@ const DesktopScreen = () => {
         </div>
 
         <div className={styles.dockArea}>
-          <OsDock items={dockItems} />
+          <DesktopDock
+            isLaunchpadOpen={isLaunchpadOpen}
+            onLaunchpadToggle={toggleLaunchpad}
+            onOtherItemClick={closeLaunchpad}
+          />
         </div>
       </div>
     </section>
