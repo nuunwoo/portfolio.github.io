@@ -1,6 +1,7 @@
 @import "./styles/fonts.css";
 @import "./styles/typography.css";
 @import "./styles/colors.css";
+@import "./design-system/index.css";
 @import "./styles/materials.css";
 @import "./styles/appearance.css";
 @import "./styles/base.css";

@@ -102,6 +102,10 @@
   --colors-text-vibrant-tertiary-dark: rgba(235, 235, 245, 0.42);
   --colors-text-vibrant-quaternary-dark: rgba(235, 235, 245, 0.24);
   --colors-text-vibrant-quinary-dark: rgba(235, 235, 245, 0.14);
+
+  --colors-menu-shortcut-idle: #c6c6c6;
+  --colors-menu-shortcut-hover: #ffffff;
+  --colors-menu-shortcut-disabled: #c6c6c6;
 }
 
 .text-primary-light {

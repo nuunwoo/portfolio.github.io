@@ -18,11 +18,10 @@ export const WALLPAPER_SOURCES = [
 ] as const;
 
 export const getWallpaperSrcForDate = (date: Date) => {
-  const hour = date.getHours();
-  const index = Math.min(
-    WALLPAPER_SOURCES.length - 1,
-    Math.floor((hour / 24) * WALLPAPER_SOURCES.length)
-  );
+  const minutesInDay = date.getHours() * 60 + date.getMinutes();
+  const slotMinutes = (24 * 60) / WALLPAPER_SOURCES.length;
+  const shiftedMinutes = minutesInDay + 30;
+  const index = Math.floor(shiftedMinutes / slotMinutes) % WALLPAPER_SOURCES.length;
   return WALLPAPER_SOURCES[index];
 };
 

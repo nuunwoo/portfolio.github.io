@@ -23,13 +23,21 @@
   background: rgba(255, 255, 255, 0.5);
 }
 
-:global(.app-shell[data-appearance='light']) .menuAppName,
+:global(.app-shell[data-appearance='light']) .appNameLabel,
 :global(.app-shell[data-appearance='light']) .menuClock {
-  color: rgba(0, 0, 0, 1);
+  color: var(--colors-text-vibrant-primary-light);
+}
+
+:global(.app-shell[data-appearance='light']) .menuItemLabel {
+  color: var(--colors-text-vibrant-primary-light);
 }
 
 :global(.app-shell[data-appearance='light']) .menuItem {
-  color: rgba(0, 0, 0, 0.2);
+  color: var(--colors-text-vibrant-primary-light);
+}
+
+:global(.app-shell[data-appearance='light']) .statusIcon {
+  color: var(--colors-text-vibrant-primary-light);
 }
 
 .leftSection {
@@ -61,10 +69,6 @@
 .textButton {
   padding: 4px 11px;
   white-space: nowrap;
-  font-family: var(--font-family-system);
-  font-size: var(--text-menu-size);
-  line-height: var(--text-menu-line-height);
-  letter-spacing: var(--text-menu-tracking);
 }
 
 .appleLogo {
@@ -73,14 +77,35 @@
   display: block;
 }
 
-.menuAppName {
-  font-weight: 400;
-  color: rgba(255, 255, 255, 0.98);
+.appNameLabel {
+  color: var(--colors-text-vibrant-primary-dark);
+}
+
+.menuItemLabel {
+  color: var(--colors-text-vibrant-primary-dark);
 }
 
 .menuItem {
   font-weight: 700;
   color: rgba(243, 246, 255, 0.92);
+}
+
+.statusItem {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.statusIcon {
+  width: 14px;
+  height: 14px;
+  display: block;
+  color: rgba(243, 246, 255, 0.92);
+}
+
+.batteryIcon {
+  width: 19px;
+  height: 9px;
 }
 
 .rightSection {
@@ -136,139 +161,9 @@
   -webkit-backdrop-filter: blur(12px);
 }
 
-:global(.app-shell[data-appearance='dark']) .menuAppName,
-:global(.app-shell[data-appearance='dark']) .menuItem {
+:global(.app-shell[data-appearance='dark']) .appNameLabel,
+:global(.app-shell[data-appearance='dark']) .menuItemLabel {
   text-shadow:
     0 1px 0 rgba(0, 0, 0, 0.75),
     0 0 2px rgba(0, 0, 0, 0.45);
-}
-
-.submenuPanel {
-  position: absolute;
-  top: calc(100% + 1px);
-  padding: 5px 12px;
-  border-radius: 9px;
-  background: rgba(240, 241, 234, 0.9);
-  border: 1px solid rgba(0, 0, 0, 0.12);
-  backdrop-filter: blur(22px) saturate(115%);
-  -webkit-backdrop-filter: blur(22px) saturate(115%);
-  box-shadow:
-    0 10px 30px rgba(0, 0, 0, 0.22),
-    0 1px 4px rgba(0, 0, 0, 0.18);
-  display: grid;
-  gap: 0;
-  z-index: 10;
-}
-
-:global(.app-shell[data-appearance='dark']) .submenuPanel {
-  background: rgba(44, 44, 48, 0.86);
-  border-color: rgba(255, 255, 255, 0.14);
-}
-
-.submenuItem {
-  border: none;
-  background: transparent;
-  border-radius: 0;
-  width: 226px;
-  height: 24px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 6px;
-  text-align: left;
-  font-family: var(--font-family-system);
-  font-size: var(--text-menu-size);
-  font-weight: 500;
-  line-height: var(--text-menu-line-height);
-  letter-spacing: var(--text-menu-tracking);
-  color: rgba(33, 33, 33, 0.88);
-  cursor: pointer;
-}
-
-:global(.app-shell[data-appearance='dark']) .submenuItem {
-  color: rgba(246, 248, 252, 0.94);
-}
-
-.submenuItem:hover {
-  background: rgba(0, 0, 0, 0.08);
-}
-
-:global(.app-shell[data-appearance='dark']) .submenuItem:hover {
-  background: rgba(255, 255, 255, 0.1);
-}
-
-.submenuItemWithDivider {
-  border-top: 1px solid rgba(0, 0, 0, 0.14);
-  margin-top: 2px;
-  padding-top: 2px;
-}
-
-:global(.app-shell[data-appearance='dark']) .submenuItemWithDivider {
-  border-top-color: rgba(255, 255, 255, 0.16);
-}
-
-.submenuItemDisabled,
-.submenuItemDisabled:hover {
-  color: rgba(0, 0, 0, 0.32);
-  background: transparent;
-  cursor: default;
-}
-
-:global(.app-shell[data-appearance='dark']) .submenuItemDisabled,
-:global(.app-shell[data-appearance='dark']) .submenuItemDisabled:hover {
-  color: rgba(255, 255, 255, 0.32);
-}
-
-.submenuItemEmphasized .submenuLabel {
-  font-weight: 700;
-  color: rgba(19, 19, 19, 0.96);
-}
-
-:global(.app-shell[data-appearance='dark']) .submenuItemEmphasized .submenuLabel {
-  color: rgba(255, 255, 255, 0.98);
-}
-
-.symbol {
-  width: 12px;
-}
-
-.submenuLabel {
-  font-family: inherit;
-  font-size: var(--text-menu-size);
-  line-height: var(--text-menu-line-height);
-  letter-spacing: var(--text-menu-tracking);
-  font-weight: inherit;
-  color: var(--colors-text-primary-light);
-  flex: 1;
-}
-
-:global(.app-shell[data-appearance='dark']) .submenuLabel {
-  color: var(--colors-text-primary-dark);
-}
-
-.submenuMeta {
-  display: inline-flex;
-  align-items: center;
-  justify-content: flex-end;
-  gap: 6px;
-  min-width: 48px;
-}
-
-.submenuShortcut {
-  font-size: 11px;
-  letter-spacing: 0.01em;
-  color: rgba(0, 0, 0, 0.52);
-}
-
-:global(.app-shell[data-appearance='dark']) .submenuShortcut {
-  color: rgba(255, 255, 255, 0.56);
-}
-
-.submenuArrow {
-  font-size: 13px;
-  color: rgba(0, 0, 0, 0.56);
-}
-
-:global(.app-shell[data-appearance='dark']) .submenuArrow {
-  color: rgba(255, 255, 255, 0.62);
 }

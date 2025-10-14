@@ -123,7 +123,7 @@
 .text-headline-regular {
   font-size: var(--text-headline-size);
   line-height: var(--text-headline-line-height);
-  font-weight: var(--font-weight-regular);
+  font-weight: var(--font-weight-bold);
 }
 
 .text-headline-emphasized {

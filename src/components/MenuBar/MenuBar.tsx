@@ -5,9 +5,15 @@ import {menuBarClockSettings} from '../../shared/settings/clock-settings';
 import {APPLE_MENU_KEY, getMenuBarPreset} from '../../shared/settings/menu-bar-menus';
 import {useAppStore} from '../../shared/store/app-store';
 import {WINDOW_KEYS} from '../../utils/windowKeys';
+import MenuPanel from '../menus/MenuPanel';
 import MenuBarLeftMenu from './MenuBarLeftMenu';
+import {
+  StatusBattery100PercentIcon,
+  StatusBluetoothIcon,
+  StatusSpeakerWave2Icon,
+  StatusWifiIcon,
+} from '../../design-system/icons';
 import styles from './MenuBar.module.css';
-const rightSymbols = ['􀙇', '􀛨', '􀋦', '􀊰'];
 
 const MenuBar = () => {
   const rootRef = useRef<HTMLDivElement | null>(null);
@@ -50,7 +56,7 @@ const MenuBar = () => {
     const rootRect = rootRef.current?.getBoundingClientRect();
     const itemRect = element.getBoundingClientRect();
     if (rootRect) {
-      setSubmenuLeft(Math.max(6, itemRect.left - rootRect.left - 6));
+      setSubmenuLeft(Math.max(0, itemRect.left - rootRect.left));
     }
     setActiveLeftMenuKey(key);
   };
@@ -67,42 +73,26 @@ const MenuBar = () => {
         />
 
         <div className={styles.rightSection}>
-          <span className={styles.menuItem}>⌘</span>
-          {rightSymbols.map(symbol => (
-            <span key={symbol} className={styles.menuItem}>
-              {symbol}
-            </span>
-          ))}
+          <span className={styles.statusItem} aria-label="Bluetooth">
+            <StatusBluetoothIcon className={styles.statusIcon} />
+          </span>
+          <span className={styles.statusItem} aria-label="Speaker volume">
+            <StatusSpeakerWave2Icon className={styles.statusIcon} />
+          </span>
+          <span className={styles.statusItem} aria-label="Wi-Fi">
+            <StatusWifiIcon className={styles.statusIcon} />
+          </span>
+          <span className={styles.statusItem} aria-label="Battery">
+            <StatusBattery100PercentIcon className={`${styles.statusIcon} ${styles.batteryIcon}`} />
+          </span>
           <span className={styles.menuItem}>100%</span>
           <span className={styles.languageChip}>한</span>
           <span className={styles.menuClock}>{formatMenuBarDateTime(currentDate, menuBarClockSettings)}</span>
         </div>
       </header>
 
-      {isMenuOpen && submenuItems.length > 0 && (
-        <div
-          className={styles.submenuPanel}
-          style={{left: submenuLeft}}
-          role="menu"
-          aria-label={`${activeLeftMenuKey} menu`}>
-          {submenuItems.map(item => (
-            <button
-              key={`${activeLeftMenuKey}-${item.label}`}
-              type="button"
-              className={`${styles.submenuItem} ${item.disabled ? styles.submenuItemDisabled : ''} ${
-                item.emphasized ? styles.submenuItemEmphasized : ''
-              } ${item.dividerAbove ? styles.submenuItemWithDivider : ''}`}
-              role="menuitem"
-              disabled={item.disabled}>
-              <div className={styles.symbol}></div>
-              <span className={styles.submenuLabel}>{item.label}</span>
-              <span className={styles.submenuMeta}>
-                {item.shortcut ? <span className={styles.submenuShortcut}>{item.shortcut}</span> : null}
-                {item.hasSubmenu ? <span className={styles.submenuArrow}>›</span> : null}
-              </span>
-            </button>
-          ))}
-        </div>
+      {isMenuOpen && activeLeftMenuKey && submenuItems.length > 0 && (
+        <MenuPanel menuKey={activeLeftMenuKey} items={submenuItems} left={submenuLeft} />
       )}
     </div>
   );

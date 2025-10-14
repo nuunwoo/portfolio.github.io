@@ -1,6 +1,6 @@
 import {useEffect, useMemo, useRef, useState} from 'react';
 import {DESKTOP_REQUIRED_KEYS, getBootAssetsForDate, LOCK_REQUIRED_KEYS} from '../../../app/assetsManifest';
-import AppleLogo from '../../../components/icons/AppleLogo';
+import {AppleLogoIcon} from '../../../design-system/icons';
 import {bootReadiness} from '../../../core/bootReadiness';
 import {hasImage, preloadImages} from '../../../core/preload';
 import {useBootReadiness} from '../../../hooks/useBootReadiness';
@@ -132,7 +132,7 @@ const BootSplash = () => {
     <section className={`${styles.root} ${isFadingOut ? styles.exiting : ''}`} aria-label="MacBook boot splash screen">
       <div className={styles.glow} />
       <div className={styles.container}>
-        <AppleLogo
+        <AppleLogoIcon
           mode="dark"
           role="img"
           aria-label="Apple inspired boot logo"

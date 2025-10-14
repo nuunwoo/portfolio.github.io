@@ -71,7 +71,7 @@
 
 .previewCard {
   width: min(560px, 100%);
-  padding: 28px;
+  padding: 12px;
   color: #f5f7fb;
 }
 
@@ -87,6 +87,35 @@
 .previewBody {
   margin-top: 14px;
   max-width: 44ch;
+}
+
+.previewLayout {
+  margin-top: 10px;
+}
+
+.previewBodyWrap {
+  padding: 14px;
+  display: grid;
+  gap: 10px;
+}
+
+.previewList {
+  margin-top: 4px;
+}
+
+.controlRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.patternArea {
+  margin-top: 12px;
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 12px;
+  align-items: start;
 }
 
 .dockArea {

@@ -1,4 +1,4 @@
-import AppleLogo from "../icons/AppleLogo";
+import { AppleLogoIcon } from "../../design-system/icons";
 import styles from "./MenuBar.module.css";
 
 type MenuBarLeftMenuProps = {
@@ -27,14 +27,18 @@ const MenuBarLeftMenu = ({ items, activeKey, isMenuOpen, onItemSelect, onAppleCl
         }}
         aria-label="Open Apple menu and lock screen"
       >
-        <AppleLogo aria-hidden={true} className={styles.appleLogo} />
+        <AppleLogoIcon aria-hidden={true} className={styles.appleLogo} />
       </button>
 
       {items.map((item, index) => (
         <button
           key={item}
           type="button"
-          className={`${styles.leftButton} ${styles.textButton} ${index === 0 ? styles.menuAppName : styles.menuItem} ${activeKey === item ? styles.leftButtonActive : ""}`}
+          className={`${styles.leftButton} ${styles.textButton} ${
+            index === 0
+              ? `${styles.appNameLabel} text-headline-regular`
+              : `${styles.menuItemLabel} text-body-emphasized`
+          } ${activeKey === item ? styles.leftButtonActive : ""}`}
           onClick={(event) => onItemSelect(item, event.currentTarget)}
           onMouseEnter={(event) => {
             if (!isMenuOpen) return;
