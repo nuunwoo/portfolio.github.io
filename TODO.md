@@ -9,30 +9,34 @@
 - [x] 공통 시간 소스(`timeKeeper`) 및 날짜 포맷 유틸 정리
 - [x] 메뉴바 기본 UI 구성 + Apple 로고 컴포넌트 연동
 - [x] Dock 기본 UI 구성
-- [x] Apple 로고 SVG 자산을 `src/assets/icons`로 이관
-- [x] `yarn icons` 기반 아이콘 생성 자동화 스크립트 구축
-- [x] light/dark 아이콘 쌍 자동 래퍼(`mode: light | dark | system`) 생성
-- [x] 아이콘 템플릿 파일을 `scripts/` 하위로 정리
-- [x] 로컬 기준 동기화(삭제 반영 포함) 작업 규칙 확정
+- [x] 디자인 토큰 기반 색상/타이포그래피 정리 및 메뉴/패널 반영
+- [x] 메뉴바 활성 메뉴 상태 + 서브메뉴 패널 인터랙션 구현
+- [x] Launchpad 오버레이(열기/닫기/검색/페이지/드래그 스와이프) 구현
+- [x] Launchpad 검색 UX(포커스 애니메이션, 결과 하이라이트) 반영
+- [x] Launchpad 구조 분리 시작
+- [x] `features/launchpad/model`에 레이아웃/검색/페이지네이션 로직 분리
+- [x] `features/launchpad/ui`에 `LaunchpadSearchBar`, `LaunchpadIcon` 분리
+- [x] `shared/dnd/reorder.ts` 공통 정렬 유틸 추가(추후 desktop/dock 재사용 예정)
+- [x] Launchpad 레이아웃 localStorage 저장 기반(`useLaunchpadLayout`) 연결
 
 ## Current Sprint (Priority)
 
-- [ ] MenuBar hover 시 하단 메뉴(드롭다운/패널) 노출 인터랙션 구현
+- [ ] Launchpad 아이콘 Drag & Drop 정렬 구현 + localStorage 반영
+- [ ] Launchpad 그룹 생성/해제(폴더) 데이터 모델 설계 및 구현
+- [ ] Dock/Desktop에서도 재사용 가능한 공통 DnD 이벤트 계층 분리
 - [ ] Window 공통 컴포넌트 제작 (`titlebar`, `traffic light`, `content`)
 - [ ] Window 최소화/최대화/복원 애니메이션 구현
-- [ ] Launchpad 화면/레이아웃/열기-닫기 모션 구현
-- [ ] Desktop 아이콘/윈도우 Drag & Drop 인터랙션 구현
 
 ## Next Backlog
 
-- [ ] 프리로드 실패 시 Splash fallback UX 정리
-- [ ] 포트폴리오 앱(소개/프로젝트/연락처) window 연결
-- [ ] 포트폴리오 컨텐츠(소개/기술스택/프로젝트/링크) 실데이터 반영
+- [ ] Launchpad 페이지 간 드래그 이동(아이콘 끌고 페이지 넘김)
+- [ ] Desktop 아이콘/윈도우 Drag & Drop 인터랙션 구현
+- [ ] Dock 아이템 재정렬/고정(고정 앱 vs 최근 앱) 모델링
 - [ ] 창 포커스/active z-index 규칙 고도화
 - [ ] 접근성(키보드 탐색, aria, focus ring) 점검
 
 ## Tech / Quality
 
-- [ ] `yarn icons` 생성 결과에 대한 최소 스모크 테스트 규칙 추가
+- [ ] Launchpad model/UI 단위 테스트 추가
 - [ ] 인터랙션 많은 컴포넌트(Dock/Window/MenuBar) 단위 테스트 기반 추가
-- [ ] 스타일 토큰(간격/색상/radius/blur) 공통화
+- [ ] 아이콘 자산 로딩 전략 최적화(초기 mount 버벅임 최소화)
