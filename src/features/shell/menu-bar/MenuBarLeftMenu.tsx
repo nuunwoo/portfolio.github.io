@@ -1,4 +1,4 @@
-import { AppleLogoIcon } from "../../design-system/icons";
+import { AppleLogoIcon } from "../../../design-system/icons";
 import styles from "./MenuBar.module.css";
 
 type MenuBarLeftMenuProps = {

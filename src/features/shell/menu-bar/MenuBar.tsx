@@ -1,10 +1,10 @@
 import {useEffect, useMemo, useRef, useState} from 'react';
-import {formatMenuBarDateTime} from '../../utils/dateTime';
-import {useCurrentDateTime} from '../../hooks/useCurrentDateTime';
-import {menuBarClockSettings} from '../../shared/settings/clock-settings';
-import {APPLE_MENU_KEY, getMenuBarPreset} from '../../shared/settings/menu-bar-menus';
-import {useAppStore} from '../../shared/store/app-store';
-import {WINDOW_KEYS} from '../../utils/windowKeys';
+import {formatMenuBarDateTime} from '../../../utils/dateTime';
+import {useCurrentDateTime} from '../../../hooks/useCurrentDateTime';
+import {menuBarClockSettings} from '../../../shared/settings/clock-settings';
+import {APPLE_MENU_KEY, getMenuBarPreset} from '../../../shared/settings/menu-bar-menus';
+import {useAppStore} from '../../../shared/store/app-store';
+import {WINDOW_KEYS} from '../../../utils/windowKeys';
 import MenuPanel from '../menus/MenuPanel';
 import MenuBarLeftMenu from './MenuBarLeftMenu';
 import {
@@ -12,7 +12,7 @@ import {
   StatusBluetoothIcon,
   StatusSpeakerWave2Icon,
   StatusWifiIcon,
-} from '../../design-system/icons';
+} from '../../../design-system/icons';
 import styles from './MenuBar.module.css';
 
 const MenuBar = () => {

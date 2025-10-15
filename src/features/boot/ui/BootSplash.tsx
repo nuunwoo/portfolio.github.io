@@ -1,12 +1,20 @@
 import {useEffect, useMemo, useRef, useState} from 'react';
-import {DESKTOP_REQUIRED_KEYS, getBootAssetsForDate, LOCK_REQUIRED_KEYS} from '../../../app/assetsManifest';
+import {
+  DESKTOP_REQUIRED_KEYS,
+  FONT_PRELOAD_TARGETS,
+  FONT_REQUIRED_KEYS,
+  getBootAssetsForDate,
+  LOCK_REQUIRED_KEYS,
+} from '../../../app/assetsManifest';
 import {AppleLogoIcon} from '../../../design-system/icons';
+import {appIconPreloadTargets} from '../../../components/icons/app-icons';
 import {bootReadiness} from '../../../core/bootReadiness';
+import {hasFont, preloadFonts} from '../../../core/preloadFonts';
 import {hasImage, preloadImages} from '../../../core/preload';
 import {useBootReadiness} from '../../../hooks/useBootReadiness';
 import {useAppStore} from '../../../shared/store/app-store';
 import {timeKeeper} from '../../../utils/timeKeeper';
-import styles from './BootSplash.module.css';
+import BootSplashMotion from './animations/BootSplashMotion';
 
 const BootSplash = () => {
   const completeSplash = useAppStore(state => state.completeSplash);
@@ -20,10 +28,20 @@ const BootSplash = () => {
 
   const bootAssets = useMemo(() => {
     const assets = getBootAssetsForDate(bootDate);
-    return [assets.lockBg, assets.desktopBg];
+    return [assets.lockBg, assets.desktopBg, ...appIconPreloadTargets];
   }, [bootDate]);
 
-  const readyAssetKeys = useMemo(() => [...new Set([...LOCK_REQUIRED_KEYS, ...DESKTOP_REQUIRED_KEYS])], []);
+  const readyAssetKeys = useMemo(
+    () => [
+      ...new Set([
+        ...LOCK_REQUIRED_KEYS,
+        ...DESKTOP_REQUIRED_KEYS,
+        ...FONT_REQUIRED_KEYS,
+        ...appIconPreloadTargets.map(({key}) => key),
+      ]),
+    ],
+    []
+  );
 
   const completeBootSplash = () => {
     if (hasCompletedRef.current) return;
@@ -76,7 +94,7 @@ const BootSplash = () => {
         bootReadiness.configure(readyAssetKeys.map(key => ({key})));
 
         readyAssetKeys.forEach(key => {
-          if (hasImage(key)) {
+          if (hasImage(key) || hasFont(key)) {
             bootReadiness.markStepReady(key);
             return;
           }
@@ -89,11 +107,16 @@ const BootSplash = () => {
           bootReadiness.markStepReady(key);
         });
 
+        await preloadFonts(FONT_PRELOAD_TARGETS, ({key}) => {
+          if (!alive) return;
+          bootReadiness.markStepReady(key);
+        });
+
         await bootReadiness.waitForReady();
       } catch (error) {
         console.error('Splash preload error:', error);
         readyAssetKeys.forEach(key => {
-          if (!hasImage(key)) {
+          if (!hasImage(key) && !hasFont(key)) {
             bootReadiness.markStepError(key);
           }
         });
@@ -129,28 +152,19 @@ const BootSplash = () => {
   }, [hasError, isReady]);
 
   return (
-    <section className={`${styles.root} ${isFadingOut ? styles.exiting : ''}`} aria-label="MacBook boot splash screen">
-      <div className={styles.glow} />
-      <div className={styles.container}>
+    <BootSplashMotion
+      isExiting={isFadingOut}
+      progress={displayProgress}
+      logo={
         <AppleLogoIcon
           mode="dark"
           role="img"
           aria-label="Apple inspired boot logo"
-          className={styles.logo}
           width={110}
           height={123}
         />
-        <div className={styles.progressWrap}>
-          <div className={styles.progressMeta}>
-            <span className={styles.status}>Starting portfolio OS</span>
-            <span className={styles.percent}>{Math.round(displayProgress)}%</span>
-          </div>
-          <div className={styles.progress}>
-            <div className={styles.bar} style={{width: `${displayProgress}%`}} />
-          </div>
-        </div>
-      </div>
-    </section>
+      }
+    />
   );
 };
 

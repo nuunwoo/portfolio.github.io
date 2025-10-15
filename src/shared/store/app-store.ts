@@ -9,10 +9,13 @@ type AppStoreState = {
   currentScreen: ScreenName;
   focusedWindowKey: WindowKey | null;
   isUnlocking: boolean;
+  isLaunchpadOpen: boolean;
   completeSplash: () => void;
+  closeLaunchpad: () => void;
   focusWindow: (windowKey: WindowKey) => void;
   lockScreen: () => void;
   syncFocusedWindow: () => void;
+  toggleLaunchpad: () => void;
   unlockScreen: () => void;
 };
 
@@ -22,12 +25,15 @@ export const useAppStore = create<AppStoreState>((set, get) => ({
   currentScreen: "splash",
   focusedWindowKey: WINDOW_KEYS.splashScreen,
   isUnlocking: false,
+  isLaunchpadOpen: false,
   completeSplash: () =>
     set({
       isBooting: false,
       currentScreen: "lock",
       focusedWindowKey: WINDOW_KEYS.lockScreen,
+      isLaunchpadOpen: false,
     }),
+  closeLaunchpad: () => set({ isLaunchpadOpen: false }),
   focusWindow: (windowKey) => set({ focusedWindowKey: windowKey }),
   lockScreen: () =>
     set((state) => {
@@ -36,6 +42,7 @@ export const useAppStore = create<AppStoreState>((set, get) => ({
           currentScreen: "lock",
           focusedWindowKey: WINDOW_KEYS.lockScreen,
           isUnlocking: false,
+          isLaunchpadOpen: false,
         };
       }
 
@@ -43,6 +50,7 @@ export const useAppStore = create<AppStoreState>((set, get) => ({
         currentScreen: "lock",
         focusedWindowKey: WINDOW_KEYS.lockScreen,
         isUnlocking: false,
+        isLaunchpadOpen: false,
       };
     }),
   syncFocusedWindow: () => {
@@ -59,7 +67,7 @@ export const useAppStore = create<AppStoreState>((set, get) => ({
     }
 
     if (currentScreen === "lock") {
-      set({ focusedWindowKey: WINDOW_KEYS.lockScreen });
+      set({ focusedWindowKey: WINDOW_KEYS.lockScreen, isLaunchpadOpen: false });
       return;
     }
 
@@ -67,6 +75,7 @@ export const useAppStore = create<AppStoreState>((set, get) => ({
       set({ focusedWindowKey: WINDOW_KEYS.desktopScreen });
     }
   },
+  toggleLaunchpad: () => set((state) => ({ isLaunchpadOpen: !state.isLaunchpadOpen })),
   unlockScreen: () => {
     const { currentScreen, isBooting, isUnlocking } = get();
     if (isBooting || currentScreen !== "lock" || isUnlocking) return;
@@ -78,6 +87,7 @@ export const useAppStore = create<AppStoreState>((set, get) => ({
         currentScreen: "desktop",
         focusedWindowKey: WINDOW_KEYS.desktopScreen,
         hasUnlockedOnce: true,
+        isLaunchpadOpen: false,
       });
 
       // Keep unlocking state briefly so the lock layer can finish its own fade-out.

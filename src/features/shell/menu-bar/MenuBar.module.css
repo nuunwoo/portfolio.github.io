@@ -52,10 +52,6 @@
   background: transparent;
   cursor: pointer;
   border-radius: 4px;
-  transition:
-    background-color 140ms ease,
-    backdrop-filter 140ms ease,
-    -webkit-backdrop-filter 140ms ease;
 }
 
 .appleButton {

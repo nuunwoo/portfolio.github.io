@@ -10,38 +10,38 @@
 
   --text-tracking: 0;
 
-  --text-large-title-size: 26px;
-  --text-large-title-line-height: 32px;
+  --text-large-title-size: clamp(22px, 2vw, 26px);
+  --text-large-title-line-height: clamp(28px, 2.4vw, 32px);
 
-  --text-title1-size: 22px;
-  --text-title1-line-height: 26px;
+  --text-title1-size: clamp(18px, 1.7vw, 22px);
+  --text-title1-line-height: clamp(22px, 2vw, 26px);
 
-  --text-title2-size: 17px;
-  --text-title2-line-height: 22px;
+  --text-title2-size: clamp(14px, 1.35vw, 17px);
+  --text-title2-line-height: clamp(18px, 1.7vw, 22px);
 
-  --text-title3-size: 15px;
-  --text-title3-line-height: 20px;
+  --text-title3-size: clamp(13px, 1.15vw, 15px);
+  --text-title3-line-height: clamp(16px, 1.5vw, 20px);
 
-  --text-headline-size: 13px;
-  --text-headline-line-height: 16px;
+  --text-headline-size: clamp(11px, 0.96vw, 13px);
+  --text-headline-line-height: clamp(14px, 1.2vw, 16px);
 
-  --text-body-size: 13px;
-  --text-body-line-height: 16px;
+  --text-body-size: clamp(11px, 0.96vw, 13px);
+  --text-body-line-height: clamp(14px, 1.2vw, 16px);
 
-  --text-callout-size: 12px;
-  --text-callout-line-height: 15px;
+  --text-callout-size: clamp(10px, 0.9vw, 12px);
+  --text-callout-line-height: clamp(13px, 1.15vw, 15px);
 
-  --text-subheadline-size: 11px;
-  --text-subheadline-line-height: 14px;
+  --text-subheadline-size: clamp(10px, 0.82vw, 11px);
+  --text-subheadline-line-height: clamp(12px, 1.06vw, 14px);
 
-  --text-footnote-size: 10px;
-  --text-footnote-line-height: 13px;
+  --text-footnote-size: clamp(9px, 0.75vw, 10px);
+  --text-footnote-line-height: clamp(11px, 0.98vw, 13px);
 
-  --text-caption1-size: 10px;
-  --text-caption1-line-height: 13px;
+  --text-caption1-size: clamp(9px, 0.75vw, 10px);
+  --text-caption1-line-height: clamp(11px, 0.98vw, 13px);
 
-  --text-caption2-size: 10px;
-  --text-caption2-line-height: 13px;
+  --text-caption2-size: clamp(9px, 0.75vw, 10px);
+  --text-caption2-line-height: clamp(11px, 0.98vw, 13px);
 }
 
 .text-large-title-regular,

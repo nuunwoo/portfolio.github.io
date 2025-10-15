@@ -37,6 +37,7 @@ const RAW_RUNTIME_STATE =
           ["eslint", "virtual:b7689d10ca7c9c91f5ab2257f23c144bf938d16c96e5cad8dc4e9c4f15c37f1a94dec8e27defa7cd185aae79e49b81bef50ae202e9b6f7370456b1e6e60c6026#npm:9.35.0"],\
           ["eslint-plugin-react-hooks", "virtual:b7689d10ca7c9c91f5ab2257f23c144bf938d16c96e5cad8dc4e9c4f15c37f1a94dec8e27defa7cd185aae79e49b81bef50ae202e9b6f7370456b1e6e60c6026#npm:5.2.0"],\
           ["eslint-plugin-react-refresh", "virtual:b7689d10ca7c9c91f5ab2257f23c144bf938d16c96e5cad8dc4e9c4f15c37f1a94dec8e27defa7cd185aae79e49b81bef50ae202e9b6f7370456b1e6e60c6026#npm:0.4.20"],\
+          ["framer-motion", "virtual:b7689d10ca7c9c91f5ab2257f23c144bf938d16c96e5cad8dc4e9c4f15c37f1a94dec8e27defa7cd185aae79e49b81bef50ae202e9b6f7370456b1e6e60c6026#npm:12.38.0"],\
           ["globals", "npm:16.4.0"],\
           ["nuunwoo.github.io", "workspace:."],\
           ["prettier", "npm:3.8.2"],\
@@ -2730,6 +2731,39 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["framer-motion", [\
+      ["npm:12.38.0", {\
+        "packageLocation": "../../../.yarn/berry/cache/framer-motion-npm-12.38.0-5ed9a26b7e-10c0.zip/node_modules/framer-motion/",\
+        "packageDependencies": [\
+          ["framer-motion", "npm:12.38.0"]\
+        ],\
+        "linkType": "SOFT"\
+      }],\
+      ["virtual:b7689d10ca7c9c91f5ab2257f23c144bf938d16c96e5cad8dc4e9c4f15c37f1a94dec8e27defa7cd185aae79e49b81bef50ae202e9b6f7370456b1e6e60c6026#npm:12.38.0", {\
+        "packageLocation": "./.yarn/__virtual__/framer-motion-virtual-6d45bd8d78/4/.yarn/berry/cache/framer-motion-npm-12.38.0-5ed9a26b7e-10c0.zip/node_modules/framer-motion/",\
+        "packageDependencies": [\
+          ["@emotion/is-prop-valid", null],\
+          ["@types/emotion__is-prop-valid", null],\
+          ["@types/react", "npm:19.1.13"],\
+          ["@types/react-dom", "virtual:b7689d10ca7c9c91f5ab2257f23c144bf938d16c96e5cad8dc4e9c4f15c37f1a94dec8e27defa7cd185aae79e49b81bef50ae202e9b6f7370456b1e6e60c6026#npm:19.1.9"],\
+          ["framer-motion", "virtual:b7689d10ca7c9c91f5ab2257f23c144bf938d16c96e5cad8dc4e9c4f15c37f1a94dec8e27defa7cd185aae79e49b81bef50ae202e9b6f7370456b1e6e60c6026#npm:12.38.0"],\
+          ["motion-dom", "npm:12.38.0"],\
+          ["motion-utils", "npm:12.36.0"],\
+          ["react", "npm:19.1.1"],\
+          ["react-dom", "virtual:b7689d10ca7c9c91f5ab2257f23c144bf938d16c96e5cad8dc4e9c4f15c37f1a94dec8e27defa7cd185aae79e49b81bef50ae202e9b6f7370456b1e6e60c6026#npm:19.1.1"],\
+          ["tslib", "npm:2.8.1"]\
+        ],\
+        "packagePeers": [\
+          "@emotion/is-prop-valid",\
+          "@types/emotion__is-prop-valid",\
+          "@types/react-dom",\
+          "@types/react",\
+          "react-dom",\
+          "react"\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["fs-minipass", [\
       ["npm:3.0.3", {\
         "packageLocation": "../../../.yarn/berry/cache/fs-minipass-npm-3.0.3-d148d6ac19-10c0.zip/node_modules/fs-minipass/",\
@@ -3355,6 +3389,25 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["motion-dom", [\
+      ["npm:12.38.0", {\
+        "packageLocation": "../../../.yarn/berry/cache/motion-dom-npm-12.38.0-bb764081e0-10c0.zip/node_modules/motion-dom/",\
+        "packageDependencies": [\
+          ["motion-dom", "npm:12.38.0"],\
+          ["motion-utils", "npm:12.36.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["motion-utils", [\
+      ["npm:12.36.0", {\
+        "packageLocation": "../../../.yarn/berry/cache/motion-utils-npm-12.36.0-30fa2f2bf9-10c0.zip/node_modules/motion-utils/",\
+        "packageDependencies": [\
+          ["motion-utils", "npm:12.36.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["ms", [\
       ["npm:2.1.3", {\
         "packageLocation": "../../../.yarn/berry/cache/ms-npm-2.1.3-81ff3cfac1-10c0.zip/node_modules/ms/",\
@@ -3463,6 +3516,7 @@ const RAW_RUNTIME_STATE =
           ["eslint", "virtual:b7689d10ca7c9c91f5ab2257f23c144bf938d16c96e5cad8dc4e9c4f15c37f1a94dec8e27defa7cd185aae79e49b81bef50ae202e9b6f7370456b1e6e60c6026#npm:9.35.0"],\
           ["eslint-plugin-react-hooks", "virtual:b7689d10ca7c9c91f5ab2257f23c144bf938d16c96e5cad8dc4e9c4f15c37f1a94dec8e27defa7cd185aae79e49b81bef50ae202e9b6f7370456b1e6e60c6026#npm:5.2.0"],\
           ["eslint-plugin-react-refresh", "virtual:b7689d10ca7c9c91f5ab2257f23c144bf938d16c96e5cad8dc4e9c4f15c37f1a94dec8e27defa7cd185aae79e49b81bef50ae202e9b6f7370456b1e6e60c6026#npm:0.4.20"],\
+          ["framer-motion", "virtual:b7689d10ca7c9c91f5ab2257f23c144bf938d16c96e5cad8dc4e9c4f15c37f1a94dec8e27defa7cd185aae79e49b81bef50ae202e9b6f7370456b1e6e60c6026#npm:12.38.0"],\
           ["globals", "npm:16.4.0"],\
           ["nuunwoo.github.io", "workspace:."],\
           ["prettier", "npm:3.8.2"],\

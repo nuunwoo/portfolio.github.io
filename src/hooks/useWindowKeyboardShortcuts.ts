@@ -25,14 +25,17 @@ const isTypingTarget = (target: EventTarget | null) => {
 type UseWindowKeyboardShortcutsOptions = {
   focusedWindowKey: WindowKey | null;
   handlersByWindowKey: KeyboardShortcutMap;
+  enabled?: boolean;
 };
 
 export const useWindowKeyboardShortcuts = ({
   focusedWindowKey,
   handlersByWindowKey,
+  enabled = true,
 }: UseWindowKeyboardShortcutsOptions) => {
   useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {
+      if (!enabled) return;
       if (isTypingTarget(event.target)) return;
       if (!focusedWindowKey) return;
 
@@ -46,5 +49,5 @@ export const useWindowKeyboardShortcuts = ({
     return () => {
       window.removeEventListener("keydown", onKeyDown);
     };
-  }, [focusedWindowKey, handlersByWindowKey]);
+  }, [enabled, focusedWindowKey, handlersByWindowKey]);
 };

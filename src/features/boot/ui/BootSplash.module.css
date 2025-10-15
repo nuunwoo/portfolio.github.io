@@ -7,17 +7,7 @@
     radial-gradient(circle at top, rgba(255, 255, 255, 0.18), transparent 34%),
     linear-gradient(180deg, #0b0b0d 0%, #020203 100%);
   overflow: hidden;
-  transition:
-    opacity 260ms ease,
-    filter 260ms ease,
-    transform 260ms ease;
   user-select: none;
-}
-
-.exiting {
-  opacity: 0;
-  filter: blur(10px);
-  transform: scale(1.02);
 }
 
 .glow {
@@ -36,10 +26,6 @@
   display: grid;
   gap: 34px;
   justify-items: center;
-}
-
-.logo {
-  display: block;
 }
 
 .progressWrap {

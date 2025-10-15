@@ -22,9 +22,9 @@
   --ds-os-search-placeholder-dark: #9a9eab;
 
   --ds-os-dock-radius: 18px;
-  --ds-os-dock-bg-light: rgba(244, 246, 252, 0.78);
-  --ds-os-dock-border-light: rgba(255, 255, 255, 0.56);
-  --ds-os-dock-bg-dark: rgba(39, 42, 49, 0.76);
-  --ds-os-dock-border-dark: rgba(115, 122, 139, 0.42);
-  --ds-os-dock-shadow: 0 14px 36px rgba(7, 12, 24, 0.35);
+  --ds-os-dock-bg-light: rgba(238, 242, 247, 0.72);
+  --ds-os-dock-border-light: rgba(255, 255, 255, 0.62);
+  --ds-os-dock-bg-dark: rgba(40, 44, 52, 0.72);
+  --ds-os-dock-border-dark: rgba(132, 138, 154, 0.4);
+  --ds-os-dock-shadow: 0 10px 28px rgba(7, 12, 24, 0.3);
 }

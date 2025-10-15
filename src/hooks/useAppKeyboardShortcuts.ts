@@ -1,10 +1,12 @@
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import { useAppStore } from "../shared/store/app-store";
 import { WINDOW_KEYS } from "../utils/windowKeys";
 import { useWindowKeyboardShortcuts } from "./useWindowKeyboardShortcuts";
 
 export const useAppKeyboardShortcuts = () => {
+  const closeLaunchpad = useAppStore((state) => state.closeLaunchpad);
   const focusedWindowKey = useAppStore((state) => state.focusedWindowKey);
+  const isLaunchpadOpen = useAppStore((state) => state.isLaunchpadOpen);
   const lockScreen = useAppStore((state) => state.lockScreen);
   const unlockScreen = useAppStore((state) => state.unlockScreen);
 
@@ -31,5 +33,21 @@ export const useAppKeyboardShortcuts = () => {
   useWindowKeyboardShortcuts({
     focusedWindowKey,
     handlersByWindowKey,
+    enabled: !isLaunchpadOpen,
   });
+
+  useEffect(() => {
+    if (!isLaunchpadOpen) return;
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key !== "Escape") return;
+      event.preventDefault();
+      closeLaunchpad();
+    };
+
+    window.addEventListener("keydown", onKeyDown);
+    return () => {
+      window.removeEventListener("keydown", onKeyDown);
+    };
+  }, [closeLaunchpad, isLaunchpadOpen]);
 };

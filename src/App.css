@@ -1,6 +1,13 @@
 #root {
   width: 100vw;
   height: 100vh;
+  overflow: hidden;
+}
+
+:root {
+  --ui-base-width: 1512px;
+  --ui-base-height: 982px;
+  --ui-scale: min(1, min(calc(100vw / var(--ui-base-width)), calc(100vh / var(--ui-base-height))));
 }
 
 .app-shell {
@@ -13,14 +20,12 @@
 
 .app-layer {
   position: absolute;
-  inset: 0;
-  transition:
-    opacity 220ms ease,
-    visibility 220ms ease;
-}
-
-.app-layer-no-transition {
-  transition: none;
+  top: 0;
+  left: 50%;
+  width: calc(100% / var(--ui-scale));
+  height: calc(100% / var(--ui-scale));
+  transform: translateX(-50%) scale(var(--ui-scale));
+  transform-origin: top center;
 }
 
 .app-layer-desktop {
@@ -33,18 +38,6 @@
 
 .app-layer-splash {
   z-index: 30;
-}
-
-.app-layer-visible {
-  opacity: 1;
-  visibility: visible;
-  pointer-events: auto;
-}
-
-.app-layer-hidden {
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
 }
 
 .wallpaper {

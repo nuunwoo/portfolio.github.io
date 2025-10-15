@@ -1,4 +1,5 @@
 import { type PropsWithChildren } from "react";
+import AppLayerMotion from "./animations/AppLayerMotion";
 
 type AppLayerProps = PropsWithChildren<{
   layerClassName: "app-layer-desktop" | "app-layer-lock" | "app-layer-splash";
@@ -12,16 +13,12 @@ const AppLayer = ({
   noTransition = false,
   visible,
 }: AppLayerProps) => {
-  const classNames = [
-    "app-layer",
-    layerClassName,
-    visible ? "app-layer-visible" : "app-layer-hidden",
-    noTransition ? "app-layer-no-transition" : "",
-  ]
-    .filter(Boolean)
-    .join(" ");
-
-  return <div className={classNames}>{children}</div>;
+  const className = ["app-layer", layerClassName].join(" ");
+  return (
+    <AppLayerMotion className={className} visible={visible} noTransition={noTransition}>
+      {children}
+    </AppLayerMotion>
+  );
 };
 
 export default AppLayer;

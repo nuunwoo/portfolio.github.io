@@ -1,6 +1,6 @@
 import {useState} from 'react';
-import {MenuRow} from '../../design-system/components';
-import type {SubmenuEntry} from '../../shared/settings/menu-bar-menus';
+import {MenuRow} from '../../../design-system/components';
+import type {SubmenuEntry} from '../../../shared/settings/menu-bar-menus';
 import SubmenuPanel from './SubmenuPanel';
 import styles from './MenuPanel.module.css';
 

@@ -3,6 +3,7 @@ import { useCurrentWallpaper } from "../../../hooks/useCurrentWallpaper";
 import { useAppStore } from "../../../shared/store/app-store";
 import { formatLockScreenDate, formatLockScreenTime } from "../../../utils/dateTime";
 import { WINDOW_KEYS } from "../../../utils/windowKeys";
+import LockScreenMotion from "./animations/LockScreenMotion";
 import styles from "./LockScreen.module.css";
 
 const LockScreen = () => {
@@ -18,20 +19,15 @@ const LockScreen = () => {
   const isTransitioningOut = isUnlocking || !isActive;
 
   return (
-    <section
-      aria-label="Lock screen"
+    <LockScreenMotion
+      disableTransition={disableTransition}
+      isTransitioningOut={isTransitioningOut}
       onClick={() => {
         if (!isActive) return;
         if (!isUnlocking) unlockScreen();
       }}
+      aria-label="Lock screen"
       data-window-key={WINDOW_KEYS.lockScreen}
-      className={[
-        styles.root,
-        disableTransition ? styles.noTransition : "",
-        isTransitioningOut ? styles.transitioningOut : "",
-      ]
-        .filter(Boolean)
-        .join(" ")}
       style={{
         cursor: isTransitioningOut ? "default" : "pointer",
         pointerEvents: !isActive || isUnlocking ? "none" : "auto",
@@ -57,7 +53,7 @@ const LockScreen = () => {
           </div>
         </div>
       </div>
-    </section>
+    </LockScreenMotion>
   );
 };
 
