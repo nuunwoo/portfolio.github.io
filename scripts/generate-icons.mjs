@@ -9,6 +9,7 @@ const projectRoot = path.resolve(__dirname, "..");
 const srcDir = path.join(projectRoot, "src");
 const assetsIconsDir = path.join(srcDir, "assets", "icons");
 const componentsIconsDir = path.join(srcDir, "components", "icons");
+const excludedSourceDirs = new Set(["app-icons"]);
 
 const toPosix = (value) => value.split(path.sep).join("/");
 
@@ -130,20 +131,44 @@ const removeStaleGeneratedIndexes = async (dir) => {
   }
 };
 
+const removeGeneratedAppIcons = async () => {
+  const appIconsDir = path.join(componentsIconsDir, "app-icons");
+  if (!(await fileExists(appIconsDir))) return;
+
+  const entries = await readdir(appIconsDir, { withFileTypes: true });
+  for (const entry of entries) {
+    if (!entry.isFile()) continue;
+    if (!entry.name.endsWith(".tsx")) continue;
+    if (entry.name === "index.tsx") continue;
+    await rm(path.join(appIconsDir, entry.name), { force: true });
+  }
+};
+
 const run = async () => {
   await mkdir(componentsIconsDir, { recursive: true });
 
-  execSync(
-    "yarn svgr --no-index --typescript --filename-case pascal --no-dimensions --no-svgo --template scripts/svgr.template.cjs --out-dir src/components/icons -- src/assets/icons",
-    {
-      cwd: projectRoot,
-      stdio: "inherit",
-    },
-  );
+  const topEntries = await readdir(assetsIconsDir, { withFileTypes: true });
+  const sourceDirs = topEntries
+    .filter((entry) => entry.isDirectory() && !excludedSourceDirs.has(entry.name))
+    .map((entry) => entry.name);
+
+  for (const dirName of sourceDirs) {
+    execSync(
+      `yarn svgr --no-index --typescript --filename-case pascal --no-dimensions --no-svgo --template scripts/svgr.template.cjs --out-dir src/components/icons/${dirName} -- src/assets/icons/${dirName}`,
+      {
+        cwd: projectRoot,
+        stdio: "inherit",
+      },
+    );
+  }
 
   await removeStaleGeneratedIndexes(componentsIconsDir);
+  await removeGeneratedAppIcons();
 
-  const svgFiles = await listSvgFiles(assetsIconsDir);
+  const svgFiles = (await listSvgFiles(assetsIconsDir)).filter((relPath) => {
+    const topDir = relPath.split(path.sep)[0];
+    return !excludedSourceDirs.has(topDir);
+  });
   const byDir = new Map();
 
   for (const relPath of svgFiles) {
