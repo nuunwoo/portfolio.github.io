@@ -1,6 +1,7 @@
-import type { ReactNode } from "react";
-import { Fragment, useState } from "react";
-import styles from "./OsDock.module.css";
+import type {ReactNode} from 'react';
+import {Fragment, useState} from 'react';
+import {PopoverSurface} from '../popover';
+import styles from './OsDock.module.css';
 
 type DockItem = {
   key: string;
@@ -17,34 +18,31 @@ type OsDockProps = {
   onItemClick?: (item: DockItem) => void;
 };
 
-const OsDock = ({ items, activeItemKey = null, onItemClick }: OsDockProps) => {
+const OsDock = ({items, activeItemKey = null, onItemClick}: OsDockProps) => {
   const [hoveredKey, setHoveredKey] = useState<string | null>(null);
 
   return (
     <div className={styles.root} onMouseLeave={() => setHoveredKey(null)}>
-      {items.map((item) => {
+      {items.map(item => {
         return (
           <Fragment key={item.key}>
             {item.separatorBefore ? <span className={styles.separator} aria-hidden={true} /> : null}
             <button
               type="button"
-              className={`${styles.item} ${activeItemKey === item.key ? styles.itemActive : ""}`}
+              className={`${styles.item} ${activeItemKey === item.key ? styles.itemActive : ''}`}
               aria-label={item.label}
               onClick={() => onItemClick?.(item)}
               onMouseEnter={() => setHoveredKey(item.key)}
-              onMouseLeave={() => setHoveredKey((prev) => (prev === item.key ? null : prev))}
+              onMouseLeave={() => setHoveredKey(prev => (prev === item.key ? null : prev))}
               onFocus={() => setHoveredKey(item.key)}
-              onBlur={() => setHoveredKey((prev) => (prev === item.key ? null : prev))}
-            >
+              onBlur={() => setHoveredKey(prev => (prev === item.key ? null : prev))}>
               {hoveredKey === item.key ? (
-                <div className={styles.popover} role="tooltip">
+                <PopoverSurface className={styles.popoverPosition} placement="north-center" role="tooltip">
                   {item.label}
-                </div>
+                </PopoverSurface>
               ) : null}
               {item.badge ? <span className={styles.badge}>{item.badge}</span> : null}
-              <span className={styles.icon}>
-                {item.glyph}
-              </span>
+              <span className={styles.icon}>{item.glyph}</span>
               {item.running ? <span className={styles.runningDot} /> : null}
             </button>
           </Fragment>
@@ -54,5 +52,5 @@ const OsDock = ({ items, activeItemKey = null, onItemClick }: OsDockProps) => {
   );
 };
 
-export type { DockItem };
+export type {DockItem};
 export default OsDock;

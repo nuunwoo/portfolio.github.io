@@ -1,11 +1,149 @@
 .root {
-  border-radius: 12px;
-  border: 1px solid rgba(0,0,0,0.12);
-  background: #f2f2f4;
-  box-shadow: 0 10px 28px rgba(7,12,24,0.28);
-  padding: 10px;
+  overflow: visible;
+  border-radius: 6px;
+  padding: 6px 14px;
 }
-:global(.app-shell[data-appearance='dark']) .root {
-  border-color: rgba(255,255,255,0.14);
-  background: #31343c;
+
+.backing {
+  position: absolute;
+  inset: 0;
+  border-radius: 6px;
+  background: rgba(226, 226, 226, 1);
+  backdrop-filter: blur(81.55px);
+  -webkit-backdrop-filter: blur(81.55px);
+  pointer-events: none;
+  z-index: 2;
 }
+
+.content {
+  position: relative;
+  z-index: 2;
+  font-family: var(--font-family-system);
+  font-size: var(--text-body-size);
+  line-height: var(--text-body-line-height);
+  font-weight: var(--font-weight-regular);
+  letter-spacing: var(--text-tracking);
+  color: var(--colors-text-vibrant-primary-light);
+  white-space: nowrap;
+}
+
+:global(.app-shell[data-appearance='dark']) .content {
+  color: var(--colors-text-vibrant-primary-dark);
+}
+
+.tail {
+  position: absolute;
+  width: 12px;
+  height: 8px;
+  background: rgba(226, 226, 226, 1);
+  backdrop-filter: blur(81.55px);
+  -webkit-backdrop-filter: blur(81.55px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.north-left .tail {
+  left: 10px;
+  bottom: -7px;
+  clip-path: polygon(50% 100%, 0 0, 100% 0);
+}
+
+.north-center .tail {
+  left: 50%;
+  bottom: -7.8px;
+  transform: translateX(-50%);
+  clip-path: polygon(50% 100%, 0 0, 100% 0);
+}
+
+.north-right .tail {
+  right: 10px;
+  bottom: -7px;
+  clip-path: polygon(50% 100%, 0 0, 100% 0);
+}
+
+.south-left .tail {
+  left: 10px;
+  top: -7px;
+  clip-path: polygon(50% 0, 0 100%, 100% 100%);
+}
+
+.south-center .tail {
+  left: 50%;
+  top: -7px;
+  transform: translateX(-50%);
+  clip-path: polygon(50% 0, 0 100%, 100% 100%);
+}
+
+.south-right .tail {
+  right: 10px;
+  top: -7px;
+  clip-path: polygon(50% 0, 0 100%, 100% 100%);
+}
+
+.west-top .tail {
+  width: 8px;
+  height: 12px;
+  left: -7px;
+  top: 8px;
+  clip-path: polygon(0 50%, 100% 0, 100% 100%);
+}
+
+.west-middle .tail {
+  width: 8px;
+  height: 12px;
+  left: -7px;
+  top: 50%;
+  transform: translateY(-50%);
+  clip-path: polygon(0 50%, 100% 0, 100% 100%);
+}
+
+.west-bottom .tail {
+  width: 8px;
+  height: 12px;
+  left: -7px;
+  bottom: 8px;
+  clip-path: polygon(0 50%, 100% 0, 100% 100%);
+}
+
+.east-top .tail {
+  width: 8px;
+  height: 12px;
+  right: -7px;
+  top: 8px;
+  clip-path: polygon(100% 50%, 0 0, 0 100%);
+}
+
+.east-middle .tail {
+  width: 8px;
+  height: 12px;
+  right: -7px;
+  top: 50%;
+  transform: translateY(-50%);
+  clip-path: polygon(100% 50%, 0 0, 0 100%);
+}
+
+.east-bottom .tail {
+  width: 8px;
+  height: 12px;
+  right: -7px;
+  bottom: 8px;
+  clip-path: polygon(100% 50%, 0 0, 0 100%);
+}
+
+/* :global(.app-shell[data-appearance='dark']) .backing {
+  background: rgba(65, 67, 72, 0.5);
+  border-color: rgba(255, 255, 255, 0.12);
+  box-shadow:
+    inset 0 0.5px 1px 0.5px rgba(255, 255, 255, 0.2),
+    0 2px 4px 0 rgba(0, 0, 0, 0.35),
+    0 8px 15px 6px rgba(0, 0, 0, 0.45);
+}
+
+:global(.app-shell[data-appearance='dark']) .tail {
+  background: rgba(65, 67, 72, 0.5);
+  border-color: rgba(255, 255, 255, 0.12);
+  box-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.35),
+    0 8px 15px rgba(0, 0, 0, 0.45),
+    inset 0 0.5px 1px rgba(255, 255, 255, 0.2);
+} */
