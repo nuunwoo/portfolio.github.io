@@ -4,7 +4,7 @@
   --launchpad-search-primary-bg: color-mix(in srgb, var(--colors-fills-primary-dark) 90%, #000 10%);
 
   --launchpad-item-width: 120px;
-  --launchpad-icon-size: 98px;
+  --launchpad-icon-size: 96px;
   width: fit-content;
   max-width: 100%;
   display: grid;

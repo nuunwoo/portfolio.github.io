@@ -1,0 +1,37 @@
+.launchpadOverlay {
+  --launchpad-overlay-bg: color-mix(in srgb, var(--colors-fills-primary-dark) 55%, transparent);
+  --launchpad-search-bg: var(--colors-fills-vibrant-tertiary-dark);
+  --launchpad-search-bg-focused: var(--colors-fills-vibrant-secondary-dark);
+  --launchpad-search-border: var(--colors-fills-vibrant-primary-dark);
+  --launchpad-search-border-focused: color-mix(in srgb, var(--colors-fills-vibrant-primary-dark) 75%, #fff 25%);
+  --launchpad-search-icon-color: var(--colors-text-primary-dark);
+  --launchpad-search-text-color: var(--colors-text-secondary-dark);
+  --launchpad-search-placeholder-color: var(--colors-text-vibrant-secondary-dark);
+  --launchpad-search-caret-color: var(--colors-text-primary-dark);
+  --launchpad-search-clear-bg: var(--colors-fills-vibrant-primary-dark);
+  --launchpad-search-clear-color: var(--colors-text-primary-dark);
+  --launchpad-empty-color: var(--colors-text-vibrant-secondary-dark);
+  --launchpad-dot-color: var(--colors-text-quaternary-dark);
+  --launchpad-dot-active-color: var(--colors-text-primary-dark);
+
+  position: fixed;
+  inset: 0;
+  display: grid;
+  align-content: stretch;
+  justify-items: stretch;
+  padding: 48px 28px 132px;
+  background: var(--launchpad-overlay-bg);
+  backdrop-filter: blur(32px) saturate(1.1);
+  -webkit-backdrop-filter: blur(32px) saturate(1.1);
+  will-change: opacity;
+}
+
+.launchpadOverlayVisible {
+  z-index: 40;
+  pointer-events: auto;
+}
+
+.launchpadOverlayBehind {
+  z-index: -1;
+  pointer-events: none;
+}

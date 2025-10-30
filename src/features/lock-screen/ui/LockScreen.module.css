@@ -1,12 +1,3 @@
-.root {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  outline-offset: -1px;
-}
-
 .overlay {
   position: absolute;
   inset: 0;

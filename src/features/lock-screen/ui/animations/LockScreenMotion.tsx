@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import type { CSSProperties, PropsWithChildren } from "react";
-import styles from "../LockScreen.module.css";
+import styles from "./LockScreenMotion.module.css";
 
 type LockScreenMotionProps = PropsWithChildren<{
   disableTransition: boolean;

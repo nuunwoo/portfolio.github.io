@@ -1,6 +1,6 @@
 import { useCurrentDateTime } from "../../../hooks/useCurrentDateTime";
-import { useCurrentWallpaper } from "../../../hooks/useCurrentWallpaper";
 import { useAppStore } from "../../../shared/store/app-store";
+import { ScreenBackground } from "../../../shared/ui/screen-background";
 import { formatLockScreenDate, formatLockScreenTime } from "../../../utils/dateTime";
 import { WINDOW_KEYS } from "../../../utils/windowKeys";
 import LockScreenMotion from "./animations/LockScreenMotion";
@@ -8,7 +8,6 @@ import styles from "./LockScreen.module.css";
 
 const LockScreen = () => {
   const currentDate = useCurrentDateTime({ align: "minute" });
-  const wallpaperSrc = useCurrentWallpaper();
   const currentScreen = useAppStore((state) => state.currentScreen);
   const hasUnlockedOnce = useAppStore((state) => state.hasUnlockedOnce);
   const isUnlocking = useAppStore((state) => state.isUnlocking);
@@ -33,7 +32,7 @@ const LockScreen = () => {
         pointerEvents: !isActive || isUnlocking ? "none" : "auto",
       }}
     >
-      <img src={wallpaperSrc} alt="Lock screen wallpaper" className="wallpaper" />
+      <ScreenBackground blurred={true} />
       <div className={styles.overlay}>
         <div className={styles.centerWrap}>
           <p className={styles.dateText}>

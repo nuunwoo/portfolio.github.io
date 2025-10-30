@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import type { ReactNode } from "react";
-import styles from "../BootSplash.module.css";
+import styles from "./BootSplashMotion.module.css";
 
 type BootSplashMotionProps = {
   isExiting: boolean;
@@ -39,4 +39,3 @@ const BootSplashMotion = ({ isExiting, logo, progress }: BootSplashMotionProps) 
 );
 
 export default BootSplashMotion;
-

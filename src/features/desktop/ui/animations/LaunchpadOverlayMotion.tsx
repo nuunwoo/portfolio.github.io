@@ -1,7 +1,7 @@
 import {motion} from 'framer-motion';
 import {useEffect, useRef, useState} from 'react';
 import {LaunchpadPanel, type LaunchpadAppItem} from '../../../launchpad';
-import styles from '../../../launchpad/ui/Launchpad.module.css';
+import styles from './LaunchpadOverlayMotion.module.css';
 
 type LaunchpadOverlayMotionProps = {
   isOpen: boolean;
@@ -9,12 +9,30 @@ type LaunchpadOverlayMotionProps = {
   onClose: () => void;
 };
 
-const CLOSE_ANIMATION_MS = 220;
-type LaunchpadPhase = 'hidden' | 'open' | 'closing';
+const CLOSE_ANIMATION_MS = 320;
+export type LaunchpadPhase = 'hidden' | 'open' | 'closing';
 
 const overlayMotion = {
-  hidden: {},
-  visible: {},
+  hidden: {
+    opacity: 0,
+    transition: {
+      duration: 0,
+    },
+  },
+  open: {
+    opacity: 1,
+    transition: {
+      duration: 0.34,
+      ease: [0.22, 1, 0.36, 1],
+    },
+  },
+  closing: {
+    opacity: 0,
+    transition: {
+      duration: 0.32,
+      ease: [0.4, 0, 1, 1],
+    },
+  },
 } as const;
 
 const LaunchpadOverlayMotion = ({isOpen, apps, onClose}: LaunchpadOverlayMotionProps) => {
@@ -53,18 +71,12 @@ const LaunchpadOverlayMotion = ({isOpen, apps, onClose}: LaunchpadOverlayMotionP
 
   return (
     <motion.div
-      className={`${styles.launchpadOverlay} ${
-        phase === 'open'
-          ? styles.launchpadOverlayOpen
-          : phase === 'closing'
-            ? styles.launchpadOverlayClosing
-            : styles.launchpadOverlayBehind
-      } ${isOpen ? styles.launchpadOverlayEnter : ''}`}
+      className={`${styles.launchpadOverlay} ${phase === 'hidden' ? styles.launchpadOverlayBehind : styles.launchpadOverlayVisible}`}
       onPointerDown={onClose}
       variants={overlayMotion}
       initial={false}
-      animate={isOpen ? 'visible' : 'hidden'}>
-      <LaunchpadPanel apps={apps} isOpen={isOpen} isClosing={isClosing} onClose={onClose} />
+      animate={phase}>
+      <LaunchpadPanel apps={apps} isOpen={isOpen} isClosing={isClosing} phase={phase} onClose={onClose} />
     </motion.div>
   );
 };

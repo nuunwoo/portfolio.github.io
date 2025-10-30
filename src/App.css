@@ -39,10 +39,3 @@
 .app-layer-splash {
   z-index: 30;
 }
-
-.wallpaper {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}

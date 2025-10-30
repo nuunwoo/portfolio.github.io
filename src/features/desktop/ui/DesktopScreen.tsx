@@ -26,14 +26,13 @@ import {useMemo} from 'react';
 import {launchpadAppIcons} from '../../../components/icons/app-icons/catalog';
 import DesktopDock from '../../shell/dock/DesktopDock';
 import {LaunchpadIcon, useLaunchpadLayout} from '../../launchpad';
-import {useCurrentWallpaper} from '../../../hooks/useCurrentWallpaper';
 import {useAppStore} from '../../../shared/store/app-store';
+import {ScreenBackground} from '../../../shared/ui/screen-background';
 import {WINDOW_KEYS} from '../../../utils/windowKeys';
 import LaunchpadOverlayMotion from './animations/LaunchpadOverlayMotion';
 import styles from './DesktopScreen.module.css';
 
 const DesktopScreen = () => {
-  const wallpaperSrc = useCurrentWallpaper();
   const closeLaunchpad = useAppStore(state => state.closeLaunchpad);
   const isFocused = useAppStore(state => state.focusedWindowKey === WINDOW_KEYS.desktopScreen);
   const isLaunchpadOpen = useAppStore(state => state.isLaunchpadOpen);
@@ -56,7 +55,7 @@ const DesktopScreen = () => {
       data-window-key={WINDOW_KEYS.desktopScreen}
       onPointerDown={() => focusWindow(WINDOW_KEYS.desktopScreen)}
       className={`${styles.root} ${isFocused ? styles.focused : ''}`}>
-      <img src={wallpaperSrc} alt="Desktop wallpaper" className="wallpaper" />
+      <ScreenBackground />
       <div className={styles.contentLayer}>
         <LaunchpadOverlayMotion isOpen={isLaunchpadOpen} apps={launchpadApps} onClose={closeLaunchpad} />
 
