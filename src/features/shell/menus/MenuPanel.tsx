@@ -1,6 +1,7 @@
 import {useState} from 'react';
 import {MenuRow} from '../../../design-system/components';
 import type {SubmenuEntry} from '../../../shared/settings/menu-bar-menus';
+import surfaceStyles from './MenuSurface.module.css';
 import SubmenuPanel from './SubmenuPanel';
 import styles from './MenuPanel.module.css';
 
@@ -33,7 +34,7 @@ const MenuPanel = ({menuKey, items, left}: MenuPanelProps) => {
   };
 
   return (
-    <div className={styles.panel} style={{left}} role="menu" aria-label={`${menuKey} menu`}>
+    <div className={`${surfaceStyles.panel} ${styles.panel}`} style={{left}} role="menu" aria-label={`${menuKey} menu`}>
       {items.map(item => {
         const isSubmenuOpen = openSubmenu?.key === item.label;
         return (

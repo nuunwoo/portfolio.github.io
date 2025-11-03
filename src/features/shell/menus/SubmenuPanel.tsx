@@ -1,7 +1,7 @@
 import {useState} from 'react';
 import {MenuRow} from '../../../design-system/components';
 import type {SubmenuEntry} from '../../../shared/settings/menu-bar-menus';
-import styles from './MenuPanel.module.css';
+import surfaceStyles from './MenuSurface.module.css';
 import submenuStyles from './SubmenuPanel.module.css';
 
 type SubmenuPanelProps = {
@@ -16,7 +16,7 @@ const SubmenuPanel = ({menuKey, items, top}: SubmenuPanelProps) => {
 
   return (
     <div
-      className={`${styles.panel} ${submenuStyles.root}`}
+      className={`${surfaceStyles.panel} ${submenuStyles.root}`}
       style={{top}}
       role="menu"
       aria-label={`${menuKey} submenu`}>
