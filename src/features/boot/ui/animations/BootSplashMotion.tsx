@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import type { ReactNode } from "react";
+import { bootSplashProgressTransition, bootSplashRootTransition, bootSplashRootVariants } from "./bootSplashAnimations";
 import styles from "./BootSplashMotion.module.css";
 
 type BootSplashMotionProps = {
@@ -13,11 +14,8 @@ const BootSplashMotion = ({ isExiting, logo, progress }: BootSplashMotionProps) 
     aria-label="MacBook boot splash screen"
     className={styles.root}
     animate={isExiting ? "exit" : "show"}
-    variants={{
-      show: { opacity: 1, filter: "blur(0px)", scale: 1 },
-      exit: { opacity: 0, filter: "blur(10px)", scale: 1.02 },
-    }}
-    transition={{ duration: 0.26, ease: "easeInOut" }}>
+    variants={bootSplashRootVariants}
+    transition={bootSplashRootTransition}>
     <div className={styles.glow} />
     <div className={styles.container}>
       {logo}
@@ -30,7 +28,7 @@ const BootSplashMotion = ({ isExiting, logo, progress }: BootSplashMotionProps) 
           <motion.div
             className={styles.bar}
             animate={{ width: `${progress}%` }}
-            transition={{ duration: 0.16, ease: "easeOut" }}
+            transition={bootSplashProgressTransition}
           />
         </div>
       </div>

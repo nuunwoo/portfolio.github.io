@@ -23,7 +23,9 @@
   background: var(--launchpad-overlay-bg);
   backdrop-filter: blur(32px) saturate(1.1);
   -webkit-backdrop-filter: blur(32px) saturate(1.1);
-  will-change: opacity;
+  will-change: opacity, transform, backdrop-filter;
+  transform: translateZ(0);
+  backface-visibility: hidden;
 }
 
 .launchpadOverlayVisible {
@@ -32,6 +34,6 @@
 }
 
 .launchpadOverlayBehind {
-  z-index: -1;
+  z-index: 0;
   pointer-events: none;
 }

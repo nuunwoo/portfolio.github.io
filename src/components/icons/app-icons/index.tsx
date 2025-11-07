@@ -113,15 +113,16 @@ type AppIconProps = {
   style?: CSSProperties;
   alt?: string;
   loading?: "eager" | "lazy";
+  decoding?: "sync" | "async" | "auto";
 };
 
-const AppIcon = ({ name, size = 50, className, style, alt = "", loading = "lazy" }: AppIconProps) => (
+const AppIcon = ({ name, size = 50, className, style, alt = "", loading = "lazy", decoding = "async" }: AppIconProps) => (
   <img
     src={appIconSources[name]}
     width={size}
     height={size}
     loading={loading}
-    decoding="async"
+    decoding={decoding}
     alt={alt}
     className={className}
     style={style}

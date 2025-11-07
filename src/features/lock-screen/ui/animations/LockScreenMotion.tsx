@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import type { CSSProperties, PropsWithChildren } from "react";
+import { getLockScreenRootTransition, lockScreenRootVariants } from "./lockScreenAnimations";
 import styles from "./LockScreenMotion.module.css";
 
 type LockScreenMotionProps = PropsWithChildren<{
@@ -21,11 +22,8 @@ const LockScreenMotion = ({
     {...rest}
     className={styles.root}
     animate={isTransitioningOut ? "exit" : "show"}
-    variants={{
-      show: { opacity: 1, scale: 1, filter: "blur(0px)" },
-      exit: { opacity: 0, scale: 1.015, filter: "blur(10px)" },
-    }}
-    transition={disableTransition ? { duration: 0 } : { duration: 0.36, ease: "easeInOut" }}>
+    variants={lockScreenRootVariants}
+    transition={getLockScreenRootTransition(disableTransition)}>
     {children}
   </motion.section>
 );

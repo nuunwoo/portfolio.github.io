@@ -8,56 +8,28 @@ import type {LaunchpadAppItem} from '../model/types';
 import type {LaunchpadPhase} from '../../desktop/ui/animations/LaunchpadOverlayMotion';
 import {ScreenBackground} from '../../../shared/ui/screen-background';
 import LaunchpadSearchBar from './LaunchpadSearchBar';
+import {
+  getLaunchpadGridTrackTransition,
+  launchpadPanelVariants,
+  SLIDE_DURATION_MS,
+} from './animations/launchpadAnimations';
 import styles from './Launchpad.module.css';
 
 type LaunchpadPanelProps = {
   apps: LaunchpadAppItem[];
+  isFirstOpening: boolean;
   isOpen: boolean;
   isClosing: boolean;
   phase: LaunchpadPhase;
+  onMoveApp: (fromIndex: number, toIndex: number) => void;
   onClose: () => void;
 };
 
 const SWIPE_THRESHOLD = 56;
-const SLIDE_DURATION = 0.38;
-const SLIDE_DURATION_MS = 380;
-const SLIDE_EASE: [number, number, number, number] = [0.22, 1, 0.36, 1];
-
-const panelMotion = {
-  hidden: {
-    opacity: 0,
-    scale: 1.14,
-    y: 22,
-    filter: 'blur(18px) saturate(1.08)',
-    transition: {
-      duration: 0,
-    },
-  },
-  open: {
-    opacity: 1,
-    scale: 1,
-    y: 0,
-    filter: 'blur(0px) saturate(1)',
-    transition: {
-      duration: 0.42,
-      ease: [0.18, 1, 0.32, 1],
-    },
-  },
-  closing: {
-    opacity: 0,
-    scale: 1.08,
-    y: 10,
-    filter: 'blur(10px) saturate(1.02)',
-    transition: {
-      duration: 0.32,
-      ease: [0.4, 0, 1, 1],
-    },
-  },
-} as const;
-
-const LaunchpadPanel = ({apps, isOpen, isClosing, phase, onClose}: LaunchpadPanelProps) => {
+const LaunchpadPanel = ({apps, isFirstOpening, isOpen, isClosing, phase, onMoveApp, onClose}: LaunchpadPanelProps) => {
   const [pageIndex, setPageIndex] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
+  const [isItemDragging, setIsItemDragging] = useState(false);
   const [dragOffset, setDragOffset] = useState(0);
   const [searchQuery, setSearchQuery] = useState('');
   const [isSearchFocused, setIsSearchFocused] = useState(false);
@@ -84,6 +56,7 @@ const LaunchpadPanel = ({apps, isOpen, isClosing, phase, onClose}: LaunchpadPane
       setPageIndex(0);
       setDragOffset(0);
       setIsDragging(false);
+      setIsItemDragging(false);
       setSearchQuery('');
       setIsSearchFocused(false);
       setHasSearchFocusHistory(false);
@@ -105,7 +78,7 @@ const LaunchpadPanel = ({apps, isOpen, isClosing, phase, onClose}: LaunchpadPane
       slideTimerRef.current = null;
     }
 
-    if (!isPhaseOpen || isDragging) {
+    if (!isPhaseOpen || isDragging || isItemDragging) {
       setIsSliding(false);
       return;
     }
@@ -115,7 +88,7 @@ const LaunchpadPanel = ({apps, isOpen, isClosing, phase, onClose}: LaunchpadPane
       setIsSliding(false);
       slideTimerRef.current = null;
     }, SLIDE_DURATION_MS + 40);
-  }, [isDragging, isPhaseOpen, pageIndex]);
+  }, [isDragging, isItemDragging, isPhaseOpen, pageIndex]);
 
   useEffect(() => {
     const updateViewportWidth = () => {
@@ -148,7 +121,7 @@ const LaunchpadPanel = ({apps, isOpen, isClosing, phase, onClose}: LaunchpadPane
   }, []);
 
   useEffect(() => {
-    const shouldHardKeepFocus = isPhaseOpen && hasSearchFocusHistory && isSearchFocused && (isDragging || isSliding);
+    const shouldHardKeepFocus = isPhaseOpen && hasSearchFocusHistory && isSearchFocused && (isDragging || isSliding || isItemDragging);
     if (!shouldHardKeepFocus) return;
 
     let rafId = 0;
@@ -163,7 +136,7 @@ const LaunchpadPanel = ({apps, isOpen, isClosing, phase, onClose}: LaunchpadPane
     return () => {
       window.cancelAnimationFrame(rafId);
     };
-  }, [hasSearchFocusHistory, isDragging, isPhaseOpen, isSearchFocused, isSliding]);
+  }, [hasSearchFocusHistory, isDragging, isItemDragging, isPhaseOpen, isSearchFocused, isSliding]);
 
   const focusSearchInput = () => {
     if (!isPhaseOpen || !hasSearchFocusHistory) return;
@@ -175,6 +148,9 @@ const LaunchpadPanel = ({apps, isOpen, isClosing, phase, onClose}: LaunchpadPane
 
   const handlePanelPointerDownCapture = (event: PointerEvent<HTMLElement>) => {
     const target = event.target as HTMLElement | null;
+    if (target?.closest("[data-launchpad-grid-item='true']")) {
+      return;
+    }
     const clickedInteractive = target?.closest("[data-launchpad-interactive='true']");
     if (!clickedInteractive) {
       event.preventDefault();
@@ -183,6 +159,12 @@ const LaunchpadPanel = ({apps, isOpen, isClosing, phase, onClose}: LaunchpadPane
 
   const handlePanelPointerDown = (event: PointerEvent<HTMLElement>) => {
     event.stopPropagation();
+
+    const target = event.target as HTMLElement | null;
+    if (target?.closest("[data-launchpad-grid-item='true']")) {
+      return;
+    }
+
     swipeStartX.current = event.clientX;
     swipeStartY.current = event.clientY;
     setIsDragging(true);
@@ -252,8 +234,8 @@ const LaunchpadPanel = ({apps, isOpen, isClosing, phase, onClose}: LaunchpadPane
     <motion.section
       className={styles.launchpadPanel}
       aria-label="Launchpad"
-      variants={panelMotion}
-      initial={false}
+      variants={launchpadPanelVariants}
+      initial={isFirstOpening ? 'open' : false}
       animate={phase}
       onPointerDownCapture={handlePanelPointerDownCapture}
       onPointerDown={handlePanelPointerDown}
@@ -284,12 +266,21 @@ const LaunchpadPanel = ({apps, isOpen, isClosing, phase, onClose}: LaunchpadPane
             className={styles.launchpadGridTrack}
             animate={{
               x: -(pageIndex * viewportWidth) + dragOffset,
-              transition: isDragging ? {duration: 0} : {duration: SLIDE_DURATION, ease: SLIDE_EASE},
+              transition: getLaunchpadGridTrackTransition(isDragging),
             }}>
             {pagedApps.map((pageApps, index) => (
               <div key={`launchpad-page-${index + 1}`} className={styles.launchpadGridPage}>
                 {isPageVisible(index) ? (
-                  <LaunchpadGrid apps={pageApps} searchMode={searchQuery.trim().length > 0} highlightFirst={pageIndex === 0 && index === pageIndex} />
+                  <LaunchpadGrid
+                    apps={pageApps}
+                    searchMode={searchQuery.trim().length > 0}
+                    highlightFirst={pageIndex === 0 && index === pageIndex}
+                    onMoveItem={(fromIndex, toIndex) => {
+                      const pageOffset = index * LAUNCHPAD_PAGE_SIZE;
+                      onMoveApp(pageOffset + fromIndex, pageOffset + toIndex);
+                    }}
+                    onDragStateChange={setIsItemDragging}
+                  />
                 ) : (
                   <div className={styles.launchpadGridPlaceholder} aria-hidden={true} />
                 )}

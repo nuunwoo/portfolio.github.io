@@ -6,7 +6,7 @@ type LaunchpadIconProps = {
 };
 
 const LaunchpadIcon = ({ name, label }: LaunchpadIconProps) => (
-  <AppIcon name={name} size={98} alt={label} />
+  <AppIcon name={name} size={98} alt={label} loading="eager" decoding="sync" />
 );
 
 export default LaunchpadIcon;

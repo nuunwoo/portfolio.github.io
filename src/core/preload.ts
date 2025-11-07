@@ -1,27 +1,37 @@
 // 아주 가벼운 이미지 프리로드 유틸 (decode 보장 + 메모리 캐시)
 type Key = string;
+const IMAGE_PRELOAD_TIMEOUT_MS = 5000;
 
 const cache = new Map<Key, HTMLImageElement>();
 
 const decode = (src: string) =>
   new Promise<HTMLImageElement>((resolve, reject) => {
     const img = new Image();
+    const timeoutId = window.setTimeout(() => {
+      reject(new Error(`image load timeout: ${src}`));
+    }, IMAGE_PRELOAD_TIMEOUT_MS);
+
     img.onload = async () => {
       try {
         // 일부 브라우저는 decode() 지원, 없으면 무시
         // @ts-ignore
         await (img.decode?.() ?? Promise.resolve());
       } catch {}
+      window.clearTimeout(timeoutId);
       resolve(img);
     };
-    img.onerror = (e) => reject(e ?? new Error(`image load error: ${src}`));
+    img.onerror = (e) => {
+      window.clearTimeout(timeoutId);
+      reject(e ?? new Error(`image load error: ${src}`));
+    };
     img.src = src;
   });
 
 export const preloadImages = async (
   entries: Array<{ key: Key; src: string }>,
   onProgress?: (loaded: number, total: number) => void,
-  onAssetLoaded?: (entry: { key: Key; src: string }) => void
+  onAssetLoaded?: (entry: { key: Key; src: string }) => void,
+  onAssetError?: (entry: { key: Key; src: string }, error: unknown) => void
 ) => {
   const targets = entries.filter((e) => !cache.has(e.key));
   const total = entries.length;
@@ -34,13 +44,17 @@ export const preloadImages = async (
   }
 
   // 병렬 + 진행률
-  await Promise.all(
+  await Promise.allSettled(
     targets.map(async ({ key, src }) => {
-      const img = await decode(src);
-      cache.set(key, img);
-      loaded += 1;
-      onAssetLoaded?.({ key, src });
-      onProgress?.(loaded, total);
+      try {
+        const img = await decode(src);
+        cache.set(key, img);
+        loaded += 1;
+        onAssetLoaded?.({ key, src });
+        onProgress?.(loaded, total);
+      } catch (error) {
+        onAssetError?.({ key, src }, error);
+      }
     })
   );
 };

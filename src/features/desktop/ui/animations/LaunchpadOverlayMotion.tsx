@@ -1,44 +1,24 @@
 import {motion} from 'framer-motion';
 import {useEffect, useRef, useState} from 'react';
 import {LaunchpadPanel, type LaunchpadAppItem} from '../../../launchpad';
+import {CLOSE_ANIMATION_MS, launchpadOverlayVariants} from '../../../launchpad/ui/animations/launchpadAnimations';
 import styles from './LaunchpadOverlayMotion.module.css';
 
 type LaunchpadOverlayMotionProps = {
   isOpen: boolean;
   apps: LaunchpadAppItem[];
+  onMoveApp: (fromIndex: number, toIndex: number) => void;
   onClose: () => void;
 };
 
-const CLOSE_ANIMATION_MS = 320;
 export type LaunchpadPhase = 'hidden' | 'open' | 'closing';
 
-const overlayMotion = {
-  hidden: {
-    opacity: 0,
-    transition: {
-      duration: 0,
-    },
-  },
-  open: {
-    opacity: 1,
-    transition: {
-      duration: 0.34,
-      ease: [0.22, 1, 0.36, 1],
-    },
-  },
-  closing: {
-    opacity: 0,
-    transition: {
-      duration: 0.32,
-      ease: [0.4, 0, 1, 1],
-    },
-  },
-} as const;
-
-const LaunchpadOverlayMotion = ({isOpen, apps, onClose}: LaunchpadOverlayMotionProps) => {
+const LaunchpadOverlayMotion = ({isOpen, apps, onMoveApp, onClose}: LaunchpadOverlayMotionProps) => {
   const [phase, setPhase] = useState<LaunchpadPhase>(isOpen ? 'open' : 'hidden');
+  const [hasOpenedOnce, setHasOpenedOnce] = useState(isOpen);
   const closeTimerRef = useRef<number | null>(null);
   const isClosing = phase === 'closing';
+  const isFirstOpening = isOpen && !hasOpenedOnce;
 
   useEffect(() => {
     if (isOpen) {
@@ -62,6 +42,12 @@ const LaunchpadOverlayMotion = ({isOpen, apps, onClose}: LaunchpadOverlayMotionP
   }, [isOpen, phase]);
 
   useEffect(() => {
+    if (isOpen && !hasOpenedOnce) {
+      setHasOpenedOnce(true);
+    }
+  }, [hasOpenedOnce, isOpen]);
+
+  useEffect(() => {
     return () => {
       if (closeTimerRef.current !== null) {
         window.clearTimeout(closeTimerRef.current);
@@ -73,10 +59,18 @@ const LaunchpadOverlayMotion = ({isOpen, apps, onClose}: LaunchpadOverlayMotionP
     <motion.div
       className={`${styles.launchpadOverlay} ${phase === 'hidden' ? styles.launchpadOverlayBehind : styles.launchpadOverlayVisible}`}
       onPointerDown={onClose}
-      variants={overlayMotion}
+      variants={launchpadOverlayVariants}
       initial={false}
       animate={phase}>
-      <LaunchpadPanel apps={apps} isOpen={isOpen} isClosing={isClosing} phase={phase} onClose={onClose} />
+      <LaunchpadPanel
+        apps={apps}
+        isFirstOpening={isFirstOpening}
+        isOpen={isOpen}
+        isClosing={isClosing}
+        phase={phase}
+        onMoveApp={onMoveApp}
+        onClose={onClose}
+      />
     </motion.div>
   );
 };

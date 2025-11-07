@@ -6,6 +6,13 @@
   outline-offset: -1px;
 }
 
+.scene {
+  position: absolute;
+  inset: 0;
+  transform-origin: center center;
+  will-change: transform;
+}
+
 .focused {
   outline: 1px solid rgba(255, 255, 255, 0.12);
 }
@@ -124,4 +131,8 @@
   bottom: 10px;
   transform: translateX(-50%);
   z-index: 50;
+}
+
+.dockMotion {
+  will-change: transform, opacity;
 }

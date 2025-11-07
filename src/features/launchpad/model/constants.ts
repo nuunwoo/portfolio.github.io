@@ -2,4 +2,4 @@ export const LAUNCHPAD_PAGE_COLUMNS = 7;
 export const LAUNCHPAD_PAGE_ROWS = 5;
 export const LAUNCHPAD_PAGE_SIZE = LAUNCHPAD_PAGE_COLUMNS * LAUNCHPAD_PAGE_ROWS;
 
-export const LAUNCHPAD_LAYOUT_STORAGE_KEY = 'launchpad-layout-v1';
+export const LAUNCHPAD_LAYOUT_STORAGE_KEY = 'launchpad-layout-v2';

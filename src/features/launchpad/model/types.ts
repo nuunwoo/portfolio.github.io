@@ -6,8 +6,22 @@ export type LaunchpadAppItem = {
   label: string;
 };
 
+export type LaunchpadAppEntry = {
+  id: string;
+  type: 'app';
+  appKey: string;
+};
+
+export type LaunchpadFolderEntry = {
+  id: string;
+  type: 'folder';
+  title: string;
+  children: string[];
+};
+
+export type LaunchpadEntry = LaunchpadAppEntry | LaunchpadFolderEntry;
+
 export type LaunchpadLayoutSnapshot = {
-  version: 1;
-  orderedKeys: string[];
-  groups: Array<{ id: string; key: string; title: string; children: string[] }>;
+  version: 2;
+  items: LaunchpadEntry[];
 };

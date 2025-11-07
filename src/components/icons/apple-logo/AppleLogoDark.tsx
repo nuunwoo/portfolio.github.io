@@ -15,7 +15,7 @@ const AppleLogoDark = (props: SVGProps<SVGSVGElement>) => (
         <feGaussianBlur stdDeviation={3} />
         <feComposite in2="hardAlpha" operator="out" />
         <feColorMatrix type="matrix" values="0 0 0 0 0.8 0 0 0 0 0.8 0 0 0 0 0.8 0 0 0 1 0" />
-        <feBlend mode="plus-darker" in2="BackgroundImageFix" result="effect1_dropShadow_164_9672" />
+        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_164_9672" />
         <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_164_9672" result="shape" />
       </filter>
     </defs>

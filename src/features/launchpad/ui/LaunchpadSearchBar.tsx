@@ -1,9 +1,10 @@
 import type {RefObject} from 'react';
 import {useEffect, useLayoutEffect, useRef, useState} from 'react';
+import {motion} from 'framer-motion';
 import Magnifyingglass from '../../../components/icons/search-actions/Magnifyingglass';
 import styles from './LaunchpadSearchBar.module.css';
 import Xmarkcirclefill from '../../../components/icons/window-menu/window/XmarkCircleFill';
-import {motion} from 'framer-motion';
+import {getLaunchpadSearchGroupTransition} from './animations/launchpadAnimations';
 
 type LaunchpadSearchBarProps = {
   value: string;
@@ -127,7 +128,7 @@ const LaunchpadSearchBar = ({value, isFocused, holdFocusedVisual = false, disabl
           left: showFocusedVisual ? focusedLeft : centerLeft,
           width: showFocusedVisual ? focusedWidth : centerWidth,
         }}
-        transition={!disableAnimation && showFocusedVisual && animateOnFocus ? {duration: 0.8, ease: [0.22, 1, 0.36, 1]} : {duration: 0}}>
+        transition={getLaunchpadSearchGroupTransition(disableAnimation, showFocusedVisual, animateOnFocus)}>
         <Magnifyingglass className={styles.launchpadSearchIcon} aria-hidden={true} />
         {!value.length && !showFocusedVisual ? <span className={styles.launchpadSearchPlaceholder}>검색</span> : null}
         <input

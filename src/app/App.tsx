@@ -15,6 +15,9 @@ const App = () => {
   const isUnlocking = useAppStore(state => state.isUnlocking);
   const syncFocusedWindow = useAppStore(state => state.syncFocusedWindow);
   const systemAppearance = useSystemAppearance();
+  const isDesktopScaledDown = hasUnlockedOnce && currentScreen === 'lock' && !isUnlocking;
+  const desktopLayerStyle = {zIndex: isUnlocking ? 40 : 10};
+  const lockLayerStyle = {zIndex: isUnlocking ? 20 : 30};
 
   useEffect(() => {
     syncFocusedWindow();
@@ -24,13 +27,21 @@ const App = () => {
 
   return (
     <main className="app-shell" data-appearance={systemAppearance}>
-      <AppLayer layerClassName="app-layer-desktop" visible={currentScreen !== 'splash'}>
-        <DesktopScreen />
+      <AppLayer
+        layerClassName="app-layer-desktop"
+        style={desktopLayerStyle}
+        visible={currentScreen !== 'splash'}>
+        <DesktopScreen
+          isScaledDown={isDesktopScaledDown}
+          disableScaleTransition={!hasUnlockedOnce && !isUnlocking}
+          hideAnimatedItems={!hasUnlockedOnce && currentScreen === 'lock' && !isUnlocking}
+        />
       </AppLayer>
 
       <AppLayer
         layerClassName="app-layer-lock"
         noTransition={!hasUnlockedOnce && currentScreen === 'lock'}
+        style={lockLayerStyle}
         visible={currentScreen === 'lock' || isUnlocking}>
         <LockScreen />
       </AppLayer>

@@ -1,9 +1,9 @@
 import {useMemo} from 'react';
-import {getWallpaperSrcForDate} from '../app/assetsManifest';
+import {getBackgroundSrcForDate, type ScreenBackgroundTarget} from '../app/assetsManifest';
 import {useCurrentDateTime} from './useCurrentDateTime';
 
-export const useCurrentBackground = () => {
+export const useCurrentBackground = (target: ScreenBackgroundTarget = 'desktop') => {
   const currentDate = useCurrentDateTime({align: 'minute'});
 
-  return useMemo(() => getWallpaperSrcForDate(currentDate), [currentDate]);
+  return useMemo(() => getBackgroundSrcForDate(currentDate, target), [currentDate, target]);
 };

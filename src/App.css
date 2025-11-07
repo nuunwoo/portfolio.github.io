@@ -19,12 +19,13 @@
 }
 
 .app-layer {
+  --layer-zoom: 1;
   position: absolute;
   top: 0;
   left: 50%;
   width: calc(100% / var(--ui-scale));
   height: calc(100% / var(--ui-scale));
-  transform: translateX(-50%) scale(var(--ui-scale));
+  transform: translateX(-50%) scale(calc(var(--ui-scale) * var(--layer-zoom)));
   transform-origin: top center;
 }
 

@@ -5,4 +5,5 @@
   height: 100%;
   overflow: hidden;
   outline-offset: -1px;
+  isolation: isolate;
 }

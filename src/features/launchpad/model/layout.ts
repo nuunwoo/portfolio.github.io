@@ -1,5 +1,6 @@
 import { LAUNCHPAD_PAGE_SIZE } from './constants';
-import type { LaunchpadAppItem } from './types';
+import {flattenEntryAppKeys} from './operations';
+import type { LaunchpadAppItem, LaunchpadEntry } from './types';
 
 export const sortAppsByOrder = (apps: LaunchpadAppItem[], orderedKeys: string[]) => {
   if (orderedKeys.length === 0) return apps;
@@ -11,6 +12,9 @@ export const sortAppsByOrder = (apps: LaunchpadAppItem[], orderedKeys: string[])
 
   return [...picked, ...rest];
 };
+
+export const sortAppsByEntries = (apps: LaunchpadAppItem[], items: LaunchpadEntry[]) =>
+  sortAppsByOrder(apps, flattenEntryAppKeys(items));
 
 export const paginateApps = (apps: LaunchpadAppItem[]) => {
   const pages: LaunchpadAppItem[][] = [];

@@ -1,6 +1,11 @@
 @font-face {
   font-family: 'SF Pro';
-  src: url('/fonts/SF-Pro-Light.woff2') format('woff2');
+  src:
+    url('/fonts/SF-Pro-Light.woff2') format('woff2'),
+    local('SF Pro Text Light'),
+    local('SF Pro Display Light'),
+    local('.SFNSText-Light'),
+    local('.SFNSDisplay-Light');
   font-weight: 300;
   font-style: normal;
   font-display: swap;
@@ -8,7 +13,12 @@
 
 @font-face {
   font-family: 'SF Pro';
-  src: url('/fonts/SF-Pro-Regular.woff2') format('woff2');
+  src:
+    url('/fonts/SF-Pro-Regular.woff2') format('woff2'),
+    local('SF Pro Text Regular'),
+    local('SF Pro Display Regular'),
+    local('.SFNSText-Regular'),
+    local('.SFNSDisplay-Regular');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -16,7 +26,12 @@
 
 @font-face {
   font-family: 'SF Pro';
-  src: url('/fonts/SF-Pro-Medium.woff2') format('woff2');
+  src:
+    url('/fonts/SF-Pro-Medium.woff2') format('woff2'),
+    local('SF Pro Text Medium'),
+    local('SF Pro Display Medium'),
+    local('.SFNSText-Medium'),
+    local('.SFNSDisplay-Medium');
   font-weight: 500;
   font-style: normal;
   font-display: swap;
@@ -24,7 +39,12 @@
 
 @font-face {
   font-family: 'SF Pro';
-  src: url('/fonts/SF-Pro-Semibold.woff2') format('woff2');
+  src:
+    url('/fonts/SF-Pro-Semibold.woff2') format('woff2'),
+    local('SF Pro Text Semibold'),
+    local('SF Pro Display Semibold'),
+    local('.SFNSText-Semibold'),
+    local('.SFNSDisplay-Semibold');
   font-weight: 600;
   font-style: normal;
   font-display: swap;
@@ -32,7 +52,12 @@
 
 @font-face {
   font-family: 'SF Pro';
-  src: url('/fonts/SF-Pro-Bold.woff2') format('woff2');
+  src:
+    url('/fonts/SF-Pro-Bold.woff2') format('woff2'),
+    local('SF Pro Text Bold'),
+    local('SF Pro Display Bold'),
+    local('.SFNSText-Bold'),
+    local('.SFNSDisplay-Bold');
   font-weight: 700;
   font-style: normal;
   font-display: swap;
@@ -40,7 +65,12 @@
 
 @font-face {
   font-family: 'SF Pro';
-  src: url('/fonts/SF-Pro-Heavy.woff2') format('woff2');
+  src:
+    url('/fonts/SF-Pro-Heavy.woff2') format('woff2'),
+    local('SF Pro Text Heavy'),
+    local('SF Pro Display Heavy'),
+    local('.SFNSText-Heavy'),
+    local('.SFNSDisplay-Heavy');
   font-weight: 800;
   font-style: normal;
   font-display: swap;

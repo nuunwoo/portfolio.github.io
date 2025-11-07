@@ -26,6 +26,16 @@ const BootSplash = () => {
   const hasCompletedRef = useRef(false);
   const {hasError, isReady, progress} = useBootReadiness();
 
+  useEffect(() => {
+    const snapshot = bootReadiness.getSnapshot();
+    console.log('[BootSplash] readiness', {
+      progress: snapshot.progress,
+      isReady: snapshot.isReady,
+      hasError: snapshot.hasError,
+      steps: snapshot.steps,
+    });
+  }, [hasError, isReady, progress]);
+
   const bootAssets = useMemo(() => {
     const assets = getBootAssetsForDate(bootDate);
     return [assets.lockBg, assets.desktopBg, ...appIconPreloadTargets];
@@ -102,15 +112,30 @@ const BootSplash = () => {
           bootReadiness.markStepLoading(key);
         });
 
-        await preloadImages(bootAssets, undefined, ({key}) => {
-          if (!alive) return;
-          bootReadiness.markStepReady(key);
-        });
+        await preloadImages(
+          bootAssets,
+          undefined,
+          ({key}) => {
+            if (!alive) return;
+            bootReadiness.markStepReady(key);
+          },
+          ({key}) => {
+            if (!alive) return;
+            bootReadiness.markStepError(key);
+          }
+        );
 
-        await preloadFonts(FONT_PRELOAD_TARGETS, ({key}) => {
-          if (!alive) return;
-          bootReadiness.markStepReady(key);
-        });
+        await preloadFonts(
+          FONT_PRELOAD_TARGETS,
+          ({key}) => {
+            if (!alive) return;
+            bootReadiness.markStepReady(key);
+          },
+          ({key}) => {
+            if (!alive) return;
+            bootReadiness.markStepError(key);
+          }
+        );
 
         await bootReadiness.waitForReady();
       } catch (error) {
