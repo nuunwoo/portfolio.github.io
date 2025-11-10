@@ -1,5 +1,6 @@
 import type {HTMLAttributes, ReactNode} from 'react';
 import styles from './PopoverSurface.module.css';
+import {SheetSurface} from '../sheet';
 
 export type PopoverPlacement =
   | 'north-left'
@@ -22,11 +23,11 @@ type PopoverSurfaceProps = HTMLAttributes<HTMLDivElement> & {
 };
 
 const PopoverSurface = ({children, className = '', placement = 'north-center', showTail = true, ...rest}: PopoverSurfaceProps) => (
-  <div className={`${styles.root} ${styles[placement]} ${className}`.trim()} {...rest}>
+  <SheetSurface className={`${styles.root} ${styles[placement]} ${className}`.trim()} {...rest}>
     <span className={styles.backing} aria-hidden={true} />
     <span className={styles.content}>{children}</span>
     {showTail ? <span className={styles.tail} aria-hidden={true} /> : null}
-  </div>
+  </SheetSurface>
 );
 
 export default PopoverSurface;

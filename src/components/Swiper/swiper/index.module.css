@@ -1,0 +1,54 @@
+.swiper {
+    overflow-x: hidden;
+    position: relative;
+}
+
+.inner {
+    position: absolute;
+    display: flex;
+}
+
+.swiper > div:not(.inner) {
+    position: absolute;
+    display: flex;
+}
+
+.count {
+    right: 10px;
+    height: 24px;
+    padding: 6px 8px;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+    flex-shrink: 0;
+    border-radius: 24px;
+    background: rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+.count span {
+    color: #fff;
+    font-feature-settings: 'clig' off, 'liga' off;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: -0.24px;
+}
+
+.page {
+    left: 50%;
+    bottom: 14px;
+    transform: translateX(-50%);
+    gap: 5px;
+}
+
+.page > div {
+    width: 5px;
+    height: 5px;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+}
+.page > div.active {
+    width: 0.86806rem;
+    border-radius: 0.375rem;
+    background: #fff;
+}

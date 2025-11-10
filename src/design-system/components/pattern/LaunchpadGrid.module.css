@@ -24,11 +24,30 @@
   display: grid;
   gap: 10px;
   justify-items: center;
+  user-select: none;
+  touch-action: none;
   transition:
-    transform 180ms ease,
-    opacity 180ms ease,
     box-shadow 180ms ease,
     background-color 180ms ease;
+  position: relative;
+  isolation: isolate;
+}
+
+.itemDropTarget {
+  position: absolute;
+  left: 50%;
+  top: -4px;
+  width: calc(var(--launchpad-icon-size) + 16px);
+  height: calc(var(--launchpad-icon-size) + 16px);
+  transform: translateX(-50%);
+  border-radius: 28px;
+  background: rgba(255, 255, 255, 0.24);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.35),
+    0 8px 24px rgba(255, 255, 255, 0.1);
+  z-index: -1;
 }
 
 .itemSearch {
@@ -44,16 +63,22 @@
 }
 
 .itemDragging {
-  opacity: 0.42;
-  transform: scale(0.96);
+  pointer-events: none;
+  z-index: 1;
+  visibility: hidden;
+  filter: brightness(0.82);
 }
 
-.itemDropTarget {
-  border-radius: 18px;
-  background: rgba(255, 255, 255, 0.12);
-  box-shadow:
-    inset 0 0 0 1px rgba(255, 255, 255, 0.16),
-    0 10px 24px rgba(0, 0, 0, 0.18);
+.dragOverlay {
+  position: absolute;
+  pointer-events: none;
+  z-index: 120;
+}
+
+.itemDragging .icon,
+.itemPressed .icon,
+.dragOverlay .icon {
+  filter: brightness(0.82);
 }
 
 .icon {
@@ -61,6 +86,12 @@
   height: var(--launchpad-icon-size);
   display: grid;
   place-items: center;
+}
+
+.dragOverlayIcon {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
 }
 
 .label {

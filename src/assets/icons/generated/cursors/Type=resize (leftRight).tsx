@@ -1,0 +1,24 @@
+import type {SVGProps} from 'react';
+const TypeResizeLeftRight = (props: SVGProps<SVGSVGElement>) => (
+  <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
+    <g filter="url(#filter0_d_121_11644)">
+      <path
+        d="M17.4814 8.54004V8.55957H17.5V14.5205H19.5205V11.584L20.3682 12.4072L23.6885 15.6299L24.0566 15.9873L23.6904 16.3467L20.3701 19.5977L19.5205 20.4297V17.4814H17.5V23.4814H14.54V17.4814H12.4805V20.418L11.6318 19.5938L8.31152 16.3701L7.94434 16.0127L8.31055 15.6533L11.6299 12.4023L12.4805 11.5703V14.54H14.54V8.54004H17.4814Z"
+        fill="black"
+        stroke="white"
+      />
+    </g>
+    <defs>
+      <filter id="filter0_d_121_11644" x={-2} y={-1} width={36} height={36} filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
+        <feFlood floodOpacity={0} result="BackgroundImageFix" />
+        <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
+        <feOffset dy={1} />
+        <feGaussianBlur stdDeviation={1} />
+        <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.4049 0" />
+        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_121_11644" />
+        <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_121_11644" result="shape" />
+      </filter>
+    </defs>
+  </svg>
+);
+export default TypeResizeLeftRight;

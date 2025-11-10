@@ -1,0 +1,24 @@
+import type {SVGProps} from 'react';
+const TypeResizeLeft = (props: SVGProps<SVGSVGElement>) => (
+  <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
+    <g filter="url(#filter0_d_121_11660)">
+      <path
+        d="M21.4805 8.5V23.4805H18.5V17.4805H16.4805V20.416L15.6318 19.5928L12.3115 16.3701L11.9443 16.0127L12.3105 15.6533L15.6299 12.4023L16.4805 11.5703V14.5H18.5V8.5H21.4805Z"
+        fill="black"
+        stroke="white"
+      />
+    </g>
+    <defs>
+      <filter id="filter0_d_121_11660" x={-2} y={-1} width={36} height={36} filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
+        <feFlood floodOpacity={0} result="BackgroundImageFix" />
+        <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
+        <feOffset dy={1} />
+        <feGaussianBlur stdDeviation={1} />
+        <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.4049 0" />
+        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_121_11660" />
+        <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_121_11660" result="shape" />
+      </filter>
+    </defs>
+  </svg>
+);
+export default TypeResizeLeft;

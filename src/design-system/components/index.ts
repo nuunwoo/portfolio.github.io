@@ -1,4 +1,5 @@
 export * from "./menu";
+export * from "./menu-panel";
 export * from "./window";
 export * from "./search";
 export * from "./dock";

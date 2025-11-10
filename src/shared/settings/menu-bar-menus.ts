@@ -1,4 +1,4 @@
-import { WINDOW_KEYS, type WindowKey } from "../../utils/windowKeys";
+import type { ScreenName } from "../store/app-store";
 
 export const APPLE_MENU_KEY = "__apple_menu__";
 
@@ -145,11 +145,10 @@ const finderMenuPreset: MenuBarPreset = {
 
 const fallbackMenuPreset = finderMenuPreset;
 
-export const menuBarPresetByWindowKey: Partial<Record<WindowKey, MenuBarPreset>> = {
-  [WINDOW_KEYS.desktopScreen]: finderMenuPreset,
+export const menuBarPresetByScreen: Partial<Record<ScreenName, MenuBarPreset>> = {
+  desktop: finderMenuPreset,
 };
 
-export const getMenuBarPreset = (windowKey: WindowKey | null): MenuBarPreset => {
-  if (!windowKey) return fallbackMenuPreset;
-  return menuBarPresetByWindowKey[windowKey] ?? fallbackMenuPreset;
+export const getMenuBarPreset = (screen: ScreenName): MenuBarPreset => {
+  return menuBarPresetByScreen[screen] ?? fallbackMenuPreset;
 };

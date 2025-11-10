@@ -1,0 +1,25 @@
+import type {SVGProps} from 'react';
+const TypeDefault = (props: SVGProps<SVGSVGElement>) => (
+  <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
+    <g filter="url(#filter0_d_121_11754)">
+      <path fillRule="evenodd" clipRule="evenodd" d="M16.4308 23.9996L18.1958 23.0586L15.4215 17.857H19.025L11 9.81396V21.002L13.5298 18.5599L16.4308 23.9996Z" fill="black" />
+      <path
+        d="M11.3535 9.46045L19.3789 17.5034L20.2305 18.3569H16.2549L18.6367 22.8237L18.8721 23.2642L18.4307 23.4995L16.666 24.4409L16.2246 24.6763L15.9893 24.2349L13.3994 19.3794L11.3477 21.3618L10.5 22.1792V8.60498L11.3535 9.46045Z"
+        stroke="white"
+      />
+    </g>
+    <defs>
+      <filter id="filter0_d_121_11754" x={8} y={6.39592} width={15.4354} height={21.9565} filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
+        <feFlood floodOpacity={0} result="BackgroundImageFix" />
+        <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
+        <feOffset dy={1} />
+        <feGaussianBlur stdDeviation={1} />
+        <feComposite in2="hardAlpha" operator="out" />
+        <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.4049 0" />
+        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_121_11754" />
+        <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_121_11754" result="shape" />
+      </filter>
+    </defs>
+  </svg>
+);
+export default TypeDefault;

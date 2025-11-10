@@ -1,0 +1,24 @@
+import type {SVGProps} from 'react';
+const TypeResizeUpDown = (props: SVGProps<SVGSVGElement>) => (
+  <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
+    <g filter="url(#filter0_d_121_11640)">
+      <path
+        d="M16.3457 8.31201L19.5967 11.6304L20.4287 12.481H17.4795V14.52H23.4805V17.481H17.4805V19.52H20.416L19.5928 20.3677L16.3691 23.688L16.0117 24.0562L15.6533 23.689L12.4023 20.3696L11.5703 19.52H14.5391V17.481H8.51953V14.52H14.5195V12.481H11.583L12.4072 11.6323L15.6299 8.31299L15.9873 7.9458L16.3457 8.31201Z"
+        fill="black"
+        stroke="white"
+      />
+    </g>
+    <defs>
+      <filter id="filter0_d_121_11640" x={-2} y={-1} width={36} height={36} filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
+        <feFlood floodOpacity={0} result="BackgroundImageFix" />
+        <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
+        <feOffset dy={1} />
+        <feGaussianBlur stdDeviation={1} />
+        <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.4049 0" />
+        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_121_11640" />
+        <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_121_11640" result="shape" />
+      </filter>
+    </defs>
+  </svg>
+);
+export default TypeResizeUpDown;

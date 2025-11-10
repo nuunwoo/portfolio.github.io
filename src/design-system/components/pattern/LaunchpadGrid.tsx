@@ -1,99 +1,119 @@
-import type {DragEvent, ReactNode} from 'react';
-import {useState} from 'react';
+import {motion} from 'framer-motion';
+import type {MouseEvent as ReactMouseEvent, ReactNode} from 'react';
 import styles from './LaunchpadGrid.module.css';
 
-type LaunchpadGridItem = {
+export type LaunchpadGridItem = {
   key: string;
   icon: ReactNode;
+  iconSrc?: string;
   label: string;
 };
+
+const ITEM_SPRING = {
+  type: 'spring',
+  stiffness: 560,
+  damping: 38,
+  mass: 0.72,
+} as const;
+
+export const LaunchpadGridItemVisual = ({
+  icon,
+  label,
+  overlay = false,
+}: {
+  icon: ReactNode;
+  iconSrc?: string;
+  label: string;
+  overlay?: boolean;
+}) => (
+  <>
+    <div className={styles.icon} data-launchpad-interactive={overlay ? undefined : 'true'}>
+      {icon}
+    </div>
+    <div className={styles.label} data-launchpad-interactive={overlay ? undefined : 'true'}>
+      {label}
+    </div>
+  </>
+);
+
+export const getLaunchpadGridItemClassName = ({
+  index,
+  searchMode,
+  highlightFirst,
+  dragging = false,
+  pressed = false,
+}: {
+  index: number;
+  searchMode: boolean;
+  highlightFirst: boolean;
+  dragging?: boolean;
+  pressed?: boolean;
+}) =>
+  `${styles.item} ${searchMode ? styles.itemSearch : ''} ${
+    searchMode && highlightFirst && index === 0 ? styles.itemSearchPrimary : ''
+  } ${dragging ? styles.itemDragging : ''} ${pressed ? styles.itemPressed : ''}`.trim();
 
 const LaunchpadGrid = ({
   apps,
   searchMode = false,
   highlightFirst = false,
-  onMoveItem,
-  onDragStateChange,
+  draggingKey = null,
+  hoveredTargetKey = null,
+  hasDragged = false,
+  onItemMouseDown,
 }: {
   apps: LaunchpadGridItem[];
   searchMode?: boolean;
   highlightFirst?: boolean;
-  onMoveItem?: (fromIndex: number, toIndex: number) => void;
-  onDragStateChange?: (dragging: boolean) => void;
-}) => {
-  const [dragIndex, setDragIndex] = useState<number | null>(null);
-  const [dropIndex, setDropIndex] = useState<number | null>(null);
-  const canReorder = !searchMode && Boolean(onMoveItem);
+  draggingKey?: string | null;
+  hoveredTargetKey?: string | null;
+  hasDragged?: boolean;
+  onItemMouseDown?: (app: LaunchpadGridItem, index: number, event: ReactMouseEvent<HTMLDivElement>) => void;
+}) => (
+  <section className={`${styles.root} ${searchMode ? styles.rootSearch : ''}`}>
+    {apps.map((app, index) => {
+      const isDragging = draggingKey === app.key;
+      const isPressed = isDragging && !hasDragged;
+      const isActivelyDragging = isDragging && hasDragged;
 
-  const resetDragState = () => {
-    setDragIndex(null);
-    setDropIndex(null);
-    onDragStateChange?.(false);
-  };
-
-  const handleDragStart = (event: DragEvent<HTMLDivElement>, index: number) => {
-    if (!canReorder) return;
-
-    setDragIndex(index);
-    setDropIndex(index);
-    onDragStateChange?.(true);
-    event.dataTransfer.effectAllowed = 'move';
-    event.dataTransfer.setData('text/plain', apps[index]?.key ?? '');
-  };
-
-  const handleDragOver = (event: DragEvent<HTMLDivElement>, index: number) => {
-    if (!canReorder || dragIndex === null) return;
-    event.preventDefault();
-    event.dataTransfer.dropEffect = 'move';
-    if (dropIndex !== index) {
-      setDropIndex(index);
-    }
-  };
-
-  const handleDrop = (event: DragEvent<HTMLDivElement>, index: number) => {
-    if (!canReorder || dragIndex === null) {
-      resetDragState();
-      return;
-    }
-
-    event.preventDefault();
-    if (dragIndex !== index) {
-      onMoveItem?.(dragIndex, index);
-    }
-    resetDragState();
-  };
-
-  return (
-    <section className={`${styles.root} ${searchMode ? styles.rootSearch : ''}`}>
-      {apps.map((app, index) => {
-        const isDragging = dragIndex === index;
-        const isDropTarget = dropIndex === index && dragIndex !== null && dragIndex !== index;
-
-        return (
-          <div
-            key={app.key}
-            className={`${styles.item} ${searchMode ? styles.itemSearch : ''} ${
-              searchMode && highlightFirst && index === 0 ? styles.itemSearchPrimary : ''
-            } ${isDragging ? styles.itemDragging : ''} ${isDropTarget ? styles.itemDropTarget : ''}`}
-            data-launchpad-item="true"
-            data-launchpad-grid-item="true"
-            data-launchpad-interactive="true"
-            draggable={canReorder}
-            onDragStart={event => handleDragStart(event, index)}
-            onDragOver={event => handleDragOver(event, index)}
-            onDrop={event => handleDrop(event, index)}
-            onDragEnd={resetDragState}>
-            <div className={styles.icon} data-launchpad-interactive="true">
-              {app.icon}
-            </div>
-            <div className={styles.label} data-launchpad-interactive="true">
-              {app.label}
-            </div>
-          </div>
-        );
-      })}
-    </section>
-  );
-};
+      return (
+        <motion.div
+          key={app.key}
+          layout={true}
+          transition={ITEM_SPRING}
+          className={getLaunchpadGridItemClassName({
+            index,
+            searchMode,
+            highlightFirst,
+            dragging: isActivelyDragging,
+            pressed: isPressed,
+          })}
+          data-launchpad-item="true"
+          data-launchpad-grid-item="true"
+          data-launchpad-key={app.key}
+          data-launchpad-interactive="true"
+          animate={
+            isActivelyDragging
+              ? {
+                  opacity: 0,
+                  scale: 1,
+                  zIndex: 1,
+                }
+              : {
+                  x: 0,
+                  y: 0,
+                  opacity: 1,
+                  scale: 1,
+                  zIndex: 1,
+                }
+          }
+          onMouseDown={event => onItemMouseDown?.(app, index, event)}>
+          {hoveredTargetKey === app.key && !isActivelyDragging ? <div className={styles.itemDropTarget} aria-hidden={true} /> : null}
+          <LaunchpadGridItemVisual icon={app.icon} iconSrc={app.iconSrc} label={app.label} />
+        </motion.div>
+      );
+    })}
+  </section>
+);
 
 export default LaunchpadGrid;

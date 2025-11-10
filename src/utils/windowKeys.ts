@@ -3,5 +3,3 @@ export const WINDOW_KEYS = {
   lockScreen: "lock-screen",
   desktopScreen: "desktop-screen",
 } as const;
-
-export type WindowKey = (typeof WINDOW_KEYS)[keyof typeof WINDOW_KEYS];

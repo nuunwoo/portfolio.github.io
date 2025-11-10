@@ -1,0 +1,29 @@
+import type {SVGProps} from 'react';
+const TypeCopy = (props: SVGProps<SVGSVGElement>) => (
+  <svg viewBox="0 0 32 36" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
+    <g filter="url(#filter0_d_121_11732)">
+      <path d="M8 23.604C8 28.574 12.03 32.604 17 32.604C21.97 32.604 26 28.574 26 23.604C26 18.633 21.97 14.604 17 14.604C12.03 14.604 8 18.633 8 23.604Z" fill="url(#paint0_linear_121_11732)" />
+      <path
+        d="M21 22.604H18V19.604C18 19.052 17.552 18.604 17 18.604C16.448 18.604 16 19.052 16 19.604V22.604H13C12.448 22.604 12 23.052 12 23.604C12 24.156 12.448 24.604 13 24.604H16V27.604C16 28.156 16.448 28.604 17 28.604C17.552 28.604 18 28.156 18 27.604V24.604H21C21.552 24.604 22 24.156 22 23.604C22 23.052 21.552 22.604 21 22.604Z"
+        fill="white"
+      />
+      <path d="M8.35352 3.06446L16.5186 11.2481L17.3701 12.1006H11.3164L11.3096 12.1055L8.34766 14.9658L7.5 15.7832V2.20899L8.35352 3.06446Z" fill="black" stroke="white" />
+    </g>
+    <defs>
+      <filter id="filter0_d_121_11732" x={-2} y={-0.395988} width={36} height={36} filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
+        <feFlood floodOpacity={0} result="BackgroundImageFix" />
+        <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
+        <feOffset dy={1} />
+        <feGaussianBlur stdDeviation={1} />
+        <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.4049 0" />
+        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_121_11732" />
+        <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_121_11732" result="shape" />
+      </filter>
+      <linearGradient id="paint0_linear_121_11732" x1={8} y1={14.604} x2={8} y2={32.604} gradientUnits="userSpaceOnUse">
+        <stop stopColor="#5BD230" />
+        <stop offset={1} stopColor="#068B03" />
+      </linearGradient>
+    </defs>
+  </svg>
+);
+export default TypeCopy;

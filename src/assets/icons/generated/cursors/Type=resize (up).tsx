@@ -1,0 +1,24 @@
+import type {SVGProps} from 'react';
+const TypeResizeUp = (props: SVGProps<SVGSVGElement>) => (
+  <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
+    <g filter="url(#filter0_d_121_11648)">
+      <path
+        d="M16.3457 12.311L19.5967 15.6304L20.4287 16.481H17.5V18.52H23.5V21.481H8.51953V18.52H14.5195V16.481H11.583L12.4072 15.6323L15.6299 12.312L15.9873 11.9448L16.3457 12.311Z"
+        fill="black"
+        stroke="white"
+      />
+    </g>
+    <defs>
+      <filter id="filter0_d_121_11648" x={-2} y={-1} width={36} height={36} filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
+        <feFlood floodOpacity={0} result="BackgroundImageFix" />
+        <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
+        <feOffset dy={1} />
+        <feGaussianBlur stdDeviation={1} />
+        <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.4049 0" />
+        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_121_11648" />
+        <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_121_11648" result="shape" />
+      </filter>
+    </defs>
+  </svg>
+);
+export default TypeResizeUp;

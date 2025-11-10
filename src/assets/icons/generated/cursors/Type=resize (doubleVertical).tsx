@@ -1,0 +1,24 @@
+import type {SVGProps} from 'react';
+const TypeResizeDoubleVertical = (props: SVGProps<SVGSVGElement>) => (
+  <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
+    <g filter="url(#filter0_d_121_11620)">
+      <path
+        d="M16.3525 9.05957L19.9385 12.626L20.7979 13.4805H17.5V18.5H20.793L16 23.293L11.207 18.5H14.5V13.4805H11.2021L12.0615 12.626L15.6475 9.05957L16 8.70898L16.3525 9.05957Z"
+        fill="black"
+        stroke="white"
+      />
+    </g>
+    <defs>
+      <filter id="filter0_d_121_11620" x={-2} y={-1} width={36} height={36} filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
+        <feFlood floodOpacity={0} result="BackgroundImageFix" />
+        <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
+        <feOffset dy={1} />
+        <feGaussianBlur stdDeviation={1} />
+        <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.4049 0" />
+        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_121_11620" />
+        <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_121_11620" result="shape" />
+      </filter>
+    </defs>
+  </svg>
+);
+export default TypeResizeDoubleVertical;

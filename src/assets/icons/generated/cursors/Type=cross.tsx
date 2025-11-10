@@ -1,0 +1,7 @@
+import type {SVGProps} from 'react';
+const TypeCross = (props: SVGProps<SVGSVGElement>) => (
+  <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
+    <path d="M17.4902 9.50049V15.5103H23.4902V17.4907H17.4902V23.5005H15.5098V17.4907H9.50977V15.5103H15.5098V9.50049H17.4902Z" fill="#231F1F" stroke="white" />
+  </svg>
+);
+export default TypeCross;

@@ -1,3 +1,9 @@
+:root {
+  --cursor-default: url("../assets/icons/raw/cursors/Type=Default.svg") 8 2, default;
+  --cursor-pointer: url("../assets/icons/raw/cursors/Type=Hand (Pointing).svg") 10 2, pointer;
+  --cursor-text: url("../assets/icons/raw/cursors/Type=Text Cursor.svg") 12 12, text;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -11,11 +17,30 @@
 
 body {
   font-family: var(--font-family-system);
+  cursor: var(--cursor-default);
 }
 
 img,
 a {
   -webkit-user-drag: none;
+}
+
+button,
+a,
+[role='button'],
+input[type='button'],
+input[type='checkbox'],
+input[type='radio'],
+input[type='range'],
+input[type='submit'],
+select {
+  cursor: var(--cursor-pointer);
+}
+
+input,
+textarea,
+[contenteditable='true'] {
+  cursor: var(--cursor-text);
 }
 
 .allow-select,

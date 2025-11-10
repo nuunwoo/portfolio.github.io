@@ -1,0 +1,20 @@
+import type {SVGProps} from 'react';
+const TypeResizeSingleRight = (props: SVGProps<SVGSVGElement>) => (
+  <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
+    <g filter="url(#filter0_d_121_11596)">
+      <path d="M22.293 16L17.5 20.793V17.5H10.5V14.5H17.5V11.207L22.293 16Z" fill="black" stroke="white" />
+    </g>
+    <defs>
+      <filter id="filter0_d_121_11596" x={-2} y={-1} width={36} height={36} filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
+        <feFlood floodOpacity={0} result="BackgroundImageFix" />
+        <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
+        <feOffset dy={1} />
+        <feGaussianBlur stdDeviation={1} />
+        <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.4049 0" />
+        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_121_11596" />
+        <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_121_11596" result="shape" />
+      </filter>
+    </defs>
+  </svg>
+);
+export default TypeResizeSingleRight;

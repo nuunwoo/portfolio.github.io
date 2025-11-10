@@ -1,3 +1,4 @@
+import {useCallback} from 'react';
 import { MenuChevronIcon } from "../../icons";
 import type { SubmenuEntry } from "../../../shared/settings/menu-bar-menus";
 import styles from "./MenuRow.module.css";
@@ -11,6 +12,10 @@ type MenuRowProps = {
 };
 
 const MenuRow = ({ item, submenuOpen, hovered, onHover, onHoverEnd }: MenuRowProps) => {
+  const handleMouseEnter = useCallback((event: React.MouseEvent<HTMLButtonElement>) => {
+    onHover?.(event.currentTarget);
+  }, [onHover]);
+
   return (
     <div className={styles.entryRow}>
       {item.dividerAbove ? (
@@ -33,7 +38,7 @@ const MenuRow = ({ item, submenuOpen, hovered, onHover, onHoverEnd }: MenuRowPro
           }`}
           role="menuitem"
           disabled={item.disabled}
-          onMouseEnter={(event) => onHover?.(event.currentTarget)}
+          onMouseEnter={handleMouseEnter}
           onMouseLeave={onHoverEnd}
         >
           {item.symbol ? (

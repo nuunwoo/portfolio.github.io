@@ -1,5 +1,5 @@
-import type {ScreenBackgroundTarget} from '../../../app/assetsManifest';
-import {useCurrentBackground} from '../../../hooks/useCurrentBackground';
+import type {ScreenBackgroundTarget} from '../../../app/assets-manifest';
+import {useCurrentBackground} from '../../hooks/useCurrentBackground';
 import styles from './ScreenBackground.module.css';
 
 type ScreenBackgroundProps = {

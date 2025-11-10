@@ -1,0 +1,52 @@
+import type {SVGProps} from 'react';
+const TypeBusy = (props: SVGProps<SVGSVGElement>) => (
+  <svg viewBox="0 0 32 36" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
+    <g filter="url(#filter0_d_121_11722)">
+      <path fillRule="evenodd" clipRule="evenodd" d="M17 32.604V23.604H26C26 28.5746 21.9706 32.604 17 32.604Z" fill="url(#paint0_linear_121_11722)" />
+      <path fillRule="evenodd" clipRule="evenodd" d="M8 23.604H17V32.604C12.0294 32.604 8 28.5746 8 23.604Z" fill="url(#paint1_linear_121_11722)" />
+      <path fillRule="evenodd" clipRule="evenodd" d="M26 23.604H17V14.604C21.9706 14.604 26 18.6334 26 23.604Z" fill="url(#paint2_linear_121_11722)" />
+      <path fillRule="evenodd" clipRule="evenodd" d="M17 14.604V23.604H8C8 18.6334 12.0294 14.604 17 14.604Z" fill="url(#paint3_linear_121_11722)" />
+      <g opacity={0.2}>
+        <circle
+          cx={17}
+          cy={23.604}
+          r={8.75}
+          stroke="black"
+          style={{
+            mixBlendMode: 'overlay',
+          }}
+          strokeWidth={0.5}
+        />
+      </g>
+      <path d="M8.35352 3.06446L16.5186 11.2481L17.3701 12.1006H11.3164L11.3096 12.1055L8.34766 14.9658L7.5 15.7832V2.20899L8.35352 3.06446Z" fill="black" stroke="white" />
+    </g>
+    <defs>
+      <filter id="filter0_d_121_11722" x={-2} y={-0.395988} width={36} height={36} filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
+        <feFlood floodOpacity={0} result="BackgroundImageFix" />
+        <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
+        <feOffset dy={1} />
+        <feGaussianBlur stdDeviation={1} />
+        <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.4049 0" />
+        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_121_11722" />
+        <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_121_11722" result="shape" />
+      </filter>
+      <linearGradient id="paint0_linear_121_11722" x1={12.5} y1={28.104} x2={21.5} y2={37.104} gradientUnits="userSpaceOnUse">
+        <stop stopColor="#4A85C7" />
+        <stop offset={1} stopColor="#3C7AB7" />
+      </linearGradient>
+      <linearGradient id="paint1_linear_121_11722" x1={12.5} y1={19.104} x2={3.5} y2={28.104} gradientUnits="userSpaceOnUse">
+        <stop stopColor="#5EC9F3" />
+        <stop offset={1} stopColor="#47C3F1" />
+      </linearGradient>
+      <linearGradient id="paint2_linear_121_11722" x1={21.5} y1={10.104} x2={12.5} y2={19.104} gradientUnits="userSpaceOnUse">
+        <stop stopColor="#86D1F6" />
+        <stop offset={1} stopColor="#67CAF3" />
+      </linearGradient>
+      <linearGradient id="paint3_linear_121_11722" x1={3.5} y1={19.104} x2={12.5} y2={28.104} gradientUnits="userSpaceOnUse">
+        <stop stopColor="#5595D3" />
+        <stop offset={1} stopColor="#4B89C6" />
+      </linearGradient>
+    </defs>
+  </svg>
+);
+export default TypeBusy;

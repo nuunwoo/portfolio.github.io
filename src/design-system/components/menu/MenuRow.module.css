@@ -66,7 +66,7 @@
   letter-spacing: var(--text-tracking);
   color: var(--ds-menu-text-idle);
   mix-blend-mode: plus-darker;
-  cursor: pointer;
+  cursor: var(--cursor-pointer);
   position: relative;
   isolation: isolate;
   z-index: 0;
@@ -94,7 +94,7 @@
 .itemDisabled:hover {
   color: var(--ds-menu-text-disabled);
   background: transparent;
-  cursor: default;
+  cursor: var(--cursor-default);
   mix-blend-mode: plus-darker;
 }
 

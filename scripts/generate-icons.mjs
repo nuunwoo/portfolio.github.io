@@ -8,8 +8,9 @@ const __dirname = path.dirname(__filename);
 const projectRoot = path.resolve(__dirname, "..");
 const srcDir = path.join(projectRoot, "src");
 const assetsIconsDir = path.join(srcDir, "assets", "icons");
-const componentsIconsDir = path.join(srcDir, "components", "icons");
-const excludedSourceDirs = new Set(["app-icons"]);
+const rawIconsDir = path.join(assetsIconsDir, "raw");
+const generatedIconsDir = path.join(assetsIconsDir, "generated");
+const excludedSourceDirs = new Set(["app-icons", "generated"]);
 
 const toPosix = (value) => value.split(path.sep).join("/");
 
@@ -59,7 +60,7 @@ const listSvgFiles = async (dir, base = "") => {
 };
 
 const createWrapper = ({ outputDir, wrapperName, lightComponent, darkComponent }) => {
-  const hookTarget = path.join(srcDir, "hooks", "useSystemAppearance");
+  const hookTarget = path.join(srcDir, "shared", "hooks", "useSystemAppearance");
   const relativeHookImport = toPosix(path.relative(outputDir, hookTarget)).replace(/\.tsx?$/, "");
 
   return `import type { ComponentType, CSSProperties, SVGProps } from "react";
@@ -132,7 +133,7 @@ const removeStaleGeneratedIndexes = async (dir) => {
 };
 
 const removeGeneratedAppIcons = async () => {
-  const appIconsDir = path.join(componentsIconsDir, "app-icons");
+  const appIconsDir = path.join(generatedIconsDir, "app-icons");
   if (!(await fileExists(appIconsDir))) return;
 
   const entries = await readdir(appIconsDir, { withFileTypes: true });
@@ -145,16 +146,16 @@ const removeGeneratedAppIcons = async () => {
 };
 
 const run = async () => {
-  await mkdir(componentsIconsDir, { recursive: true });
+  await mkdir(generatedIconsDir, { recursive: true });
 
-  const topEntries = await readdir(assetsIconsDir, { withFileTypes: true });
+  const topEntries = await readdir(rawIconsDir, { withFileTypes: true });
   const sourceDirs = topEntries
     .filter((entry) => entry.isDirectory() && !excludedSourceDirs.has(entry.name))
     .map((entry) => entry.name);
 
   for (const dirName of sourceDirs) {
     execSync(
-      `yarn svgr --no-index --typescript --filename-case pascal --no-dimensions --no-svgo --template scripts/svgr.template.cjs --out-dir src/components/icons/${dirName} -- src/assets/icons/${dirName}`,
+      `yarn svgr --no-index --typescript --filename-case pascal --no-dimensions --no-svgo --template scripts/svgr.template.cjs --out-dir src/assets/icons/generated/${dirName} -- src/assets/icons/raw/${dirName}`,
       {
         cwd: projectRoot,
         stdio: "inherit",
@@ -162,10 +163,10 @@ const run = async () => {
     );
   }
 
-  await removeStaleGeneratedIndexes(componentsIconsDir);
+  await removeStaleGeneratedIndexes(generatedIconsDir);
   await removeGeneratedAppIcons();
 
-  const svgFiles = (await listSvgFiles(assetsIconsDir)).filter((relPath) => {
+  const svgFiles = (await listSvgFiles(rawIconsDir)).filter((relPath) => {
     const topDir = relPath.split(path.sep)[0];
     return !excludedSourceDirs.has(topDir);
   });
@@ -194,7 +195,7 @@ const run = async () => {
     for (const [wrapperName, variants] of variantsByBase.entries()) {
       if (!variants.light || !variants.dark) continue;
 
-      const outputDir = path.join(componentsIconsDir, relDir);
+      const outputDir = path.join(generatedIconsDir, relDir);
       const lightFile = path.join(outputDir, `${variants.light.componentName}.tsx`);
       const darkFile = path.join(outputDir, `${variants.dark.componentName}.tsx`);
 
