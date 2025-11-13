@@ -65,7 +65,7 @@
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #000;
+  background: rgba(0, 0, 0, 0.8);
 }
 
 .badge {

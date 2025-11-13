@@ -1,10 +1,10 @@
 import type {RefObject} from 'react';
 import {useCallback, useEffect, useLayoutEffect, useRef, useState} from 'react';
 import {motion} from 'framer-motion';
-import Magnifyingglass from '../../../assets/icons/generated/search-actions/Magnifyingglass';
+import Magnifyingglass from '../../../../assets/icons/generated/search-actions/Magnifyingglass';
 import styles from './LaunchpadSearchBar.module.css';
-import Xmarkcirclefill from '../../../assets/icons/generated/window-menu/window/XmarkCircleFill';
-import {getLaunchpadSearchGroupTransition} from '../lib/launchpadViewMotion';
+import Xmarkcirclefill from '../../../../assets/icons/generated/window-menu/window/XmarkCircleFill';
+import {getLaunchpadSearchGroupTransition} from '../../lib/launchpadViewMotion';
 
 type LaunchpadSearchBarProps = {
   value: string;

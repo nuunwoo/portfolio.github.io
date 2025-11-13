@@ -1,4 +1,4 @@
-import styles from './Launchpad.module.css';
+import styles from './LaunchpadPagination.module.css';
 
 type LaunchpadPaginationProps = {
   pageCount: number;
@@ -11,7 +11,7 @@ const LaunchpadPagination = ({pageCount, pageIndex}: LaunchpadPaginationProps) =
   }
 
   return (
-    <div className={styles.launchpadPagination} aria-hidden={true}>
+    <div className={styles.launchpadPagination} data-launchpad-pagination="true" aria-hidden={true}>
       {Array.from({length: pageCount}).map((_, index) => (
         <span key={`launchpad-page-dot-${index + 1}`} className={`${styles.launchpadDot} ${index === pageIndex ? styles.launchpadDotActive : ''}`} />
       ))}

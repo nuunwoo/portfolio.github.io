@@ -32,7 +32,7 @@ export const LaunchpadGridItemVisual = ({
   overlay?: boolean;
 }) => (
   <>
-    <div className={styles.icon} data-launchpad-interactive={overlay ? undefined : 'true'}>
+    <div className={styles.icon} data-launchpad-interactive={overlay ? undefined : 'true'} data-launchpad-icon="true">
       {itemType === 'folder' && (previewChildren?.length ?? 0) > 0 ? (
         <div className={styles.folderPreviewGrid}>
           {previewChildren?.slice(0, 9).map((previewChild, index) => (
@@ -45,7 +45,7 @@ export const LaunchpadGridItemVisual = ({
         icon
       )}
     </div>
-    <div className={styles.label} data-launchpad-interactive={overlay ? undefined : 'true'}>
+    <div className={styles.label} data-launchpad-interactive={overlay ? undefined : 'true'} data-launchpad-label="true">
       {label}
     </div>
   </>
@@ -72,24 +72,29 @@ const LaunchpadGrid = ({
   apps,
   searchMode = false,
   highlightFirst = false,
-  draggingKey = null,
-  hoveredTargetKey = null,
+  draggingItemKey = null,
+  dropTargetItemKey = null,
+  dropPreviewSlotIndex = null,
   hasDragged = false,
   onItemMouseDown,
 }: {
   apps: LaunchpadDisplayItem[];
   searchMode?: boolean;
   highlightFirst?: boolean;
-  draggingKey?: string | null;
-  hoveredTargetKey?: string | null;
+  draggingItemKey?: string | null;
+  dropTargetItemKey?: string | null;
+  dropPreviewSlotIndex?: number | null;
   hasDragged?: boolean;
   onItemMouseDown?: (app: LaunchpadDisplayItem, index: number, event: ReactMouseEvent<HTMLDivElement>) => void;
 }) => (
   <section className={`${styles.root} ${searchMode ? styles.rootSearch : ''}`} data-launchpad-grid-root="true">
     {apps.map((app, index) => {
-      const isDragging = draggingKey === app.key;
+      const isDragging = draggingItemKey === app.key;
       const isPressed = isDragging && !hasDragged;
       const isActivelyDragging = isDragging && hasDragged;
+      const isProjectedTarget = dropPreviewSlotIndex === index;
+      const shouldShowDropTarget =
+        dropPreviewSlotIndex !== null ? isProjectedTarget : dropTargetItemKey === app.key;
 
       return (
         <motion.div
@@ -123,7 +128,9 @@ const LaunchpadGrid = ({
                 }
           }
           onMouseDown={event => onItemMouseDown?.(app, index, event)}>
-          {hoveredTargetKey === app.key && !isActivelyDragging ? <div className={styles.itemDropTarget} aria-hidden={true} /> : null}
+          {shouldShowDropTarget && !isActivelyDragging ? (
+            <div className={styles.itemDropTarget} aria-hidden={true} />
+          ) : null}
           <LaunchpadGridItemVisual
             icon={app.icon}
             iconSrc={app.iconSrc}

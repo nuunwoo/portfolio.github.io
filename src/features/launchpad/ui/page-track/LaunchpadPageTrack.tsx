@@ -1,28 +1,32 @@
-import LaunchpadGrid from './grid/LaunchpadGrid';
-import type {LaunchpadDisplayItem} from '../model/types';
-import styles from './Launchpad.module.css';
+import LaunchpadGrid from '../grid/LaunchpadGrid';
+import type {LaunchpadDisplayItem} from '../../model/types';
+import styles from './LaunchpadPageTrack.module.css';
 
-type LaunchpadGridTrackProps = {
+type LaunchpadPageTrackProps = {
   pagedApps: LaunchpadDisplayItem[][];
   pageIndex: number;
   isItemDragging: boolean;
   isSearchMode: boolean;
-  draggingKey: string | null;
-  hoveredTargetKey: string | null;
+  draggingItemKey: string | null;
+  dropTargetItemKey: string | null;
+  dropPreviewPageIndex: number | null;
+  dropPreviewSlotIndex: number | null;
   hasDragged: boolean;
   onItemMouseDown: (app: LaunchpadDisplayItem, index: number, event: React.MouseEvent<HTMLDivElement>) => void;
 };
 
-const LaunchpadGridTrack = ({
+const LaunchpadPageTrack = ({
   pagedApps,
   pageIndex,
   isItemDragging,
   isSearchMode,
-  draggingKey,
-  hoveredTargetKey,
+  draggingItemKey,
+  dropTargetItemKey,
+  dropPreviewPageIndex,
+  dropPreviewSlotIndex,
   hasDragged,
   onItemMouseDown,
-}: LaunchpadGridTrackProps) => {
+}: LaunchpadPageTrackProps) => {
   const isPageVisible = (index: number) => isItemDragging || Math.abs(index - pageIndex) <= 1;
 
   return (
@@ -38,8 +42,9 @@ const LaunchpadGridTrack = ({
               apps={pageApps}
               searchMode={isSearchMode}
               highlightFirst={pageIndex === 0 && index === pageIndex}
-              draggingKey={draggingKey}
-              hoveredTargetKey={hoveredTargetKey}
+              draggingItemKey={draggingItemKey}
+              dropTargetItemKey={dropTargetItemKey}
+              dropPreviewSlotIndex={dropPreviewPageIndex === index ? dropPreviewSlotIndex : null}
               hasDragged={hasDragged}
               onItemMouseDown={onItemMouseDown}
             />
@@ -52,4 +57,4 @@ const LaunchpadGridTrack = ({
   );
 };
 
-export default LaunchpadGridTrack;
+export default LaunchpadPageTrack;

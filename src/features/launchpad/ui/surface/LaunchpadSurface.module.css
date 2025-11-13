@@ -23,39 +23,49 @@
   --launchpad-label-color: var(--colors-text-primary-dark);
   --launchpad-label-shadow: 0 1px 2px rgba(0, 0, 0, 0.55);
   --launchpad-search-primary-bg: color-mix(in srgb, var(--colors-fills-primary-dark) 90%, #000 10%);
-  --launchpad-item-width: 132px;
-  --launchpad-icon-size: 108px;
-  --launchpad-side-pad: clamp(56px, 9vw, 132px);
-  --launchpad-grid-icon-size: 108px;
-  --launchpad-grid-item-gap: 12px;
-  --launchpad-grid-row-gap: 22px;
+  --launchpad-icon-size: clamp(50px, 5vw, 92px);
+  --launchpad-item-width: clamp(86px, 6.1vw, 116px);
+  --launchpad-side-pad: clamp(44px, 6vw, 96px);
+  --launchpad-grid-icon-size: var(--launchpad-icon-size);
+  --launchpad-grid-column-gap: 44px;
+  --launchpad-grid-item-gap: 8px;
+  --launchpad-grid-label-offset: calc(var(--launchpad-grid-icon-size) + var(--launchpad-grid-item-gap));
+  --launchpad-grid-label-space: 24px;
+  --launchpad-grid-row-gap: clamp(24px, 2.4vw, 32px);
+  --launchpad-grid-outer-horizontal: calc(var(--launchpad-grid-column-gap) * 1.5);
+  --launchpad-grid-outer-vertical: calc(var(--launchpad-grid-row-gap) * 2);
   --launchpad-grid-label-line-height: var(--text-body-line-height);
-  --launchpad-grid-row-height: calc(var(--launchpad-grid-icon-size) + var(--launchpad-grid-item-gap) + var(--launchpad-grid-label-line-height));
+  --launchpad-grid-row-height: calc(var(--launchpad-grid-label-offset) + var(--launchpad-grid-label-space));
   --launchpad-grid-height: calc((var(--launchpad-grid-row-height) * 5) + (var(--launchpad-grid-row-gap) * 4));
+  --launchpad-dock-height: 62px;
+  --launchpad-pagination-offset-from-dock: 38px;
   width: 100%;
   height: 100%;
   display: grid;
   grid-template-rows: auto var(--launchpad-grid-height) auto;
   justify-items: center;
   align-content: start;
-  padding: 0 var(--launchpad-side-pad) 0;
   transform-origin: 50% 100%;
   will-change: transform, opacity, filter;
   position: absolute;
   inset: 0;
 }
 
-.launchpadPanel > *:not(.background) {
+.launchpadPanel > *:not(.background):not([data-launchpad-pagination='true']) {
   position: relative;
   z-index: 1;
 }
 
 .launchpadGridViewport {
-  width: calc(100% + (var(--launchpad-side-pad) * 2));
+  width: 100vw;
+  max-width: 100vw;
   height: var(--launchpad-grid-height);
-  margin-inline: calc(var(--launchpad-side-pad) * -1);
-  overflow-x: hidden;
-  overflow-y: hidden;
+  margin-inline: 0;
+  justify-self: stretch;
+  left: 50%;
+  position: relative;
+  transform: translateX(-50%);
+  overflow: visible;
   scrollbar-width: none;
   -ms-overflow-style: none;
 }
@@ -68,18 +78,6 @@
   display: flex;
   width: 100%;
   gap: 8px;
-}
-
-.launchpadGridPage {
-  width: 100%;
-  flex: 0 0 100%;
-  min-height: var(--launchpad-grid-height);
-  scroll-snap-align: start;
-}
-
-.launchpadGridPlaceholder {
-  width: 100%;
-  min-height: var(--launchpad-grid-height);
 }
 
 .launchpadSearchEmpty {
@@ -95,25 +93,4 @@
   line-height: 1;
   color: var(--launchpad-empty-color);
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.24);
-}
-
-.launchpadPagination {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  margin-top: 18px;
-  min-height: 18px;
-  z-index: 1;
-}
-
-.launchpadDot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--launchpad-dot-color);
-}
-
-.launchpadDotActive {
-  background: var(--launchpad-dot-active-color);
 }

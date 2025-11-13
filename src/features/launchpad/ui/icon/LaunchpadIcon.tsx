@@ -1,4 +1,4 @@
-import AppIcon, { type AppIconName } from '../../../assets/icons/generated/app-icons';
+import AppIcon, { type AppIconName } from '../../../../assets/icons/generated/app-icons';
 
 type LaunchpadIconProps = {
   name: AppIconName;

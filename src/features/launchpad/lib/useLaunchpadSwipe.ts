@@ -38,6 +38,8 @@ export const useLaunchpadSwipe = ({
     }
 
     event.stopPropagation();
+    setDragOffset(0);
+    setIsDragging(false);
 
     const target = event.target as HTMLElement | null;
     if (target?.closest("[data-launchpad-grid-item='true']")) {

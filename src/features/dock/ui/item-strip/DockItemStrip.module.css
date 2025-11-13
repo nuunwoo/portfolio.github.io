@@ -2,7 +2,7 @@
   --dock-icon-size: 50px;
   --dock-gap: 2px;
   --dock-separator-width: 22px;
-  --dock-separator-height: 45.7px;
+  --dock-separator-height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;

@@ -1,13 +1,13 @@
 import {motion} from 'framer-motion';
 import type {PointerEvent} from 'react';
 import {useEffect, useRef, useState} from 'react';
-import type {LaunchpadMoveMode} from '../model/useLaunchpadLayout';
-import type {LaunchpadDisplayItem} from '../model/types';
-import {CLOSE_ANIMATION_MS, launchpadOverlayVariants} from '../lib/launchpadViewMotion';
-import LaunchpadView from './LaunchpadView';
-import styles from './LaunchpadOverlay.module.css';
+import type {LaunchpadMoveMode} from '../../model/useLaunchpadLayout';
+import type {LaunchpadDisplayItem} from '../../model/types';
+import {CLOSE_ANIMATION_MS, launchpadOverlayVariants} from '../../lib/launchpadViewMotion';
+import LaunchpadSurface from '../surface/LaunchpadSurface';
+import styles from './LaunchpadMotion.module.css';
 
-type LaunchpadOverlayProps = {
+type LaunchpadMotionProps = {
   isOpen: boolean;
   apps: LaunchpadDisplayItem[];
   pagedApps: LaunchpadDisplayItem[][];
@@ -21,7 +21,7 @@ type LaunchpadOverlayProps = {
 
 export type LaunchpadPhase = 'hidden' | 'open' | 'closing';
 
-const LaunchpadOverlay = ({isOpen, apps, pagedApps, onMoveApp, onMoveAppToNewPage, onMoveAppToPageEnd, onCopyAppToDock, onDockDragHoverChange, onClose}: LaunchpadOverlayProps) => {
+const LaunchpadMotion = ({isOpen, apps, pagedApps, onMoveApp, onMoveAppToNewPage, onMoveAppToPageEnd, onCopyAppToDock, onDockDragHoverChange, onClose}: LaunchpadMotionProps) => {
   const [phase, setPhase] = useState<LaunchpadPhase>(isOpen ? 'open' : 'hidden');
   const [hasOpenedOnce, setHasOpenedOnce] = useState(isOpen);
   const closeTimerRef = useRef<number | null>(null);
@@ -77,11 +77,10 @@ const LaunchpadOverlay = ({isOpen, apps, pagedApps, onMoveApp, onMoveAppToNewPag
       variants={launchpadOverlayVariants}
       initial={false}
       animate={phase}>
-      <LaunchpadView
+      <LaunchpadSurface
         apps={apps}
         pagedApps={pagedApps}
         isFirstOpening={isFirstOpening}
-        isOpen={isOpen}
         isClosing={isClosing}
         phase={phase}
         onMoveApp={onMoveApp}
@@ -95,4 +94,4 @@ const LaunchpadOverlay = ({isOpen, apps, pagedApps, onMoveApp, onMoveAppToNewPag
   );
 };
 
-export default LaunchpadOverlay;
+export default LaunchpadMotion;

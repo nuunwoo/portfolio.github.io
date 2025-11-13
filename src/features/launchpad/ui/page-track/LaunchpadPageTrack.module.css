@@ -1,0 +1,14 @@
+.launchpadGridPage {
+  width: 100%;
+  flex: 0 0 100%;
+  min-height: var(--launchpad-grid-height);
+  scroll-snap-align: start;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.launchpadGridPlaceholder {
+  width: 100%;
+  min-height: var(--launchpad-grid-height);
+}

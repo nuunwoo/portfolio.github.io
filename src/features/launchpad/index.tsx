@@ -7,8 +7,7 @@ import {useDockItems} from '../dock';
 import {LAUNCHPAD_PAGE_SIZE} from './model/constants';
 import type {LaunchpadDisplayItem} from './model/types';
 import {useLaunchpadLayout} from './model/useLaunchpadLayout';
-import LaunchpadIcon from './ui/LaunchpadIcon';
-import LaunchpadOverlay from './ui/LaunchpadOverlay';
+import {LaunchpadIcon, LaunchpadMotion} from './ui';
 
 const Launchpad = () => {
   const isLaunchpadOpen = useAppStore(state => state.isLaunchpadOpen);
@@ -146,7 +145,7 @@ const Launchpad = () => {
   };
 
   return (
-    <LaunchpadOverlay
+    <LaunchpadMotion
       isOpen={isLaunchpadOpen}
       apps={launchpadApps}
       pagedApps={launchpadPagedApps}
@@ -162,13 +161,9 @@ const Launchpad = () => {
 
 export default Launchpad;
 export {Launchpad as LaunchpadFeature};
-export {default as LaunchpadView} from './ui/LaunchpadView';
-export {default as LaunchpadIcon} from './ui/LaunchpadIcon';
-export {default as LaunchpadOverlay} from './ui/LaunchpadOverlay';
-export {default as LaunchpadPagination} from './ui/LaunchpadPagination';
-export {default as LaunchpadSearchBar} from './ui/LaunchpadSearchBar';
+export {LaunchpadSurface, LaunchpadIcon, LaunchpadMotion, LaunchpadPagination, LaunchpadSearchBar} from './ui';
 export {useLaunchpadLayout} from './model/useLaunchpadLayout';
 export {filterApps, paginateApps} from './model/layout';
 export {LAUNCHPAD_PAGE_SIZE} from './model/constants';
 export type {LaunchpadAppItem, LaunchpadDisplayItem, LaunchpadEntry, LaunchpadFolderEntry} from './model/types';
-export type {LaunchpadPhase} from './ui/LaunchpadOverlay';
+export type {LaunchpadPhase} from './ui';

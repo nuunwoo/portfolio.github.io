@@ -1,0 +1,24 @@
+.launchpadPagination {
+  position: absolute;
+  left: 50%;
+  bottom: calc(var(--launchpad-dock-height) + var(--launchpad-pagination-offset-from-dock));
+  transform: translateX(-50%);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 18px;
+  z-index: 1;
+  margin: 0;
+}
+
+.launchpadDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--launchpad-dot-color);
+}
+
+.launchpadDotActive {
+  background: var(--launchpad-dot-active-color);
+}

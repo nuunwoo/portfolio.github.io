@@ -7,16 +7,16 @@
   justify-content: center;
   align-content: start;
   justify-items: center;
-  row-gap: 20px;
-  column-gap: 30px;
+  row-gap: var(--launchpad-grid-row-gap);
+  column-gap: var(--launchpad-grid-column-gap);
   padding: 0;
   margin: 0 auto;
+  position: relative;
 }
 
 .item {
   width: var(--launchpad-item-width);
   display: grid;
-  gap: 10px;
   justify-items: center;
   user-select: none;
   touch-action: none;
@@ -25,6 +25,7 @@
     background-color 180ms ease;
   position: relative;
   isolation: isolate;
+  padding-bottom: var(--launchpad-grid-label-space);
 }
 
 .itemDropTarget {
@@ -81,11 +82,11 @@
   display: grid;
   place-items: center;
   border-radius: 24px;
-  background: rgba(255, 255, 255, 0.14);
   box-sizing: border-box;
+  /* background: rgba(255, 255, 255, 0.14);
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.08),
-    0 8px 18px rgba(0, 0, 0, 0.12);
+    0 8px 18px rgba(0, 0, 0, 0.12); */
 }
 
 .icon > * {
@@ -130,6 +131,10 @@
 }
 
 .label {
+  position: absolute;
+  left: 50%;
+  top: var(--launchpad-grid-label-offset);
+  transform: translateX(-50%);
   width: 100%;
   text-align: center;
   font-family: var(--font-family-system);
@@ -145,18 +150,21 @@
 }
 
 .dragOverlay .label {
+  position: static;
+  transform: none;
   overflow: visible;
   text-overflow: clip;
 }
 
 .rootSearch {
-  width: min(100%, calc((var(--launchpad-item-width) * 7) + (30px * 6)));
+  width: min(100%, calc((var(--launchpad-item-width) * 7) + (var(--launchpad-grid-column-gap) * 6)));
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
   align-content: flex-start;
-  row-gap: 20px;
-  column-gap: 30px;
+  row-gap: var(--launchpad-grid-row-gap);
+  column-gap: var(--launchpad-grid-column-gap);
   padding: 0;
   margin: 0 auto;
+  position: relative;
 }

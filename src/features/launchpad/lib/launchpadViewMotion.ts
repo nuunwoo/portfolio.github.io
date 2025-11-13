@@ -42,7 +42,7 @@ export const launchpadViewVariants: Variants = {
   },
 };
 
-export const getLaunchpadGridTrackTransition = (isDragging: boolean): Transition =>
+export const getLaunchpadPageTrackTransition = (isDragging: boolean): Transition =>
   isDragging ? {duration: 0} : {duration: 0.38, ease: LAUNCHPAD_OPEN_EASE};
 
 export const getLaunchpadSearchGroupTransition = (
