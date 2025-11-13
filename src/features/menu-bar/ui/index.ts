@@ -1,3 +1,4 @@
-export {MenuBarContent, MenuBarLeftMenu} from './content';
-export {default as MenuBarMotion} from './motion/MenuBarMotion';
+export {MenuBarMotion} from './motion';
+export {MenuBarPrimaryMenus} from './primary-menus';
+export {MenuBarStatusArea} from './status-area';
 export {MenuBarSurface} from './surface';

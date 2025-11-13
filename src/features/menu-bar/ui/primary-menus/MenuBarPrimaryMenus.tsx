@@ -1,9 +1,9 @@
 import {useCallback, useMemo} from 'react';
 import type {MouseEvent as ReactMouseEvent} from 'react';
 import {AppleLogoIcon} from '../../../../design-system/icons';
-import styles from './MenuBarContent.module.css';
+import styles from './MenuBarPrimaryMenus.module.css';
 
-type MenuBarLeftMenuProps = {
+type MenuBarPrimaryMenusProps = {
   items: readonly string[];
   activeKey: string | null;
   isMenuOpen: boolean;
@@ -13,13 +13,13 @@ type MenuBarLeftMenuProps = {
 
 const APPLE_MENU_KEY = '__apple_menu__';
 
-const MenuBarLeftMenu = ({
+const MenuBarPrimaryMenus = ({
   items,
   activeKey,
   isMenuOpen,
   onItemSelect,
   onAppleClick,
-}: MenuBarLeftMenuProps) => {
+}: MenuBarPrimaryMenusProps) => {
   const handleAppleClick = useCallback(
     (event: ReactMouseEvent<HTMLButtonElement>) => {
       onItemSelect(APPLE_MENU_KEY, event.currentTarget);
@@ -52,11 +52,11 @@ const MenuBarLeftMenu = ({
   }, [isMenuOpen, items, onItemSelect]);
 
   return (
-    <div className={styles.leftSection}>
+    <div className={styles.primaryMenus}>
       <button
         type="button"
-        className={`${styles.leftButton} ${styles.appleButton} ${
-          activeKey === APPLE_MENU_KEY ? styles.leftButtonActive : ''
+        className={`${styles.menuButton} ${styles.appleMenuButton} ${
+          activeKey === APPLE_MENU_KEY ? styles.menuButtonActive : ''
         }`}
         onClick={handleAppleClick}
         onMouseEnter={handleAppleMouseEnter}
@@ -70,11 +70,9 @@ const MenuBarLeftMenu = ({
           <button
             key={item}
             type="button"
-            className={`${styles.leftButton} ${styles.textButton} ${
-              index === 0
-                ? `${styles.appNameLabel} text-headline-regular`
-                : `${styles.menuItemLabel} text-body-emphasized`
-            } ${activeKey === item ? styles.leftButtonActive : ''}`}
+            className={`${styles.menuButton} ${styles.textMenuButton} ${
+              index === 0 ? `${styles.appNameLabel} text-headline-regular` : `${styles.menuItemLabel} text-body-emphasized`
+            } ${activeKey === item ? styles.menuButtonActive : ''}`}
             onClick={handlers.onClick}
             onMouseEnter={handlers.onMouseEnter}>
             {item}
@@ -85,4 +83,4 @@ const MenuBarLeftMenu = ({
   );
 };
 
-export default MenuBarLeftMenu;
+export default MenuBarPrimaryMenus;

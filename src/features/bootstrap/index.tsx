@@ -1,5 +1,5 @@
 import {useBootstrapState} from './lib/useBootstrapState';
-import {BootstrapContent, BootstrapLogo, BootstrapMotion, BootstrapProgress} from './ui';
+import {BootstrapLayout, BootstrapLogo, BootstrapMotion, BootstrapProgress} from './ui';
 
 const Bootstrap = () => {
   const {progressValue, isExiting, isFinished} = useBootstrapState();
@@ -10,12 +10,12 @@ const Bootstrap = () => {
 
   return (
     <BootstrapMotion isExiting={isExiting}>
-      <BootstrapContent
+      <BootstrapLayout
         logo={
           <BootstrapLogo role="img" aria-label="Apple inspired boot logo" width={110} height={123} />
         }>
         <BootstrapProgress progressValue={progressValue} />
-      </BootstrapContent>
+      </BootstrapLayout>
     </BootstrapMotion>
   );
 };

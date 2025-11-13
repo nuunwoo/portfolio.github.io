@@ -1,35 +1,26 @@
 import {useAppKeyboardShortcuts} from '../hooks/useAppKeyboardShortcuts';
+import {useSystemUIViewState} from '../hooks/useSystemUIViewState';
 import Desktop from '../../features/desktop';
 import Dock from '../../features/dock';
 import Launchpad from '../../features/launchpad';
 import Lock from '../../features/lock';
-import {MenuBar} from '../../features/menu-bar';
-import {useAppStore} from '../../shared/store/app-store';
+import MenuBar from '../../features/menu-bar';
 import styles from './SystemUI.module.css';
 
 const SystemUI = () => {
-  const hasUnlockedOnce = useAppStore(state => state.hasUnlockedOnce);
-  const currentScreen = useAppStore(state => state.currentScreen);
-  const isUnlocking = useAppStore(state => state.isUnlocking);
-
-  const disableDesktopAnimation = !hasUnlockedOnce && !isUnlocking;
-  const hideDesktopItems = currentScreen === 'lock' && !isUnlocking;
+  const {disableDesktopAnimation, hideDesktopItems} = useSystemUIViewState();
 
   useAppKeyboardShortcuts();
 
   return (
     <div className={styles.root}>
-      <div>
+      <div className={styles.desktopLayer}>
         <Desktop isScaledDown={false} disableScaleTransition={disableDesktopAnimation} hideAnimatedItems={hideDesktopItems} />
-
         <MenuBar />
-
         <Launchpad />
-
         <Dock />
       </div>
-
-      <div>
+      <div className={styles.lockLayer}>
         <Lock />
       </div>
     </div>

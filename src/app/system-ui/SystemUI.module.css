@@ -2,3 +2,9 @@
   position: absolute;
   inset: 0;
 }
+
+.desktopLayer,
+.lockLayer {
+  position: absolute;
+  inset: 0;
+}

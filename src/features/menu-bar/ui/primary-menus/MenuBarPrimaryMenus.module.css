@@ -1,0 +1,52 @@
+.primaryMenus {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  min-width: 0;
+}
+
+.menuButton {
+  border: none;
+  background: transparent;
+  border-radius: 4px;
+}
+
+.appleMenuButton {
+  padding: 0 7px;
+  display: grid;
+  place-items: center;
+}
+
+.textMenuButton {
+  padding: 4px 11px;
+  white-space: nowrap;
+}
+
+.appleLogo {
+  width: 15px;
+  height: 20px;
+  display: block;
+  color: white;
+}
+
+.appNameLabel,
+.menuItemLabel {
+  color: white;
+  text-shadow:
+    0 1px 0 rgba(0, 0, 0, 0.75),
+    0 0 2px rgba(0, 0, 0, 0.45);
+}
+
+:global([data-menu-open='true']) .menuButton:hover {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+:global(main[data-appearance='dark']) .menuButtonActive {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}

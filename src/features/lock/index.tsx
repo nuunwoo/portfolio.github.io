@@ -1,16 +1,21 @@
-import {formatLockScreenDate, formatLockScreenTime} from '../../utils/dateTime';
 import {WINDOW_KEYS} from '../../utils/windowKeys';
-import {useLockState} from './lib/useLockState';
-import {
-  getLockClockMotion,
-  getLockClockTransition,
-  getLockProfileMotion,
-  getLockProfileTransition,
-} from './lib/lockMotionConfig';
-import {LockContent, LockMotion} from './ui';
+import {useLockScreenViewState} from './lib/useLockScreenViewState';
+import {LockClockDisplay, LockMotion, LockScreenLayout, LockUnlockPanel} from './ui';
 
 const Lock = () => {
-  const {currentDateTime, disableAnimation, isExiting, pointerCursor, pointerEvents, handleUnlock} = useLockState();
+  const {
+    disableAnimation,
+    isExiting,
+    pointerCursor,
+    pointerEvents,
+    handleUnlock,
+    dateLabel,
+    timeLabel,
+    clockMotion,
+    clockTransition,
+    unlockPanelMotion,
+    unlockPanelTransition,
+  } = useLockScreenViewState();
 
   return (
     <LockMotion
@@ -23,13 +28,21 @@ const Lock = () => {
         cursor: pointerCursor,
         pointerEvents,
       }}>
-      <LockContent
-        currentDateLabel={formatLockScreenDate(currentDateTime)}
-        currentTimeLabel={formatLockScreenTime(currentDateTime)}
-        clockMotion={getLockClockMotion(isExiting)}
-        clockTransition={getLockClockTransition(disableAnimation)}
-        profileMotion={getLockProfileMotion(isExiting)}
-        profileTransition={getLockProfileTransition(disableAnimation)}
+      <LockScreenLayout
+        clockDisplay={
+          <LockClockDisplay
+            dateLabel={dateLabel}
+            timeLabel={timeLabel}
+            motionState={clockMotion}
+            transition={clockTransition}
+          />
+        }
+        unlockPanel={
+          <LockUnlockPanel
+            motionState={unlockPanelMotion}
+            transition={unlockPanelTransition}
+          />
+        }
       />
     </LockMotion>
   );

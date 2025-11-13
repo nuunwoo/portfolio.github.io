@@ -50,6 +50,7 @@ const DesktopView = ({workspaceState, isScaledDown = false, disableScaleTransiti
     finderListItems,
     handleDesktopSurfaceClick,
     isFocused,
+    roadmapSections,
     spotlightItems,
     tabItems,
     tableColumns,
@@ -107,11 +108,28 @@ const DesktopView = ({workspaceState, isScaledDown = false, disableScaleTransiti
                           right={
                             <div className={styles.finderPreviewBody}>
                               <p className={`text-caption-1 font-semibold text-secondary-dark ${styles.previewEyebrow}`}>Design System</p>
-                              <h2 className={`text-large-title font-semibold text-primary-dark ${styles.previewHeadline}`}>macOS-style patterns & components</h2>
+                              <h2 className={`text-large-title font-semibold text-primary-dark ${styles.previewHeadline}`}>Next Up on Desktop</h2>
                               <p className={`text-body font-regular text-secondary-dark ${styles.previewDescription}`}>
-                                window, dock, menu, toolbar, sidebar, tabs, list, progress, button까지 OS 레이어를 컴포넌트화했습니다.
+                                지금 바로 진행해야 할 구조 작업과 인터랙션 작업을 Finder 안에서 한눈에 보이도록 정리했습니다.
                               </p>
                               <ProgressBar value={64} />
+                              <div className={styles.roadmapGrid}>
+                                {roadmapSections.map(section => (
+                                  <section key={section.title} className={styles.roadmapCard}>
+                                    <div className={styles.roadmapCardHeader}>
+                                      <p className={styles.roadmapTitle}>{section.title}</p>
+                                      <span className={styles.roadmapAccent}>{section.accent}</span>
+                                    </div>
+                                    <ul className={styles.roadmapList}>
+                                      {section.items.map(item => (
+                                        <li key={item} className={styles.roadmapListItem}>
+                                          {item}
+                                        </li>
+                                      ))}
+                                    </ul>
+                                  </section>
+                                ))}
+                              </div>
                               <div className={styles.finderListSection}>
                                 <ListView items={finderListItems as unknown as string[]} active="정렬" />
                               </div>

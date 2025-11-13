@@ -1,0 +1,16 @@
+.layout {
+  position: absolute;
+  inset: 0;
+  color: #fff;
+  display: grid;
+  grid-template-rows: 1fr auto;
+  text-align: center;
+  padding: 36px 24px 56px;
+}
+
+.centerContent {
+  width: 100%;
+  display: grid;
+  place-items: center;
+  align-self: center;
+}

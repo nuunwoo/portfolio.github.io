@@ -1,0 +1,15 @@
+.date {
+  font-size: clamp(20px, 2.2vw, 34px);
+  font-weight: 700;
+  opacity: 0.84;
+  margin-bottom: 14px;
+  text-shadow: 0 12px 30px rgba(0, 0, 0, 0.18);
+}
+
+.time {
+  font-size: clamp(88px, 12vw, 136px);
+  line-height: 1;
+  font-weight: 700;
+  letter-spacing: -0.07em;
+  text-shadow: 0 18px 40px rgba(0, 0, 0, 0.24);
+}

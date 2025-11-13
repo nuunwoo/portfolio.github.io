@@ -1,2 +1,4 @@
-export {default as LockContent} from './content/LockContent';
-export {default as LockMotion} from './motion/LockMotion';
+export {LockClockDisplay} from './clock-display';
+export {LockScreenLayout} from './layout';
+export {LockMotion} from './motion';
+export {LockUnlockPanel} from './unlock-panel';
