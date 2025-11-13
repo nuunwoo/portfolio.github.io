@@ -38,16 +38,16 @@
   padding: 14px;
 }
 
-:global(.app-shell[data-appearance='dark']) .root {
+:global(main[data-appearance='dark']) .root {
   border-color: var(--ds-os-window-border-dark);
   background: var(--ds-os-window-bg-dark);
 }
 
-:global(.app-shell[data-appearance='dark']) .titleBar {
+:global(main[data-appearance='dark']) .titleBar {
   background: var(--ds-os-titlebar-bg-dark);
   border-bottom-color: rgba(255, 255, 255, 0.1);
 }
 
-:global(.app-shell[data-appearance='dark']) .title {
+:global(main[data-appearance='dark']) .title {
   color: var(--colors-text-vibrant-primary-dark);
 }

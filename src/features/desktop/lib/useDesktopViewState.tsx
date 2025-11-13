@@ -1,9 +1,5 @@
-import {useCallback, useMemo} from 'react';
-import {launchpadAppIcons} from '../../../assets/icons/generated/app-icons/catalog';
-import {getAppIconSrc} from '../../../assets/icons/generated/app-icons';
+import {useCallback} from 'react';
 import {useAppStore} from '../../../shared/store/app-store';
-import {LaunchpadIcon, useLaunchpadLayout} from '../../../applications/launchpad';
-import {useDesktopDockItems} from '../dock/useDesktopDockItems';
 
 const DESKTOP_SHORTCUT_ITEMS = [
   {label: 'About Me', glyph: '👤'},
@@ -26,25 +22,23 @@ const TABLE_ROWS = [
   ['Readme.md', 'Markdown', '어제 20:03'],
 ] as const;
 
-export const useDesktopViewState = () => {
+export type DesktopWorkspaceState = {
+  breadcrumbItems: typeof BREADCRUMB_ITEMS;
+  desktopNotifications: typeof DESKTOP_NOTIFICATIONS;
+  desktopShortcutItems: typeof DESKTOP_SHORTCUT_ITEMS;
+  finderListItems: typeof LIST_VIEW_ITEMS;
+  handleDesktopSurfaceClick: () => void;
+  isFocused: boolean;
+  spotlightItems: typeof SPOTLIGHT_ITEMS;
+  tabItems: typeof TAB_ITEMS;
+  tableColumns: typeof TABLE_COLUMNS;
+  tableRows: typeof TABLE_ROWS;
+};
+
+export const useDesktopWorkspaceState = (): DesktopWorkspaceState => {
   const closeLaunchpad = useAppStore(state => state.closeLaunchpad);
   const currentScreen = useAppStore(state => state.currentScreen);
-  const isLaunchpadOpen = useAppStore(state => state.isLaunchpadOpen);
-  const toggleLaunchpad = useAppStore(state => state.toggleLaunchpad);
-  const {items: dockItems, addDockItem, isDockAtMaxItemCount, recentlyAddedItemKey} = useDesktopDockItems();
 
-  const launchpadSourceApps = useMemo(
-    () =>
-      launchpadAppIcons.map(item => ({
-        key: item.key,
-        icon: <LaunchpadIcon name={item.icon} label={item.label} />,
-        iconSrc: getAppIconSrc(item.icon),
-        label: item.label,
-      })),
-    [],
-  );
-
-  const {orderedApps: launchpadApps, pagedApps: launchpadPagedApps, moveApp, moveAppToNewPage} = useLaunchpadLayout(launchpadSourceApps);
   const isFocused = currentScreen === 'desktop';
   const handleDesktopSurfaceClick = useCallback(() => {
     closeLaunchpad();
@@ -54,23 +48,14 @@ export const useDesktopViewState = () => {
     breadcrumbItems: BREADCRUMB_ITEMS,
     desktopNotifications: DESKTOP_NOTIFICATIONS,
     desktopShortcutItems: DESKTOP_SHORTCUT_ITEMS,
-    dockItems,
     finderListItems: LIST_VIEW_ITEMS,
+    handleDesktopSurfaceClick,
     isFocused,
-    isDockAtMaxItemCount,
-    isLaunchpadOpen,
-    launchpadApps,
-    launchpadPagedApps,
-    recentlyAddedItemKey,
     spotlightItems: SPOTLIGHT_ITEMS,
     tabItems: TAB_ITEMS,
     tableColumns: TABLE_COLUMNS,
     tableRows: TABLE_ROWS,
-    addDockItem,
-    closeLaunchpad,
-    handleDesktopSurfaceClick,
-    moveApp,
-    moveAppToNewPage,
-    toggleLaunchpad,
   };
 };
+export const useDesktopState = useDesktopWorkspaceState;
+export const useDesktopViewState = useDesktopWorkspaceState;

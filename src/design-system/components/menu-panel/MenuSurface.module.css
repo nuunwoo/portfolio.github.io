@@ -26,7 +26,7 @@
   background: transparent;
 }
 
-:global(.app-shell[data-appearance='dark']) .panel {
+:global(main[data-appearance='dark']) .panel {
   background: #2f2f33;
   border-color: #5a5a60;
 }

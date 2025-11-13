@@ -1,0 +1,55 @@
+import LaunchpadGrid from './grid/LaunchpadGrid';
+import type {LaunchpadDisplayItem} from '../model/types';
+import styles from './Launchpad.module.css';
+
+type LaunchpadGridTrackProps = {
+  pagedApps: LaunchpadDisplayItem[][];
+  pageIndex: number;
+  isItemDragging: boolean;
+  isSearchMode: boolean;
+  draggingKey: string | null;
+  hoveredTargetKey: string | null;
+  hasDragged: boolean;
+  onItemMouseDown: (app: LaunchpadDisplayItem, index: number, event: React.MouseEvent<HTMLDivElement>) => void;
+};
+
+const LaunchpadGridTrack = ({
+  pagedApps,
+  pageIndex,
+  isItemDragging,
+  isSearchMode,
+  draggingKey,
+  hoveredTargetKey,
+  hasDragged,
+  onItemMouseDown,
+}: LaunchpadGridTrackProps) => {
+  const isPageVisible = (index: number) => isItemDragging || Math.abs(index - pageIndex) <= 1;
+
+  return (
+    <>
+      {pagedApps.map((pageApps, index) => (
+        <div
+          key={`launchpad-page-${index + 1}`}
+          className={styles.launchpadGridPage}
+          data-launchpad-grid-page="true"
+          data-launchpad-page-index={index}>
+          {isPageVisible(index) ? (
+            <LaunchpadGrid
+              apps={pageApps}
+              searchMode={isSearchMode}
+              highlightFirst={pageIndex === 0 && index === pageIndex}
+              draggingKey={draggingKey}
+              hoveredTargetKey={hoveredTargetKey}
+              hasDragged={hasDragged}
+              onItemMouseDown={onItemMouseDown}
+            />
+          ) : (
+            <div className={styles.launchpadGridPlaceholder} aria-hidden={true} />
+          )}
+        </div>
+      ))}
+    </>
+  );
+};
+
+export default LaunchpadGridTrack;

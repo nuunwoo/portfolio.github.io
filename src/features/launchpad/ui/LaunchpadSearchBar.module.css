@@ -1,0 +1,125 @@
+.launchpadSearch {
+  width: min(224px, 32vw);
+  height: 24px;
+  border-radius: 6px;
+  margin: 38px 0 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  background: var(--launchpad-search-bg);
+  border: 0;
+  box-shadow: inset 0 0 0 1px var(--launchpad-search-border);
+  padding: 0 6px;
+  position: relative;
+  overflow: hidden;
+}
+
+.launchpadSearchFocused {
+  justify-content: flex-start;
+  background: var(--launchpad-search-bg-focused);
+  box-shadow: inset 0 0 0 1px var(--launchpad-search-border-focused);
+}
+
+.launchpadSearchGroup {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  z-index: 2;
+  overflow: hidden;
+}
+
+.launchpadSearchIcon {
+  width: 13px;
+  height: 13px;
+  display: block;
+  flex: 0 0 13px;
+  color: var(--launchpad-search-icon-color);
+}
+
+.launchpadSearchIcon :global(path) {
+  fill: currentColor !important;
+  fill-opacity: 1 !important;
+}
+
+.launchpadSearchPlaceholder {
+  flex: 0 0 auto;
+  color: var(--launchpad-search-placeholder-color);
+  font-family: var(--font-family-system);
+  font-size: var(--text-title3-size);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--text-title3-line-height);
+  letter-spacing: var(--text-tracking);
+  white-space: nowrap;
+}
+
+.launchpadSearchInput {
+  width: 0;
+  flex: 0 0 auto;
+  opacity: 0;
+  border: 0;
+  outline: none;
+  background: transparent;
+  color: var(--launchpad-search-text-color);
+  caret-color: var(--launchpad-search-caret-color);
+  font-family: var(--font-family-system);
+  font-size: var(--text-title3-size);
+  font-weight: var(--font-weight-emphasized);
+  line-height: var(--text-title3-line-height);
+  letter-spacing: var(--text-tracking);
+  padding: 0;
+  margin: 0;
+}
+
+.launchpadSearchInput::placeholder {
+  color: var(--launchpad-search-placeholder-color);
+}
+
+.launchpadSearchFocused .launchpadSearchInput {
+  width: 100%;
+  flex: 1 1 auto;
+  min-width: 0;
+  opacity: 1;
+}
+
+.launchpadSearchAnimate .launchpadSearchInput {
+  transition: opacity 180ms ease;
+}
+
+.launchpadSearchMeasure {
+  position: absolute;
+  visibility: hidden;
+  pointer-events: none;
+  white-space: nowrap;
+  font-family: var(--font-family-system);
+  font-size: var(--text-title3-size);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--text-title3-line-height);
+  letter-spacing: var(--text-tracking);
+}
+
+.launchpadSearchClear {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 14px;
+  height: 14px;
+  border: 0;
+  border-radius: 50%;
+  background: var(--launchpad-search-clear-bg);
+  color: var(--launchpad-search-clear-color);
+  font-family: var(--font-family-system);
+  font-size: var(--text-subheadline-size);
+  line-height: var(--text-subheadline-line-height);
+  letter-spacing: var(--text-tracking);
+  display: grid;
+  place-items: center;
+  padding: 0;
+  cursor: var(--cursor-pointer);
+  z-index: 3;
+}

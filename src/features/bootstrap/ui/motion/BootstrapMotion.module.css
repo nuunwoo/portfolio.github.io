@@ -1,0 +1,21 @@
+.root {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background:
+    radial-gradient(circle at top, rgba(255, 255, 255, 0.18), transparent 34%),
+    linear-gradient(180deg, #0b0b0d 0%, #020203 100%);
+  overflow: hidden;
+  user-select: none;
+}
+
+.backgroundGlow {
+  position: absolute;
+  inset: auto 50% 18%;
+  width: min(46vw, 520px);
+  height: min(28vw, 240px);
+  transform: translateX(-50%);
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.12), transparent 68%);
+  filter: blur(40px);
+}

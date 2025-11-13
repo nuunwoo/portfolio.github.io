@@ -20,4 +20,27 @@ export default tseslint.config([
       globals: globals.browser,
     },
   },
+  {
+    files: ['src/features/**/*.{ts,tsx}'],
+    rules: {
+      'no-restricted-imports': [
+        'error',
+        {
+          patterns: [
+            {
+              group: [
+                '../features/*',
+                '../../features/*',
+                '../../../features/*',
+                '../../../../features/*',
+                'src/features/*',
+              ],
+              message:
+                '다른 feature를 직접 import하지 말고 app/shared/design-system/applications 경계나 각 feature의 public API를 통해 연결하세요.',
+            },
+          ],
+        },
+      ],
+    },
+  },
 ])

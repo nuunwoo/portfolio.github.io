@@ -20,8 +20,8 @@
   color: var(--colors-text-vibrant-primary-light);
 }
 .itemActive { background: #0a84ff; color: #fff; }
-:global(.app-shell[data-appearance='dark']) .root {
+:global(main[data-appearance='dark']) .root {
   border-right-color: rgba(255,255,255,0.12);
   background: rgba(33,35,41,0.9);
 }
-:global(.app-shell[data-appearance='dark']) .item { color: var(--colors-text-vibrant-primary-dark); }
+:global(main[data-appearance='dark']) .item { color: var(--colors-text-vibrant-primary-dark); }

@@ -201,22 +201,22 @@
   align-self: center;
 }
 
-:global(.app-shell[data-appearance='dark']) .headerLabel {
+:global(main[data-appearance='dark']) .headerLabel {
   mix-blend-mode: plus-lighter;
 }
 
-:global(.app-shell[data-appearance='dark']) .item {
+:global(main[data-appearance='dark']) .item {
   color: var(--colors-text-vibrant-secondary-dark);
   mix-blend-mode: plus-lighter;
 }
 
-:global(.app-shell[data-appearance='dark']) .itemDisabled,
-:global(.app-shell[data-appearance='dark']) .itemDisabled:hover {
+:global(main[data-appearance='dark']) .itemDisabled,
+:global(main[data-appearance='dark']) .itemDisabled:hover {
   color: var(--ds-menu-text-disabled);
   mix-blend-mode: plus-lighter;
 }
 
-:global(.app-shell[data-appearance='dark']) .itemSelected::before,
-:global(.app-shell[data-appearance='dark']) .itemSubmenuOpen:not(:hover)::before {
+:global(main[data-appearance='dark']) .itemSelected::before,
+:global(main[data-appearance='dark']) .itemSubmenuOpen:not(:hover)::before {
   background: rgba(255, 255, 255, 0.22);
 }

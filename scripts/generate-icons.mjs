@@ -13,6 +13,13 @@ const generatedIconsDir = path.join(assetsIconsDir, "generated");
 const excludedSourceDirs = new Set(["app-icons", "generated"]);
 
 const toPosix = (value) => value.split(path.sep).join("/");
+const kebabCase = (value) =>
+  value
+    .replace(/\.svg$/i, "")
+    .replace(/([a-z0-9])([A-Z])/g, "$1-$2")
+    .replace(/[^a-zA-Z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "")
+    .toLowerCase();
 
 const pascalCase = (value) =>
   value
@@ -21,6 +28,134 @@ const pascalCase = (value) =>
     .filter(Boolean)
     .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
     .join("");
+
+const createAppIconsIndex = (iconNames) => {
+  const importLines = iconNames
+    .map((iconName) => `import ${pascalCase(iconName)}Icon from "../../raw/app-icons/${iconName}.svg";`)
+    .join("\n");
+
+  const sourceEntries = iconNames
+    .map((iconName) => `  "${iconName}": ${pascalCase(iconName)}Icon,`)
+    .join("\n");
+
+  return `import type { CSSProperties } from "react";
+${importLines}
+
+const appIconSources = {
+${sourceEntries}
+} as const;
+
+export type AppIconName = keyof typeof appIconSources;
+const getAppIconSrc = (name: AppIconName) => appIconSources[name];
+const appIconNames = Object.keys(appIconSources) as AppIconName[];
+const appIconPreloadTargets = appIconNames.map(name => ({
+  key: \`app-icon-\${name}\`,
+  src: getAppIconSrc(name),
+}));
+
+type AppIconProps = {
+  name: AppIconName;
+  size?: number;
+  className?: string;
+  style?: CSSProperties;
+  alt?: string;
+  loading?: "eager" | "lazy";
+  decoding?: "sync" | "async" | "auto";
+};
+
+const AppIcon = ({ name, size = 50, className, style, alt = "", loading = "lazy", decoding = "async" }: AppIconProps) => (
+  <img
+    src={getAppIconSrc(name)}
+    width={size}
+    height={size}
+    loading={loading}
+    decoding={decoding}
+    alt={alt}
+    className={className}
+    style={style}
+  />
+);
+
+export { appIconNames };
+export { appIconPreloadTargets };
+export { getAppIconSrc };
+export default AppIcon;
+`;
+};
+
+const createAppIconsCatalog = () => `import {appIconNames, type AppIconName} from '.';
+
+type AppIconCatalogItem = {
+  key: string;
+  label: string;
+  icon: AppIconName;
+};
+
+const defaultDockItems = [
+  {key: 'finder', label: 'Finder', icon: 'finder'},
+  {key: 'launchpad', label: 'Launchpad', icon: 'launchpad'},
+  {key: 'mail', label: 'Mail', icon: 'mail'},
+  {key: 'calendar', label: 'Calendar', icon: 'calendar'},
+  {key: 'notes', label: 'Notes', icon: 'notes'},
+  {key: 'terminal', label: 'Terminal', icon: 'terminal'},
+  {key: 'trash', label: 'Trash', icon: 'trash'},
+] as const;
+
+const dockAppIcons = defaultDockItems.filter(item => appIconNames.includes(item.icon as AppIconName)) as AppIconCatalogItem[];
+
+const specialLabels = {
+  'app-store': 'App Store',
+  'apple-tv': 'Apple TV',
+  'custom-app': 'Custom App',
+  facetime: 'FaceTime',
+  'find-my': 'Find My',
+  garageband: 'GarageBand',
+  imovie: 'iMovie',
+  keynote: 'Keynote',
+  launchpad: 'Launchpad',
+  mail: 'Mail',
+  maps: 'Maps',
+  music: 'Music',
+  notes: 'Notes',
+  pages: 'Pages',
+  'photo-booth': 'Photo Booth',
+  photos: 'Photos',
+  podcasts: 'Podcasts',
+  preview: 'Preview',
+  safari: 'Safari',
+  siri: 'Siri',
+  terminal: 'Terminal',
+  textedit: 'TextEdit',
+  'system-settings': 'System Settings',
+  'system-information': 'System Information',
+  'swift-playgrounds': 'Swift Playgrounds',
+  'quicktime-player': 'QuickTime Player',
+  'voice-memos': 'Voice Memos',
+  'voiceover-utility': 'VoiceOver Utility',
+  'colorsync-utility': 'ColorSync Utility',
+  xcode: 'Xcode',
+} as const;
+
+const launchpadLabelOverrides: Partial<Record<AppIconName, string>> = Object.fromEntries(
+  Object.entries(specialLabels).filter(([key]) => appIconNames.includes(key as AppIconName)),
+) as Partial<Record<AppIconName, string>>;
+
+const toTitleLabel = (name: AppIconName) =>
+  launchpadLabelOverrides[name] ??
+  name
+    .split('-')
+    .map(token => token.charAt(0).toUpperCase() + token.slice(1))
+    .join(' ');
+
+const launchpadAppIcons: AppIconCatalogItem[] = appIconNames.map(iconName => ({
+  key: iconName,
+  label: toTitleLabel(iconName),
+  icon: iconName,
+}));
+
+export type {AppIconCatalogItem};
+export {dockAppIcons, launchpadAppIcons};
+`;
 
 const getVariantInfo = (name) => {
   const withoutExt = name.replace(/\.svg$/i, "");
@@ -165,6 +300,16 @@ const run = async () => {
 
   await removeStaleGeneratedIndexes(generatedIconsDir);
   await removeGeneratedAppIcons();
+
+  const appIconsRawDir = path.join(rawIconsDir, "app-icons");
+  const appIconFileNames = (await readdir(appIconsRawDir))
+    .filter((name) => name.endsWith(".svg"))
+    .map((name) => kebabCase(name))
+    .sort();
+  const appIconsGeneratedDir = path.join(generatedIconsDir, "app-icons");
+  await mkdir(appIconsGeneratedDir, { recursive: true });
+  await writeFile(path.join(appIconsGeneratedDir, "index.tsx"), createAppIconsIndex(appIconFileNames), "utf8");
+  await writeFile(path.join(appIconsGeneratedDir, "catalog.ts"), createAppIconsCatalog(), "utf8");
 
   const svgFiles = (await listSvgFiles(rawIconsDir)).filter((relPath) => {
     const topDir = relPath.split(path.sep)[0];

@@ -29,7 +29,7 @@
   - `navigation/Breadcrumbs`
   - `data/TableView`
   - `overlay/Tooltip`, `overlay/ContextMenuSurface`
-  - `pattern/SpotlightOverlay`, `pattern/NotificationCenter`, `pattern/LaunchpadGrid`, `pattern/MissionControlView`
+  - `pattern/SpotlightOverlay`, `pattern/NotificationCenter`, `pattern/MissionControlView`
 
 3. `icons/`
 - 디자인시스템 컴포넌트 전용 아이콘 진입점

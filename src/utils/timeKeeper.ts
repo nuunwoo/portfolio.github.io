@@ -30,6 +30,12 @@ export class TimeKeeper {
   private tickTimer: number | null = null;
   private lastTick: number = 0;
 
+  private getTickIntervalMs = () => {
+    if (this.align === "minute") return 60000;
+    if (this.align === "second") return 1000;
+    return 1000;
+  };
+
   constructor(options: TimeKeeperOptions = {}) {
     this.timezone = options.timezone ?? "Asia/Seoul";
     this.align = options.align ?? "minute";
@@ -102,12 +108,22 @@ export class TimeKeeper {
 
   // === 내부 타이머 관리 ===
   private start = () => {
+    this.emitAlignedNow();
     this.scheduleNextTick();
   };
 
   private restart = () => {
     if (this.tickTimer) clearTimeout(this.tickTimer);
+    this.emitAlignedNow();
     this.scheduleNextTick();
+  };
+
+  private emitAlignedNow = () => {
+    const now = this.zonedNow();
+
+    if (this.align === "minute") this.emit("minute", now);
+    if (this.align === "second") this.emit("second", now);
+    this.emit("hour", now);
   };
 
   private scheduleNextTick = () => {
@@ -127,7 +143,7 @@ export class TimeKeeper {
 
   private handleTick = () => {
     const now = Date.now();
-    const drift = now - (this.lastTick + 60000);
+    const drift = now - (this.lastTick + this.getTickIntervalMs());
 
     // 드리프트(오차) 감지 → 재정렬
     if (this.lastTick !== 0 && Math.abs(drift) > this.driftThresholdMs) {
@@ -137,11 +153,7 @@ export class TimeKeeper {
 
     this.lastTick = now;
 
-    // 분 단위 이벤트 발생
-    if (this.align === "minute") this.emit("minute", this.zonedNow());
-    if (this.align === "second") this.emit("second", this.zonedNow());
-
-    this.emit("hour", this.zonedNow());
+    this.emitAlignedNow();
 
     this.scheduleNextTick();
   };

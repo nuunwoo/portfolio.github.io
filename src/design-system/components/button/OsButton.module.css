@@ -20,12 +20,12 @@
   color: #fff;
 }
 .primary:hover { background: linear-gradient(180deg,#45a3ff,#0a84ff); }
-:global(.app-shell[data-appearance='dark']) .root {
+:global(main[data-appearance='dark']) .root {
   border-color: rgba(255,255,255,0.18);
   background: linear-gradient(180deg,#3a3d45,#2d3037);
   color: var(--colors-text-vibrant-primary-dark);
 }
-:global(.app-shell[data-appearance='dark']) .primary {
+:global(main[data-appearance='dark']) .primary {
   border-color: #0a84ff;
   background: linear-gradient(180deg,#0a84ff,#006fdd);
   color: #fff;

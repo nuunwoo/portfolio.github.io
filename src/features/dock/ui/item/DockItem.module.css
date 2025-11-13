@@ -1,0 +1,89 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  gap: 3px;
+  border: none;
+  background: transparent;
+  position: relative;
+  transition: transform 180ms cubic-bezier(0.22, 1, 0.36, 1);
+  z-index: 1;
+}
+
+.shiftLeft {
+  transform: translateX(calc(var(--dock-drop-spread, 0px) * -1));
+}
+
+.shiftRight {
+  transform: translateX(var(--dock-drop-spread, 0px));
+}
+
+.recentlyAdded .icon {
+  animation: dock-item-settle-in 680ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.popoverPosition {
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 20px);
+  transform: translateX(-50%);
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.icon {
+  width: var(--dock-icon-size);
+  height: var(--dock-icon-size);
+  border-radius: 0;
+  display: grid;
+  place-items: center;
+  font-size: 0;
+  transform-origin: center bottom;
+}
+
+@keyframes dock-item-settle-in {
+  0% {
+    transform: scale(0.38);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+.icon :global(img) {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+.runningDot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #000;
+}
+
+.badge {
+  position: absolute;
+  top: -1px;
+  right: -1px;
+  min-width: 16px;
+  height: 16px;
+  padding: 0 5px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  font-size: 10px;
+  font-weight: 700;
+  color: #fff;
+  background: linear-gradient(180deg, #ff665f 0%, #ff3b30 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.42),
+    0 2px 8px rgba(100, 10, 6, 0.4);
+  z-index: 2;
+}

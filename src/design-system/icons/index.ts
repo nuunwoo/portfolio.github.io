@@ -1,7 +1,6 @@
 export { default as AppleLogoIcon } from "../../assets/icons/generated/apple-logo";
 export { default as MenuChevronIcon } from "../../assets/icons/generated/window-menu/menu/Chevron";
 export { default as SearchMagnifyingglassIcon } from "../../assets/icons/generated/search-actions/Magnifyingglass";
-export { default as StatusBluetoothIcon } from "../../assets/icons/generated/status-system/Bluetooth";
 export { default as StatusSpeakerWave2Icon } from "../../assets/icons/generated/status-system/SpeakerWave2";
 export { default as StatusWifiIcon } from "../../assets/icons/generated/status-system/Wifi";
 export { default as StatusBattery100PercentIcon } from "../../assets/icons/generated/status-system/Battery100Percent";

@@ -1,0 +1,19 @@
+.root {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 10px;
+  z-index: 3;
+  display: flex;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.content {
+  position: relative;
+  display: inline-flex;
+  border-radius: 16px;
+  overflow: hidden;
+  will-change: opacity, transform;
+  pointer-events: auto;
+}

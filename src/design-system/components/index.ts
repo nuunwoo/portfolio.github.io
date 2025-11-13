@@ -2,7 +2,6 @@ export * from "./menu";
 export * from "./menu-panel";
 export * from "./window";
 export * from "./search";
-export * from "./dock";
 export * from "./button";
 export * from "./toolbar";
 export * from "./sidebar";

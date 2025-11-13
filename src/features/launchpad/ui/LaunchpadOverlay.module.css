@@ -1,0 +1,24 @@
+.launchpadOverlay {
+  --launchpad-overlay-bg: color-mix(in srgb, var(--colors-fills-primary-dark) 55%, transparent);
+
+  position: fixed;
+  inset: 0;
+  z-index: 2;
+  display: grid;
+  align-content: stretch;
+  justify-items: stretch;
+  background: var(--launchpad-overlay-bg);
+  backdrop-filter: blur(32px) saturate(1.1);
+  -webkit-backdrop-filter: blur(32px) saturate(1.1);
+  will-change: opacity, transform, backdrop-filter;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+.launchpadOverlayVisible {
+  pointer-events: auto;
+}
+
+.launchpadOverlayBehind {
+  pointer-events: none;
+}

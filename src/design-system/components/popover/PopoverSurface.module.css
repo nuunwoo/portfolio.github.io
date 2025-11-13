@@ -27,7 +27,7 @@
   white-space: nowrap;
 }
 
-:global(.app-shell[data-appearance='dark']) .content {
+:global(main[data-appearance='dark']) .content {
   color: var(--colors-text-vibrant-primary-dark);
 }
 
@@ -130,7 +130,7 @@
   clip-path: polygon(100% 50%, 0 0, 0 100%);
 }
 
-/* :global(.app-shell[data-appearance='dark']) .backing {
+/* :global(main[data-appearance='dark']) .backing {
   background: rgba(65, 67, 72, 0.5);
   border-color: rgba(255, 255, 255, 0.12);
   box-shadow:
@@ -139,7 +139,7 @@
     0 8px 15px 6px rgba(0, 0, 0, 0.45);
 }
 
-:global(.app-shell[data-appearance='dark']) .tail {
+:global(main[data-appearance='dark']) .tail {
   background: rgba(65, 67, 72, 0.5);
   border-color: rgba(255, 255, 255, 0.12);
   box-shadow:

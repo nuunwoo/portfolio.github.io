@@ -1,0 +1,13 @@
+.root {
+  --dock-icon-size: 50px;
+  --dock-gap: 2px;
+  --dock-separator-width: 22px;
+  --dock-separator-height: 45.7px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--dock-gap);
+  user-select: none;
+  position: relative;
+  z-index: 0;
+}

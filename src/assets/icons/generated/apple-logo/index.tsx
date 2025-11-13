@@ -1,7 +1,6 @@
-import type { ComponentType, CSSProperties, SVGProps } from "react";
-import { useSystemAppearance, type SystemAppearance } from "../../../../shared/hooks/useSystemAppearance";
-import AppleLogoDark from "./AppleLogoDark";
-import AppleLogoLight from "./AppleLogoLight";
+import type {CSSProperties, SVGProps} from 'react';
+import {useSystemAppearance, type SystemAppearance} from '../../../../shared/hooks/useSystemAppearance';
+import AppleLogoLight from './AppleLogoLight';
 
 type AppleLogoMode = SystemAppearance | "system";
 
@@ -19,17 +18,14 @@ const AppleLogo = ({
   ...rest
 }: AppleLogoProps) => {
   const systemAppearance = useSystemAppearance();
-  const resolvedMode = mode === "system" ? systemAppearance : mode;
-  const IconComponent: ComponentType<SVGProps<SVGSVGElement>> =
-    (resolvedMode === "light" ? AppleLogoLight : AppleLogoDark) as ComponentType<SVGProps<SVGSVGElement>>;
-
+  const resolvedMode = mode === 'system' ? systemAppearance : mode;
   const mergedStyle: CSSProperties = {
     ...style,
     ...(width !== undefined ? { width } : {}),
     ...(height !== undefined ? { height } : {}),
   };
 
-  return <IconComponent style={mergedStyle} {...rest} />;
+  return <AppleLogoLight style={mergedStyle} {...rest} />;
 };
 
 export default AppleLogo;

@@ -1,0 +1,19 @@
+#root {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+main[data-appearance] {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+  background: #050505;
+}
+
+:root {
+  --ui-base-width: 1512px;
+  --ui-base-height: 982px;
+  --ui-scale: min(1, min(calc(100vw / var(--ui-base-width)), calc(100vh / var(--ui-base-height))));
+}

@@ -1,0 +1,26 @@
+.root {
+  --dock-padding: 6px;
+  --dock-surface-radius: 16px;
+  position: relative;
+  display: inline-flex;
+  padding-top: var(--dock-padding);
+  padding-bottom: var(--dock-padding);
+  padding-left: var(--dock-padding);
+  padding-right: var(--dock-padding);
+  border-radius: var(--dock-surface-radius);
+  background: rgba(246, 246, 246, 0.36);
+  box-shadow: inset 0 0 0 1px rgba(26, 26, 26, 0.18);
+  overflow: hidden;
+  transition:
+    padding-left 180ms cubic-bezier(0.22, 1, 0.36, 1),
+    padding-right 180ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+:global(main[data-appearance='dark']) .root {
+  background: rgba(74, 74, 74, 0.39);
+}
+
+.rootPreviewActive {
+  padding-left: calc(var(--dock-padding) + var(--dock-preview-expand-left, 0px));
+  padding-right: calc(var(--dock-padding) + var(--dock-preview-expand-right, 0px));
+}

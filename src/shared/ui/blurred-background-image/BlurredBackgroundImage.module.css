@@ -1,0 +1,16 @@
+.root {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.image {
+  position: absolute;
+  display: block;
+  object-fit: cover;
+  max-width: none;
+  opacity: 1;
+  pointer-events: none;
+  filter: blur(100px) saturate(1.1);
+}

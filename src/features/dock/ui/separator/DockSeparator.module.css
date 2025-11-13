@@ -1,0 +1,30 @@
+.root {
+  width: var(--dock-separator-width);
+  height: var(--dock-separator-height);
+  align-self: center;
+  margin: 0;
+  border-radius: 999px;
+  position: relative;
+  z-index: 1;
+}
+
+.root::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 1px;
+  height: var(--dock-separator-height);
+  transform: translate(-50%, -50%);
+  background: #000;
+}
+
+.shiftLeft {
+  transform: translateX(calc(var(--dock-drop-spread, 0px) * -1));
+  transition: transform 180ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.shiftRight {
+  transform: translateX(var(--dock-drop-spread, 0px));
+  transition: transform 180ms cubic-bezier(0.22, 1, 0.36, 1);
+}

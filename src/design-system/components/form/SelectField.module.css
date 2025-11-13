@@ -1,4 +1,4 @@
 .root { height: 26px; border-radius: 8px; border: 1px solid rgba(0,0,0,0.2); background: #fff; padding: 0 26px 0 8px; font: 500 13px/16px var(--font-family-system); appearance: none; }
 .wrap { position: relative; display: inline-block; }
 .arrow { position: absolute; right: 8px; top: 50%; transform: translateY(-50%); font-size: 11px; color: #666; pointer-events: none; }
-:global(.app-shell[data-appearance='dark']) .root { background: #24262d; border-color: rgba(255,255,255,0.2); color: #fff; }
+:global(main[data-appearance='dark']) .root { background: #24262d; border-color: rgba(255,255,255,0.2); color: #fff; }

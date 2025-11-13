@@ -9,7 +9,7 @@
   padding: 0 10px;
 }
 .spacer { flex: 1; }
-:global(.app-shell[data-appearance='dark']) .root {
+:global(main[data-appearance='dark']) .root {
   border-color: rgba(255,255,255,0.12);
   background: rgba(42,44,52,0.88);
 }

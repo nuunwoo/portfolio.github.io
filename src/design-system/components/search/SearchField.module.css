@@ -41,16 +41,16 @@
   color: var(--ds-os-search-placeholder-light);
 }
 
-:global(.app-shell[data-appearance='dark']) .root {
+:global(main[data-appearance='dark']) .root {
   border-color: var(--ds-os-search-border-dark);
   background: var(--ds-os-search-bg-dark);
 }
 
-:global(.app-shell[data-appearance='dark']) .icon,
-:global(.app-shell[data-appearance='dark']) .input::placeholder {
+:global(main[data-appearance='dark']) .icon,
+:global(main[data-appearance='dark']) .input::placeholder {
   color: var(--ds-os-search-placeholder-dark);
 }
 
-:global(.app-shell[data-appearance='dark']) .input {
+:global(main[data-appearance='dark']) .input {
   color: var(--colors-text-vibrant-primary-dark);
 }

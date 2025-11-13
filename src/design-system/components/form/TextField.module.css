@@ -1,3 +1,3 @@
 .root { height: 26px; border-radius: 8px; border: 1px solid rgba(0,0,0,0.2); background: #fff; padding: 0 8px; font: 400 13px/16px var(--font-family-system); color: var(--colors-text-vibrant-primary-light); }
 .root:focus { outline: 2px solid rgba(10,132,255,0.4); outline-offset: 0; }
-:global(.app-shell[data-appearance='dark']) .root { background: #24262d; border-color: rgba(255,255,255,0.2); color: var(--colors-text-vibrant-primary-dark); }
+:global(main[data-appearance='dark']) .root { background: #24262d; border-color: rgba(255,255,255,0.2); color: var(--colors-text-vibrant-primary-dark); }

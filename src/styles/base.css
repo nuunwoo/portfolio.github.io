@@ -1,7 +1,7 @@
 :root {
-  --cursor-default: url("../assets/icons/raw/cursors/Type=Default.svg") 8 2, default;
-  --cursor-pointer: url("../assets/icons/raw/cursors/Type=Hand (Pointing).svg") 10 2, pointer;
-  --cursor-text: url("../assets/icons/raw/cursors/Type=Text Cursor.svg") 12 12, text;
+  --cursor-default: url('../assets/icons/raw/cursors/Type=Default.svg') 8 2, default;
+  --cursor-pointer: url('../assets/icons/raw/cursors/Type=Hand (Pointing).svg') 10 2, pointer;
+  --cursor-text: url('../assets/icons/raw/cursors/Type=Text Cursor.svg') 12 12, text;
 }
 
 * {
@@ -34,7 +34,7 @@ input[type='radio'],
 input[type='range'],
 input[type='submit'],
 select {
-  cursor: var(--cursor-pointer);
+  cursor: var(--cursor-default);
 }
 
 input,

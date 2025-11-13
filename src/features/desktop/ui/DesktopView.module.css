@@ -1,3 +1,14 @@
+.scaleRoot {
+  --desktop-layer-zoom: 1;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: calc(100% / var(--ui-scale));
+  height: calc(100% / var(--ui-scale));
+  transform: translateX(-50%) scale(calc(var(--ui-scale) * var(--desktop-layer-zoom)));
+  transform-origin: top center;
+}
+
 .root {
   position: relative;
   width: 100%;
@@ -20,14 +31,6 @@
 .desktopLayer {
   position: absolute;
   inset: 0;
-}
-
-.menuBarArea {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 20;
 }
 
 .desktopContentGrid {
@@ -123,18 +126,6 @@
   grid-template-columns: 1fr 320px;
   gap: 12px;
   align-items: start;
-}
-
-.desktopDockArea {
-  position: absolute;
-  left: 50%;
-  bottom: 10px;
-  transform: translateX(-50%);
-  z-index: 50;
-}
-
-.dockMotion {
-  will-change: transform, opacity;
 }
 
 .scaledDesktopPanel {

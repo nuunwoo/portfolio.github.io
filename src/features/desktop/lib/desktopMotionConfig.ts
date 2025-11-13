@@ -21,7 +21,7 @@ export const getDesktopContentItemMotion = (hideContentItems: boolean, isScaledD
 
 export const getDesktopMenuBarMotion = (hideContentItems: boolean, isScaledDown: boolean) => ({
   opacity: hideContentItems || isScaledDown ? 0 : 1,
-  y: isScaledDown ? -24 : 0,
+  y: hideContentItems || isScaledDown ? -24 : 0,
 });
 
 export const getDesktopMenuBarTransition = (disableAnimation: boolean): Transition =>

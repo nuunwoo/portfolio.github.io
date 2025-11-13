@@ -1,0 +1,162 @@
+.root {
+  width: fit-content;
+  max-width: 100%;
+  display: grid;
+  grid-template-columns: repeat(7, var(--launchpad-item-width));
+  grid-template-rows: repeat(5, max-content);
+  justify-content: center;
+  align-content: start;
+  justify-items: center;
+  row-gap: 20px;
+  column-gap: 30px;
+  padding: 0;
+  margin: 0 auto;
+}
+
+.item {
+  width: var(--launchpad-item-width);
+  display: grid;
+  gap: 10px;
+  justify-items: center;
+  user-select: none;
+  touch-action: none;
+  transition:
+    box-shadow 180ms ease,
+    background-color 180ms ease;
+  position: relative;
+  isolation: isolate;
+}
+
+.itemDropTarget {
+  position: absolute;
+  left: 50%;
+  top: -4px;
+  width: calc(var(--launchpad-icon-size) + 16px);
+  height: calc(var(--launchpad-icon-size) + 16px);
+  transform: translateX(-50%);
+  border-radius: 28px;
+  background: rgba(255, 255, 255, 0.24);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.35),
+    0 8px 24px rgba(255, 255, 255, 0.1);
+  z-index: -1;
+}
+
+.itemSearch {
+  border-radius: 18px;
+  padding: 8px 8px 10px;
+}
+
+.itemSearchPrimary {
+  background: var(--launchpad-search-primary-bg);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 12px 30px rgba(0, 0, 0, 0.28);
+}
+
+.itemDragging {
+  pointer-events: none;
+  z-index: 1;
+  visibility: hidden;
+  filter: brightness(0.82);
+}
+
+.dragOverlay {
+  position: fixed;
+  pointer-events: none;
+  z-index: 120;
+}
+
+.itemDragging .icon,
+.itemPressed .icon,
+.dragOverlay .icon {
+  filter: brightness(0.82);
+}
+
+.icon {
+  width: calc(var(--launchpad-icon-size));
+  height: calc(var(--launchpad-icon-size));
+  display: grid;
+  place-items: center;
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.14);
+  box-sizing: border-box;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 8px 18px rgba(0, 0, 0, 0.12);
+}
+
+.icon > * {
+  width: var(--launchpad-icon-size);
+  height: var(--launchpad-icon-size);
+  display: block;
+  margin: 0 auto;
+}
+
+.folderPreviewGrid {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 4px;
+  padding: 12px;
+  box-sizing: border-box;
+  align-items: center;
+  justify-items: center;
+}
+
+.folderPreviewCell {
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  min-height: 0;
+  display: grid;
+  place-items: center;
+}
+
+.folderPreviewCell > * {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.dragOverlayIcon {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.label {
+  width: 100%;
+  text-align: center;
+  font-family: var(--font-family-system);
+  font-size: var(--text-body-size);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--text-body-line-height);
+  letter-spacing: var(--text-tracking);
+  color: var(--launchpad-label-color);
+  text-shadow: var(--launchpad-label-shadow);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.dragOverlay .label {
+  overflow: visible;
+  text-overflow: clip;
+}
+
+.rootSearch {
+  width: min(100%, calc((var(--launchpad-item-width) * 7) + (30px * 6)));
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-content: flex-start;
+  row-gap: 20px;
+  column-gap: 30px;
+  padding: 0;
+  margin: 0 auto;
+}
